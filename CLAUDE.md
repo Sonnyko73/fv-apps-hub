@@ -89,9 +89,11 @@ App repos consume shared styles at runtime via `<link>` tags (zero build-time de
 
 Sections:
 1. **Header** -- FV logo, "Forest Valley Apps" title, link to fv.dev
-2. **Hero** -- Tagline: "Tools for Ecwid merchants", short description
-3. **App Grid** -- Card per app with: icon, name, one-line description, "Learn more" link, pricing badge (Free/Freemium/Paid)
-4. **Footer** -- copyright, link to fv.dev, contact email
+2. **Hero** -- Tagline: "Business Apps by Forest Valley", subtitle about integrations and tools
+3. **What We Do** -- Description of the company's approach and focus
+4. **App Grid** -- Card per app with: icon, name, one-line description, platform badges, pricing badge (Free/Freemium/Paid), "View details" link
+5. **Why Forest Valley** -- Three value props: Built by Developers, Reliable & Secure, Real Support
+6. **Footer** -- copyright, link to fv.dev, contact email
 
 App data is hardcoded in HTML. When adding a new app, manually add a card.
 
@@ -100,7 +102,6 @@ App data is hardcoded in HTML. When adding a new app, manually add a card.
 Proxy rewrites (200 status = invisible to user):
 ```
 /seo-redirect-manager/*  https://seo-redirect-manager-site.pages.dev/:splat  200
-/next-app/*               https://next-app-site.pages.dev/:splat              200
 ```
 
 Each app's Cloudflare Pages project must set `base: /{app-slug}/` so asset paths resolve correctly.
@@ -112,6 +113,19 @@ Each app's Cloudflare Pages project must set `base: /{app-slug}/` so asset paths
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 ```
+
+## Repository & Deployment
+
+- **GitHub:** https://github.com/Sonnyko73/fv-apps-hub
+- **Live URL:** https://fv-apps-hub.pages.dev (custom domain: apps.fv.dev)
+- **Deploy:** Push to `main` triggers GitHub Actions → builds → deploys to Cloudflare Pages
+- **Secrets (GitHub):** `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
+- **Cloudflare Account:** ak@fv.dev
+
+## Commands
+
+- `npm run build` -- Build to `dist/` (copies src + shared, minifies HTML/CSS)
+- `npm run dev` -- Serve `dist/` locally via `npx serve`
 
 ## Adding a New App
 
