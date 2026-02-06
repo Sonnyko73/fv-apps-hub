@@ -1,0 +1,386 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;}
+{\colortbl;\red255\green255\blue255;\red16\green16\blue16;\red255\green255\blue255;\red118\green23\blue27;
+\red249\green248\blue242;\red16\green19\blue24;\red46\green47\blue44;\red167\green0\blue20;\red32\green36\blue45;
+\red91\green98\blue116;\red162\green55\blue4;\red15\green112\blue1;\red14\green110\blue109;\red4\green57\blue181;
+\red173\green0\blue24;\red108\green0\blue181;}
+{\*\expandedcolortbl;;\cssrgb\c7843\c7843\c7451;\cssrgb\c100000\c100000\c100000;\cssrgb\c54118\c14118\c14118;
+\cssrgb\c98039\c97647\c96078\c50196;\cssrgb\c7843\c9412\c12157;\cssrgb\c23922\c23922\c22745;\cssrgb\c72157\c3922\c9412;\cssrgb\c16863\c18824\c23137;
+\cssrgb\c43137\c46275\c52941;\cssrgb\c70196\c29020\c0;\cssrgb\c0\c50196\c0;\cssrgb\c0\c50196\c50196;\cssrgb\c0\c31765\c76078;
+\cssrgb\c74118\c5882\c11765;\cssrgb\c50588\c0\c76078;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid1\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat0\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat0\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid201\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Spec:\'a0
+\fs26 \cf4 \cb5 \strokec4 fv-apps-hub
+\fs24 \cf2 \cb3 \strokec2 \'a0Repository\
+\pard\pardeftab720\partightenfactor0
+\cf2 Purpose\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 Hub/catalog page at\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 apps.fv.dev/
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0and shared assets at\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 apps.fv.dev/shared/
+\f0\fs28 \cf2 \cb3 \strokec2 . This repo knows nothing about individual apps \'97 it only links to them.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 URL Routing\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf6 \cb5 \strokec6 apps.fv.dev/                        \uc0\u8594  Main catalog page\
+apps.fv.dev/shared/styles/          \uc0\u8594  Shared CSS (consumed by all app repos)\
+apps.fv.dev/shared/assets/          \uc0\u8594  Shared assets (logos, fonts)\
+apps.fv.dev/seo-redirect-manager/   \uc0\u8594  Proxied to separate Cloudflare Pages project\
+apps.fv.dev/next-app/               \uc0\u8594  Proxied to separate Cloudflare Pages project\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Repo Structure\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf6 \cb5 \strokec6 fv-apps-hub/\
+\uc0\u9500 \u9472 \u9472  .github/\
+\uc0\u9474    \u9492 \u9472 \u9472  workflows/\
+\uc0\u9474        \u9492 \u9472 \u9472  deploy.yml\
+\uc0\u9474 \
+\uc0\u9500 \u9472 \u9472  package.json\
+\uc0\u9500 \u9472 \u9472  .gitignore\
+\uc0\u9500 \u9472 \u9472  README.md\
+\uc0\u9474 \
+\uc0\u9500 \u9472 \u9472  src/\
+\uc0\u9474    \u9500 \u9472 \u9472  index.html                  # Catalog page\
+\uc0\u9474    \u9500 \u9472 \u9472  styles.css                  # Catalog-specific styles\
+\uc0\u9474    \u9500 \u9472 \u9472  404.html                    # Custom 404 page\
+\uc0\u9474    \u9492 \u9472 \u9472  assets/\
+\uc0\u9474        \u9492 \u9472 \u9472  hero.png                # Catalog page imagery (if any)\
+\uc0\u9474 \
+\uc0\u9500 \u9472 \u9472  shared/                         # Hosted at apps.fv.dev/shared/\
+\uc0\u9474    \u9500 \u9472 \u9472  styles/\
+\uc0\u9474    \u9474    \u9500 \u9472 \u9472  reset.css               # Minimal CSS reset\
+\uc0\u9474    \u9474    \u9500 \u9472 \u9472  variables.css           # Brand tokens (see below)\
+\uc0\u9474    \u9474    \u9492 \u9472 \u9472  base.css                # Typography, containers, utilities\
+\uc0\u9474    \u9500 \u9472 \u9472  assets/\
+\uc0\u9474    \u9474    \u9500 \u9472 \u9472  fv-logo.svg\
+\uc0\u9474    \u9474    \u9500 \u9472 \u9472  fv-logo-dark.svg\
+\uc0\u9474    \u9474    \u9492 \u9472 \u9472  favicon.ico\
+\uc0\u9474    \u9492 \u9472 \u9472  components/\
+\uc0\u9474        \u9500 \u9472 \u9472  header.css              # Shared header styles\
+\uc0\u9474        \u9492 \u9472 \u9472  footer.css              # Shared footer styles\
+\uc0\u9474 \
+\uc0\u9500 \u9472 \u9472  dist/                           # Build output (gitignored)\
+\uc0\u9474 \
+\uc0\u9500 \u9472 \u9472  scripts/\
+\uc0\u9474    \u9492 \u9472 \u9472  build.js                    # Copies src/ \u8594  dist/, shared/ \u8594  dist/shared/\
+\uc0\u9474                                    # Minifies HTML + CSS\
+\uc0\u9474 \
+\uc0\u9492 \u9472 \u9472  _redirects                      # Cloudflare Pages routing rules (or _routes.json)\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Build Output (
+\fs26 \cf4 \cb5 \strokec4 dist/
+\fs24 \cf2 \cb3 \strokec2 )\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf6 \cb5 \strokec6 dist/\
+\uc0\u9500 \u9472 \u9472  index.html\
+\uc0\u9500 \u9472 \u9472  styles.css\
+\uc0\u9500 \u9472 \u9472  404.html\
+\uc0\u9500 \u9472 \u9472  assets/\
+\uc0\u9474    \u9492 \u9472 \u9472  hero.png\
+\uc0\u9492 \u9472 \u9472  shared/\
+    \uc0\u9500 \u9472 \u9472  styles/\
+    \uc0\u9474    \u9500 \u9472 \u9472  reset.css\
+    \uc0\u9474    \u9500 \u9472 \u9472  variables.css\
+    \uc0\u9474    \u9492 \u9472 \u9472  base.css\
+    \uc0\u9500 \u9472 \u9472  assets/\
+    \uc0\u9474    \u9500 \u9472 \u9472  fv-logo.svg\
+    \uc0\u9474    \u9500 \u9472 \u9472  fv-logo-dark.svg\
+    \uc0\u9474    \u9492 \u9472 \u9472  favicon.ico\
+    \uc0\u9492 \u9472 \u9472  components/\
+        \uc0\u9500 \u9472 \u9472  header.css\
+        \uc0\u9492 \u9472 \u9472  footer.css\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Shared CSS Spec (
+\fs26 \cf4 \cb5 \strokec4 shared/styles/
+\fs24 \cf2 \cb3 \strokec2 )\
+\pard\pardeftab720\partightenfactor0
+
+\fs26 \cf4 \cb5 \strokec4 variables.css
+\fs28 \cf2 \cb3 \strokec2 \'a0\'97 Brand tokens, consumed by all app repos via\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 <link>
+\f0\fs28 \cf2 \cb3 \strokec2 :\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf8 \cb5 \strokec8 :root\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6 \
+  \cf10 \strokec10 /* Colors */\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-green\cf9 \strokec9 :\cf6 \strokec6  #27ae60\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-green-dark\cf9 \strokec9 :\cf6 \strokec6  #219a52\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-green-light\cf9 \strokec9 :\cf6 \strokec6  #2ecc71\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-navy\cf9 \strokec9 :\cf6 \strokec6  #2c3e50\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-navy-light\cf9 \strokec9 :\cf6 \strokec6  #34495e\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-white\cf9 \strokec9 :\cf6 \strokec6  #ffffff\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-50\cf9 \strokec9 :\cf6 \strokec6  #fafbfc\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-100\cf9 \strokec9 :\cf6 \strokec6  #f8f9fa\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-200\cf9 \strokec9 :\cf6 \strokec6  #e9ecef\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-300\cf9 \strokec9 :\cf6 \strokec6  #dee2e6\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-600\cf9 \strokec9 :\cf6 \strokec6  #6c757d\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-gray-800\cf9 \strokec9 :\cf6 \strokec6  #343a40\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-danger\cf9 \strokec9 :\cf6 \strokec6  #e74c3c\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-warning\cf9 \strokec9 :\cf6 \strokec6  #f39c12\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-info\cf9 \strokec9 :\cf6 \strokec6  #3498db\cf9 \strokec9 ;\cf6 \strokec6 \
+\
+  \cf10 \strokec10 /* Typography */\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-font\cf9 \strokec9 :\cf6 \strokec6  -apple-system\cf9 \strokec9 ,\cf6 \strokec6  BlinkMacSystemFont\cf9 \strokec9 ,\cf6 \strokec6  \cf12 \strokec12 'Segoe UI'\cf9 \strokec9 ,\cf6 \strokec6  Roboto\cf9 \strokec9 ,\cf6 \strokec6  sans-serif\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-font-mono\cf9 \strokec9 :\cf6 \strokec6  \cf12 \strokec12 'SF Mono'\cf9 \strokec9 ,\cf6 \strokec6  SFMono-Regular\cf9 \strokec9 ,\cf6 \strokec6  Consolas\cf9 \strokec9 ,\cf6 \strokec6  monospace\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-xs\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0.75\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-sm\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0.875\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-base\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 1\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-lg\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 1.125\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 1.5\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-2xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 2\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-fs-3xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 2.5\cf6 \strokec6 rem\cf9 \strokec9 ;\cf6 \strokec6 \
+\
+  \cf10 \strokec10 /* Spacing */\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-xs\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 4\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-sm\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 8\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-md\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 16\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-lg\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 24\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 32\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-2xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 48\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-space-3xl\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 64\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+\
+  \cf10 \strokec10 /* Layout */\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-max-width\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 1120\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-radius\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 8\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-radius-sm\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 4\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-radius-lg\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 12\cf6 \strokec6 px\cf9 \strokec9 ;\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-shadow\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0\cf6 \strokec6  \cf13 \strokec13 2\cf6 \strokec6 px \cf13 \strokec13 8\cf6 \strokec6 px \cf14 \strokec14 rgba\cf9 \strokec9 (\cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0.08\cf9 \strokec9 );\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-shadow-lg\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0\cf6 \strokec6  \cf13 \strokec13 4\cf6 \strokec6 px \cf13 \strokec13 16\cf6 \strokec6 px \cf14 \strokec14 rgba\cf9 \strokec9 (\cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0\cf9 \strokec9 ,\cf6 \strokec6  \cf13 \strokec13 0.12\cf9 \strokec9 );\cf6 \strokec6 \
+\
+  \cf10 \strokec10 /* Transitions */\cf6 \strokec6 \
+  \cf11 \strokec11 --fv-transition\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0.2\cf6 \strokec6 s ease\cf9 \strokec9 ;\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf9 \strokec9 \}\cf6 \strokec6 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+
+\fs26 \cf4 \cb5 \strokec4 reset.css
+\fs28 \cf2 \cb3 \strokec2 \'a0\'97 Minimal reset (box-sizing, margins, font smoothing).\
+
+\fs26 \cf4 \cb5 \strokec4 base.css
+\fs28 \cf2 \cb3 \strokec2 \'a0\'97 Common utility classes:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf10 \cb5 \strokec10 /* Containers */\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf8 \strokec8 .fv-container\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 max-width\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-max-width\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 margin\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0\cf6 \strokec6  auto\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 padding\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 0\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-space-lg\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf10 \strokec10 /* Buttons */\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf8 \strokec8 .fv-btn\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 display\cf9 \strokec9 :\cf6 \strokec6  inline-flex\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 align-items\cf9 \strokec9 :\cf6 \strokec6  center\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 gap\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-space-sm\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 padding\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-space-sm\cf9 \strokec9 )\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-space-lg\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 border-radius\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-radius\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 font-family\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-font\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 font-size\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-fs-base\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 font-weight\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 500\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 text-decoration\cf9 \strokec9 :\cf6 \strokec6  none\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 cursor\cf9 \strokec9 :\cf6 \strokec6  pointer\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 transition\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-transition\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 border\cf9 \strokec9 :\cf6 \strokec6  none\cf9 \strokec9 ;\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\cf8 \strokec8 .fv-btn-primary\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 background\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-green\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 color\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-white\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\cf8 \strokec8 .fv-btn-primary:hover\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 background\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-green-dark\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\cf8 \strokec8 .fv-btn-outline\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 background\cf9 \strokec9 :\cf6 \strokec6  transparent\cf9 \strokec9 ;\cf6 \strokec6  \cf8 \strokec8 color\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-navy\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 border\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 1\cf6 \strokec6 px solid \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-gray-300\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf10 \strokec10 /* Cards */\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf8 \strokec8 .fv-card\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 background\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-white\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 border-radius\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-radius-lg\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 box-shadow\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-shadow\cf9 \strokec9 );\cf6 \strokec6  \cf8 \strokec8 padding\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-space-lg\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf10 \strokec10 /* Text */\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf8 \strokec8 .fv-text-muted\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 color\cf9 \strokec9 :\cf6 \strokec6  \cf14 \strokec14 var\cf9 \strokec9 (\cf11 \strokec11 --fv-gray-600\cf9 \strokec9 );\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\cf8 \strokec8 .fv-text-center\cf6 \strokec6  \cf9 \strokec9 \{\cf6 \strokec6  \cf8 \strokec8 text-align\cf9 \strokec9 :\cf6 \strokec6  center\cf9 \strokec9 ;\cf6 \strokec6  \cf9 \strokec9 \}\cf6 \strokec6 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Catalog Page Spec (
+\fs26 \cf4 \cb5 \strokec4 src/index.html
+\fs24 \cf2 \cb3 \strokec2 )\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 Content sections:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Header\'a0\'97 FV logo, "Forest Valley Apps" title, link to fv.dev\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Hero\'a0\'97 Tagline: "Tools for Ecwid merchants", short description\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 App Grid\'a0\'97 Card per app, each card contains:\cb1 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\partightenfactor0
+\ls1\ilvl1\cf2 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 App icon\cb1 \
+\ls1\ilvl1\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 App name\cb1 \
+\ls1\ilvl1\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 One-line description\cb1 \
+\ls1\ilvl1\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 "Learn more \uc0\u8594 " link to\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 apps.fv.dev/\{app-slug\}/
+\f0\fs28 \cf2 \cb1 \strokec2 \
+\ls1\ilvl1\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Badge: "Free" / "Freemium" / "Paid"\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	4	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Footer\'a0\'97 \'a9 Forest Valley, link to fv.dev, contact email\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 App card data is hardcoded in HTML.\'a0When a new app repo is created, a card is manually added here. No dynamic loading \'97 it's a static site with a handful of apps.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 How App Repos Consume Shared Styles\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 Each app repo (e.g.,\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 seo-redirect-manager-site
+\f0\fs28 \cf2 \cb3 \strokec2 ) links to shared CSS from the hub:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf9 \cb5 \strokec9 <\cf8 \strokec8 link \cf15 \strokec15 rel\cf9 \strokec9 ="\cf12 \strokec12 stylesheet\cf9 \strokec9 "\cf8 \strokec8  \cf15 \strokec15 href\cf9 \strokec9 ="\cf12 \strokec12 https://apps.fv.dev/shared/styles/reset.css\cf9 \strokec9 ">\cf6 \strokec6 \
+\cf9 \strokec9 <\cf8 \strokec8 link \cf15 \strokec15 rel\cf9 \strokec9 ="\cf12 \strokec12 stylesheet\cf9 \strokec9 "\cf8 \strokec8  \cf15 \strokec15 href\cf9 \strokec9 ="\cf12 \strokec12 https://apps.fv.dev/shared/styles/variables.css\cf9 \strokec9 ">\cf6 \strokec6 \
+\cf9 \strokec9 <\cf8 \strokec8 link \cf15 \strokec15 rel\cf9 \strokec9 ="\cf12 \strokec12 stylesheet\cf9 \strokec9 "\cf8 \strokec8  \cf15 \strokec15 href\cf9 \strokec9 ="\cf12 \strokec12 https://apps.fv.dev/shared/styles/base.css\cf9 \strokec9 ">\cf6 \strokec6 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 This means:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 App repos have\'a0zero dependency\'a0on the hub repo at build time\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Shared styles are loaded at runtime from the CDN (Cloudflare Pages = global CDN, cached)\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 If shared styles update, all apps pick it up automatically (use cache headers wisely)\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Cloudflare Pages Routing (
+\fs26 \cf4 \cb5 \strokec4 _routes.json
+\fs24 \cf2 \cb3 \strokec2 )\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 The hub project serves\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 apps.fv.dev
+\f0\fs28 \cf2 \cb3 \strokec2 . App subpaths are\'a0separate Cloudflare Pages projects\'a0connected via Cloudflare's routing rules or a\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 _redirects
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0file:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf6 \cb5 \strokec6 # _redirects\
+/seo-redirect-manager/*  https://seo-redirect-manager-site.pages.dev/:splat  200\
+/next-app/*               https://next-app-site.pages.dev/:splat              200\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 The\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 200
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0status makes these\'a0proxy rewrites\'a0(not visible redirects) \'97 the user always sees\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 apps.fv.dev/seo-redirect-manager/...
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0in their address bar.\
+Important:\'a0Each app's Cloudflare Pages project must set\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 base: /seo-redirect-manager/
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0so asset paths resolve correctly.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 CORS on Shared Assets\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 Add\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 _headers
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0file to allow app subdomains to load shared styles:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf6 \cb5 \strokec6 /shared/*\
+  Access-Control-Allow-Origin: *\
+  Cache-Control: public, max-age=86400\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Deploy\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf10 \cb5 \strokec10 # .github/workflows/deploy.yml\cf6 \strokec6 \
+\pard\pardeftab720\partightenfactor0
+\cf16 \strokec16 name\cf9 \strokec9 :\cf6 \strokec6  Deploy to Cloudflare Pages\
+\cf16 \strokec16 on\cf9 \strokec9 :\cf6 \strokec6 \
+  \cf16 \strokec16 push\cf9 \strokec9 :\cf6 \strokec6 \
+    \cf16 \strokec16 branches\cf9 \strokec9 :\cf6 \strokec6  \cf9 \strokec9 [\cf6 \strokec6 main\cf9 \strokec9 ]\cf6 \strokec6 \
+\
+\cf16 \strokec16 jobs\cf9 \strokec9 :\cf6 \strokec6 \
+  \cf16 \strokec16 deploy\cf9 \strokec9 :\cf6 \strokec6 \
+    \cf16 \strokec16 runs-on\cf9 \strokec9 :\cf6 \strokec6  ubuntu\cf9 \strokec9 -\cf6 \strokec6 latest\
+    \cf16 \strokec16 steps\cf9 \strokec9 :\cf6 \strokec6 \
+      \cf9 \strokec9 -\cf6 \strokec6  \cf16 \strokec16 uses\cf9 \strokec9 :\cf6 \strokec6  actions/checkout@v4\
+      \cf9 \strokec9 -\cf6 \strokec6  \cf16 \strokec16 uses\cf9 \strokec9 :\cf6 \strokec6  actions/setup\cf9 \strokec9 -\cf6 \strokec6 node@v4\
+        \cf16 \strokec16 with\cf9 \strokec9 :\cf6 \strokec6 \
+          \cf16 \strokec16 node-version\cf9 \strokec9 :\cf6 \strokec6  \cf13 \strokec13 20\cf6 \strokec6 \
+      \cf9 \strokec9 -\cf6 \strokec6  \cf16 \strokec16 run\cf9 \strokec9 :\cf6 \strokec6  npm install\
+      \cf9 \strokec9 -\cf6 \strokec6  \cf16 \strokec16 run\cf9 \strokec9 :\cf6 \strokec6  npm run build\
+      \cf9 \strokec9 -\cf6 \strokec6  \cf16 \strokec16 uses\cf9 \strokec9 :\cf6 \strokec6  cloudflare/wrangler\cf9 \strokec9 -\cf6 \strokec6 action@v3\
+        \cf16 \strokec16 with\cf9 \strokec9 :\cf6 \strokec6 \
+          \cf16 \strokec16 apiToken\cf9 \strokec9 :\cf6 \strokec6  $\cf9 \strokec9 \{\{\cf6 \strokec6  secrets.CF_API_TOKEN \cf9 \strokec9 \}\}\cf6 \strokec6 \
+          \cf16 \strokec16 accountId\cf9 \strokec9 :\cf6 \strokec6  $\cf9 \strokec9 \{\{\cf6 \strokec6  secrets.CF_ACCOUNT_ID \cf9 \strokec9 \}\}\cf6 \strokec6 \
+          \cf16 \strokec16 command\cf9 \strokec9 :\cf6 \strokec6  pages deploy dist \cf9 \strokec9 --\cf6 \strokec6 project\cf9 \strokec9 -\cf6 \strokec6 name=fv\cf9 \strokec9 -\cf6 \strokec6 apps\cf9 \strokec9 -\cf6 \strokec6 hub\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf7 \cb1 \strokec7 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 Checklist for New App Integration\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 When adding a new app (from a separate repo):\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Create a new Cloudflare Pages project for the app repo\cb1 \
+\ls3\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Add a proxy line in\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 _redirects
+\f0\fs28 \cf2 \cb3 \strokec2 \'a0in this hub repo\cb1 \
+\ls3\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Add an app card to\'a0
+\f1\fs26 \cf4 \cb5 \strokec4 src/index.html
+\f0\fs28 \cf2 \cb1 \strokec2 \
+\ls3\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	4	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Push both repos\cb1 \
+}

@@ -1,0 +1,182 @@
+/* Catalog Page — Specific Styles */
+
+/* Hero */
+.hero {
+  padding: var(--fv-space-3xl) 0 var(--fv-space-2xl);
+  background: linear-gradient(135deg, var(--fv-gray-50) 0%, var(--fv-white) 100%);
+}
+
+.hero-content {
+  max-width: 680px;
+}
+
+.hero h1 {
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-md);
+}
+
+.hero-subtitle {
+  font-size: var(--fv-fs-lg);
+  color: var(--fv-gray-600);
+  line-height: 1.7;
+}
+
+/* About / What We Do */
+.about {
+  padding: var(--fv-space-2xl) 0;
+}
+
+.about h2 {
+  margin-bottom: var(--fv-space-lg);
+  color: var(--fv-navy);
+}
+
+.about p {
+  color: var(--fv-gray-600);
+  line-height: 1.8;
+  margin-bottom: var(--fv-space-md);
+  max-width: 760px;
+}
+
+/* App Grid */
+.apps {
+  padding: var(--fv-space-2xl) 0;
+  background: var(--fv-gray-50);
+}
+
+.apps h2 {
+  margin-bottom: var(--fv-space-xl);
+  color: var(--fv-navy);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--fv-space-lg);
+}
+
+/* App Card */
+.app-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--fv-space-md);
+}
+
+.app-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fv-green);
+  color: var(--fv-white);
+  border-radius: var(--fv-radius);
+}
+
+.app-card-badge {
+  font-size: var(--fv-fs-xs);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--fv-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-free {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-freemium {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge-paid {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.app-card-name {
+  font-size: var(--fv-fs-xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.app-card-desc {
+  font-size: var(--fv-fs-sm);
+  color: var(--fv-gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--fv-space-md);
+  flex: 1;
+}
+
+.app-card-platforms {
+  display: flex;
+  gap: var(--fv-space-sm);
+  margin-bottom: var(--fv-space-md);
+}
+
+.platform-badge {
+  font-size: var(--fv-fs-xs);
+  color: var(--fv-gray-500);
+  background: var(--fv-gray-100);
+  padding: 2px 8px;
+  border-radius: var(--fv-radius-sm);
+}
+
+.app-card-btn {
+  align-self: flex-start;
+}
+
+/* Why Section */
+.why {
+  padding: var(--fv-space-2xl) 0;
+}
+
+.why h2 {
+  margin-bottom: var(--fv-space-xl);
+  color: var(--fv-navy);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--fv-space-xl);
+}
+
+.why-item h3 {
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.why-item p {
+  color: var(--fv-gray-600);
+  font-size: var(--fv-fs-sm);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .hero {
+    padding: var(--fv-space-2xl) 0 var(--fv-space-xl);
+  }
+
+  .hero h1 {
+    font-size: var(--fv-fs-2xl);
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}

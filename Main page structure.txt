@@ -1,0 +1,32 @@
+1. Hero / Header
+•	Headline: "Business Apps by Forest Valley"
+•	Subheadline: "Powerful integrations and tools for your business stack. From e-commerce to accounting, automation to analytics."
+
+Section 2: Explanation What We Do
+We build specialized business applications that solve real problems for online stores and service businesses.
+Every app in our catalog is designed to address a specific gap in your business stack—whether that's preserving your SEO rankings during store migrations, automating repetitive tasks, or integrating systems that weren't meant to work together.
+Unlike generic solutions, our apps are built with deep platform knowledge and real-world merchant feedback. We focus on tools that deliver immediate value, work reliably behind the scenes, and integrate seamlessly with the platforms you already use.
+
+3. App Grid / Catalog
+Main content area with filterable cards (3-4 columns on desktop):
+Each app card includes:
+•	Icon/logo
+•	App name
+•	One-line description (e.g., "Fix broken links & preserve SEO")
+•	Platform badges (Ecwid, Shopify icons)
+•	Plan indicator (Free / Free + Pro / Pro only)
+•	"View details" button linking to /app-name/
+
+Section 4: Why Forest Valley Apps
+🛠️ Built by Developers, For Merchants
+We're not a marketplace aggregator—we're the team that builds, maintains, and supports every app. With 10+ years developing e-commerce solutions, we understand both the technical challenges and business needs of online merchants. When you use our apps, you're getting tools built by people who've solved these problems firsthand.
+🔒 Reliable & Secure
+Professional infrastructure means your business tools just work. We handle hosting, security updates, and compliance (including GDPR) so you can focus on running your business. Our apps are production-ready from day one, with regular maintenance and monitoring to prevent issues before they impact you.
+💬 Real Support
+We respond quickly, understand the technical details, and can actually fix things—not just escalate them.
+
+5. Footer
+Standard footer with:
+•	Support/Contact (info@fv.dev)
+•	Forest Valley branding + link back to fv.dev
+

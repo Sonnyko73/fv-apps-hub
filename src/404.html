@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Forest Valley Apps</title>
+  <link rel="icon" type="image/png" href="/shared/assets/favicon.png">
+  <link rel="stylesheet" href="/shared/styles/reset.css">
+  <link rel="stylesheet" href="/shared/styles/variables.css">
+  <link rel="stylesheet" href="/shared/styles/base.css">
+  <link rel="stylesheet" href="/shared/components/header.css">
+  <link rel="stylesheet" href="/shared/components/footer.css">
+  <style>
+    .error-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+      padding: var(--fv-space-2xl) var(--fv-space-lg);
+    }
+    .error-code {
+      font-size: 6rem;
+      font-weight: 700;
+      color: var(--fv-gray-200);
+      line-height: 1;
+      margin-bottom: var(--fv-space-md);
+    }
+    .error-page h1 {
+      font-size: var(--fv-fs-2xl);
+      color: var(--fv-navy);
+      margin-bottom: var(--fv-space-sm);
+    }
+    .error-page p {
+      color: var(--fv-gray-500);
+      margin-bottom: var(--fv-space-xl);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="fv-header">
+    <div class="fv-container">
+      <a href="/" class="fv-header-brand">
+        <img src="/shared/assets/fv-logo.svg" alt="Forest Valley" class="fv-header-logo">
+        <span class="fv-header-title">Forest Valley Apps</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="error-page">
+    <div class="error-code">404</div>
+    <h1>Page Not Found</h1>
+    <p>The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/" class="fv-btn fv-btn-primary">Back to Apps</a>
+  </main>
+
+  <footer class="fv-footer">
+    <div class="fv-container">
+      <div class="fv-footer-brand">
+        <img src="/shared/assets/fv-logo.svg" alt="Forest Valley">
+        <span>Forest Valley</span>
+      </div>
+      <div class="fv-footer-links">
+        <a href="https://fv.dev">fv.dev</a>
+        <a href="mailto:info@fv.dev">info@fv.dev</a>
+      </div>
+      <div class="fv-footer-copy">
+        &copy; 2025 Forest Valley. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
