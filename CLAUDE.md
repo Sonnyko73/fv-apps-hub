@@ -1,6 +1,6 @@
 # fv-apps-hub
 
-Hub/catalog page at `apps.fv.dev/` and shared assets at `apps.fv.dev/shared/`. This repo knows nothing about individual apps -- it only links to them.
+Monorepo for `apps.fv.dev/` -- catalog page, shared design system, and all app pages.
 
 ## Tech Stack
 
@@ -26,6 +26,7 @@ fv-apps-hub/
 │   │   ├── variables.css    # Brand tokens (design system)
 │   │   └── base.css         # Typography, containers, utilities
 │   ├── assets/
+│   │   ├── fv-logo.png         # Primary logo (used in headers/footers)
 │   │   ├── fv-logo.svg
 │   │   ├── fv-logo-dark.svg
 │   │   └── favicon.ico
@@ -43,19 +44,21 @@ fv-apps-hub/
 ## URL Routing
 
 - `apps.fv.dev/` -- Main catalog page
-- `apps.fv.dev/shared/styles/` -- Shared CSS (consumed by all app repos)
+- `apps.fv.dev/shared/styles/` -- Shared CSS (consumed by all app pages)
 - `apps.fv.dev/shared/assets/` -- Shared assets (logos, fonts)
-- `apps.fv.dev/{app-slug}/` -- Proxied to separate Cloudflare Pages project (200 rewrite)
+- `apps.fv.dev/{app-slug}/` -- App pages (served from this repo)
 
 ## Shared Design System
 
-App repos consume shared styles at runtime via `<link>` tags (zero build-time dependency):
+App pages consume shared styles via `<link>` tags with relative paths:
 
 ```html
-<link rel="stylesheet" href="https://apps.fv.dev/shared/styles/reset.css">
-<link rel="stylesheet" href="https://apps.fv.dev/shared/styles/variables.css">
-<link rel="stylesheet" href="https://apps.fv.dev/shared/styles/base.css">
+<link rel="stylesheet" href="/shared/styles/reset.css">
+<link rel="stylesheet" href="/shared/styles/variables.css">
+<link rel="stylesheet" href="/shared/styles/base.css">
 ```
+
+See `SHARED-STYLES.md` for the full reference (tokens, utility classes, header/footer markup, page template).
 
 ### Design Tokens (`variables.css`)
 
@@ -97,20 +100,10 @@ Sections:
 
 App data is hardcoded in HTML. When adding a new app, manually add a card.
 
-## Cloudflare Routing (`_redirects`)
-
-Proxy rewrites (200 status = invisible to user):
-```
-/seo-redirect-manager/*  https://seo-redirect-manager-site.pages.dev/:splat  200
-```
-
-Each app's Cloudflare Pages project must set `base: /{app-slug}/` so asset paths resolve correctly.
-
-## CORS (`_headers`)
+## Caching (`_headers`)
 
 ```
 /shared/*
-  Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 ```
 
@@ -129,7 +122,6 @@ Each app's Cloudflare Pages project must set `base: /{app-slug}/` so asset paths
 
 ## Adding a New App
 
-1. Create a new Cloudflare Pages project for the app repo
-2. Add a proxy line in `_redirects` in this hub repo
-3. Add an app card to `src/index.html`
-4. Push both repos
+1. Create the app page under `src/{app-slug}/`
+2. Add an app card to `src/index.html`
+3. Push to `main`
