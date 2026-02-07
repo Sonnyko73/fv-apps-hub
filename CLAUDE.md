@@ -18,8 +18,15 @@ fv-apps-hub/
 │   ├── index.html          # Catalog page (hardcoded app cards)
 │   ├── styles.css           # Catalog-specific styles
 │   ├── 404.html             # Custom 404 page
-│   └── assets/
-│       └── hero.png
+│   ├── assets/
+│   │   └── hero.png
+│   └── {app-slug}/         # App pages (generated from docs/)
+│       └── index.html
+├── docs/                    # App manuals (source of truth)
+│   └── {app-slug}-app-docs/
+│       ├── about.md         # App info for catalog card + landing page
+│       ├── README.md        # Manual table of contents
+│       └── *.md             # Manual chapters
 ├── shared/                  # Hosted at apps.fv.dev/shared/
 │   ├── styles/
 │   │   ├── reset.css        # Minimal CSS reset
@@ -98,7 +105,7 @@ Sections:
 5. **Why Forest Valley** -- Three value props: Built by Developers, Reliable & Secure, Real Support
 6. **Footer** -- copyright, link to fv.dev, contact email
 
-App data is hardcoded in HTML. When adding a new app, manually add a card.
+App data is hardcoded in HTML. When adding a new app, manually add a card. App info comes from `docs/{app-slug}-app-docs/about.md`.
 
 ## Caching (`_headers`)
 
@@ -120,8 +127,19 @@ App data is hardcoded in HTML. When adding a new app, manually add a card.
 - `npm run build` -- Build to `dist/` (copies src + shared, minifies HTML/CSS)
 - `npm run dev` -- Serve `dist/` locally via `npx serve`
 
+## App Docs (`docs/`)
+
+Each app has a manual in `docs/{app-slug}-app-docs/` with:
+
+- **`about.md`** -- App description, features, pricing, FAQ. Used to generate the catalog card on `src/index.html` and the app landing page at `src/{app-slug}/index.html`.
+- **`README.md`** -- Manual table of contents linking to chapter files.
+- **`01-*.md`, `02-*.md`, ...** -- Manual chapters (getting started, features, troubleshooting, etc.).
+
+The docs folder is the **source of truth** for all app content on the site. App pages and catalog cards should be built from these docs.
+
 ## Adding a New App
 
-1. Create the app page under `src/{app-slug}/`
-2. Add an app card to `src/index.html`
-3. Push to `main`
+1. Add app manual to `docs/{app-slug}-app-docs/` (about.md + README.md + chapter files)
+2. Generate the app page under `src/{app-slug}/` from the docs
+3. Add an app card to `src/index.html` (using info from `about.md`)
+4. Push to `main`

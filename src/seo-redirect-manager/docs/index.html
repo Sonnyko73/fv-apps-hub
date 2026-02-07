@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Redirect Manager — User Manual — Forest Valley Apps</title>
+  <meta name="description" content="User manual for SEO Redirect Manager. Manage URL redirects, detect 404 errors, and preserve SEO for your Ecwid store.">
+  <link rel="icon" href="/shared/assets/favicon.ico">
+  <link rel="stylesheet" href="/shared/styles/reset.css">
+  <link rel="stylesheet" href="/shared/styles/variables.css">
+  <link rel="stylesheet" href="/shared/styles/base.css">
+  <link rel="stylesheet" href="/shared/components/header.css">
+  <link rel="stylesheet" href="/shared/components/footer.css">
+  <link rel="stylesheet" href="/seo-redirect-manager/styles/docs.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="fv-header">
+    <div class="fv-container">
+      <a href="/" class="fv-header-brand">
+        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo">
+        <span class="fv-header-title">Forest Valley Apps</span>
+      </a>
+      <nav class="fv-header-nav">
+        <a href="/seo-redirect-manager/">Back to SEO Redirect Manager</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout fv-container">
+
+    <!-- Sidebar -->
+    <nav class="docs-sidebar" aria-label="Manual navigation">
+      <h2 class="docs-sidebar-title">User Manual</h2>
+      <ul class="docs-nav">
+        <li>
+          <a href="#getting-started">1. Getting Started</a>
+          <ul>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#opening-the-app">Opening the App</a></li>
+            <li><a href="#admin-ui-layout">Admin UI Layout</a></li>
+            <li><a href="#understanding-redirect-types">Redirect Types</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#managing-redirects">2. Managing Redirects</a>
+          <ul>
+            <li><a href="#creating-a-redirect">Creating</a></li>
+            <li><a href="#editing-a-redirect">Editing</a></li>
+            <li><a href="#enabling-and-disabling">Enable / Disable</a></li>
+            <li><a href="#searching">Searching</a></li>
+            <li><a href="#bulk-actions">Bulk Actions</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#bulk-csv-import">3. Bulk CSV Import</a>
+          <ul>
+            <li><a href="#csv-format">CSV Format</a></li>
+            <li><a href="#import-workflow">Import Workflow</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#broken-urls">4. Broken URLs &amp; 404 Detection</a>
+          <ul>
+            <li><a href="#how-detection-works">How Detection Works</a></li>
+            <li><a href="#the-404-errors-page">404 Errors Page</a></li>
+            <li><a href="#fixing-a-broken-url">Fixing a Broken URL</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#automatic-redirects">5. Automatic Redirects</a>
+          <ul>
+            <li><a href="#auto-how-it-works">How It Works</a></li>
+            <li><a href="#initial-catalog-sync">Catalog Sync</a></li>
+            <li><a href="#enabling-disabling-auto">Enable / Disable</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#free-vs-pro">6. Free vs Pro Plans</a>
+          <ul>
+            <li><a href="#feature-comparison">Comparison</a></li>
+            <li><a href="#upgrading-to-pro">Upgrading</a></li>
+            <li><a href="#what-happens-on-downgrade">Downgrade</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#how-redirects-work">7. How Redirects Work</a>
+          <ul>
+            <li><a href="#client-side-execution">Client-Side Execution</a></li>
+            <li><a href="#url-matching-rules">URL Matching</a></li>
+            <li><a href="#application-storage">Storage &amp; Overflow</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#troubleshooting">8. Troubleshooting</a>
+          <ul>
+            <li><a href="#redirect-not-working">Redirect Not Working</a></li>
+            <li><a href="#404s-not-detected">404s Not Detected</a></li>
+            <li><a href="#csv-import-errors">CSV Import Errors</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Content -->
+    <main class="docs-content">
+
+      <h1>SEO Redirect Manager — User Manual</h1>
+      <p class="docs-intro">URL redirect management for Ecwid stores. Create 301/302 redirects, detect broken URLs, and automatically preserve SEO when product or category URLs change.</p>
+
+      <!-- Chapter 1: Getting Started -->
+      <section id="getting-started">
+        <h2>1. Getting Started</h2>
+
+        <h3 id="installation">Installation</h3>
+        <ol>
+          <li>Find <strong>SEO Redirect Manager</strong> in the Ecwid App Market.</li>
+          <li>Click <strong>Install</strong>. The app requests the following permissions:
+            <ul>
+              <li>Read store profile (store URL and settings)</li>
+              <li>Read catalog (product and category data for slug tracking)</li>
+              <li>Customize storefront (inject the redirect script)</li>
+              <li>Public storefront access (serve redirect rules to visitors)</li>
+            </ul>
+          </li>
+          <li>After installation, the app appears in your Ecwid admin panel sidebar.</li>
+        </ol>
+        <p>On first install, the app performs an initial catalog sync — it reads all your products and categories to record their current URL slugs. This enables automatic redirect detection if you later rename items.</p>
+
+        <h3 id="opening-the-app">Opening the App</h3>
+        <p>Navigate to <strong>Apps &gt; SEO Redirect Manager</strong> in the Ecwid admin panel. The app loads inside the admin as an embedded panel.</p>
+
+        <h3 id="admin-ui-layout">Admin UI Layout</h3>
+        <p>The app uses a sidebar-based layout with three main sections:</p>
+
+        <h4>Header Bar</h4>
+        <p>At the top of the screen you'll find the app logo and title, plus a <strong>+ Add New Redirect</strong> button for quick access.</p>
+
+        <h4>Sidebar Navigation</h4>
+        <table>
+          <thead>
+            <tr><th>Page</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Dashboard</strong></td><td>Overview with stats, redirect table, and 404 preview panel</td></tr>
+            <tr><td><strong>404 Errors</strong></td><td>View all 404 errors detected on your storefront (Pro)</td></tr>
+            <tr><td><strong>Settings</strong></td><td>Store details, sync config, redirect defaults, notifications, plan &amp; usage, activity logs, reset</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Dashboard Overview</h4>
+        <p>The Dashboard is your main working area. It includes:</p>
+        <ol>
+          <li><strong>Stats Cards</strong> — Three cards showing: Total Redirects, 404s Detected (Pro), and Redirects Hit.</li>
+          <li><strong>Managed Redirects Table</strong> — View, search, and manage all your redirect rules with search, filter, sort, bulk actions, and pagination.</li>
+          <li><strong>404 Detector Panel</strong> (Pro) — A preview of recent 404 errors with quick actions: Create Redirect, Ignore, or View All 404s.</li>
+        </ol>
+
+        <h3 id="understanding-redirect-types">Understanding Redirect Types</h3>
+        <table>
+          <thead>
+            <tr><th>Type</th><th>Name</th><th>When to Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>301</strong></td><td>Permanent redirect</td><td>The old URL will never come back. Tells search engines to transfer all SEO value to the new URL. Use for renamed products, merged categories, or permanent URL changes.</td></tr>
+            <tr><td><strong>302</strong></td><td>Temporary redirect (Pro)</td><td>The old URL may return. Tells search engines to keep the old URL indexed. Use for seasonal pages, A/B tests, or temporary promotions.</td></tr>
+          </tbody>
+        </table>
+        <p>In most cases, <strong>301</strong> is the correct choice. Use 302 only when you plan to restore the original URL later.</p>
+
+        <h3>What Happens After You Create a Redirect</h3>
+        <p>When you save a redirect rule, the app:</p>
+        <ol>
+          <li>Validates the rule (checks for loops, self-redirects, and conflicts).</li>
+          <li>Stores it in the database.</li>
+          <li>Syncs the updated rules to your storefront via Ecwid Application Storage.</li>
+          <li>Visitors who land on the old URL are immediately redirected to the new one.</li>
+        </ol>
+        <p>No server configuration or code changes are required on your part.</p>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 2: Managing Redirects -->
+      <section id="managing-redirects">
+        <h2>2. Managing Redirects</h2>
+
+        <h3>The Managed Redirects Table</h3>
+        <p>The Dashboard displays all redirect rules in the <strong>Managed Redirects</strong> table:</p>
+        <table>
+          <thead>
+            <tr><th>Column</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Source URL</strong></td><td>The old URL path that triggers the redirect (clickable link to edit)</td></tr>
+            <tr><td><strong>Destination URL</strong></td><td>The new URL path visitors are sent to</td></tr>
+            <tr><td><strong>Type</strong></td><td>301 (permanent) or 302 (temporary)</td></tr>
+            <tr><td><strong>Status</strong></td><td>Badge showing "Active" or "Inactive"</td></tr>
+            <tr><td><strong>Hits</strong></td><td>Number of times the redirect has been triggered</td></tr>
+            <tr><td><strong>Actions</strong></td><td>Menu with Edit, Activate/Deactivate, and Delete options</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="creating-a-redirect">Creating a Redirect</h3>
+        <ol>
+          <li>Click the <strong>+ Add New Redirect</strong> button.</li>
+          <li>Fill in the form:
+            <ul>
+              <li><strong>Source Path</strong> (required) — The old URL path, e.g. <code>/store/old-product-name-p12345</code></li>
+              <li><strong>Destination</strong> (required) — The new URL path, e.g. <code>/store/new-product-name-p12345</code></li>
+              <li><strong>Redirect Type</strong> — Select 301 or 302 (302 requires Pro plan)</li>
+              <li><strong>Notes</strong> (optional) — A memo for your own reference, up to 500 characters</li>
+            </ul>
+          </li>
+          <li>Click <strong>Save</strong>.</li>
+        </ol>
+        <p>The source path must start with <code>/</code>. Trailing slashes are removed automatically. Paths are case-insensitive.</p>
+
+        <h4>Validation Rules</h4>
+        <ul>
+          <li><strong>No self-redirects</strong> — The source and destination cannot be the same path.</li>
+          <li><strong>No duplicate sources</strong> — Each source path can only have one redirect rule.</li>
+          <li><strong>Loop detection</strong> — If redirect A &rarr; B already exists and you try to create B &rarr; A, the app rejects it.</li>
+          <li><strong>Chain warning</strong> — If redirect A &rarr; B exists and you create B &rarr; C, the app warns you and suggests updating A to point directly to C.</li>
+        </ul>
+
+        <h3 id="editing-a-redirect">Editing a Redirect</h3>
+        <ol>
+          <li>Click the <strong>Source URL</strong> link or use the <strong>Actions</strong> menu and select <strong>Edit</strong>.</li>
+          <li>Modify any field (source, destination, type, notes).</li>
+          <li>Click <strong>Save</strong>.</li>
+        </ol>
+
+        <h3 id="enabling-and-disabling">Enabling and Disabling Redirects</h3>
+        <ol>
+          <li>Click the <strong>Actions</strong> menu on the redirect row.</li>
+          <li>Select <strong>Activate</strong> or <strong>Deactivate</strong>.</li>
+        </ol>
+        <p>Disabled redirects remain in the database but do not execute on the storefront. The change takes effect immediately.</p>
+
+        <h3>Deleting a Redirect</h3>
+        <ol>
+          <li>Click the <strong>Actions</strong> menu on the redirect row.</li>
+          <li>Select <strong>Delete</strong>.</li>
+        </ol>
+        <p>Deleted redirects are permanently removed from the database and storefront rules.</p>
+
+        <h3 id="searching">Searching</h3>
+        <p>Use the search box above the table to filter redirects. Search matches against both the source path and destination. The search is case-insensitive.</p>
+
+        <h3>Sorting</h3>
+        <p>Click a column header to sort the table. Available sort columns: Source path, Created date, Updated date, Hit count. Click the same column again to toggle between ascending and descending order.</p>
+
+        <h3 id="bulk-actions">Bulk Actions</h3>
+        <p>Select multiple redirects using checkboxes, then click <strong>Bulk Actions</strong> to perform operations on all selected items.</p>
+
+        <h3>Pagination</h3>
+        <p>The Dashboard table shows a preview of your redirects. Use the pagination controls at the bottom to navigate between pages.</p>
+
+        <h3>"Destination Broken" Warning</h3>
+        <p>If a redirect's destination points to a product or category that has been deleted, the redirect is marked with a "destination broken" indicator. You may want to update it to point to an active page.</p>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 3: Bulk CSV Import -->
+      <section id="bulk-csv-import">
+        <h2>3. Bulk CSV Import</h2>
+        <p><strong>Requires Pro plan.</strong></p>
+        <p>Bulk CSV import lets you upload a CSV file to create many redirects at once instead of adding them one by one.</p>
+
+        <h3 id="csv-format">CSV Format</h3>
+        <p>Your CSV file must have a header row with these three columns:</p>
+        <table>
+          <thead>
+            <tr><th>Column</th><th>Required</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>source_path</code></td><td>Yes</td><td>The old URL path (e.g. <code>/old-page</code>)</td></tr>
+            <tr><td><code>destination_path</code></td><td>Yes</td><td>The new URL path (e.g. <code>/new-page</code>)</td></tr>
+            <tr><td><code>type</code></td><td>Yes</td><td><code>301</code> or <code>302</code></td></tr>
+          </tbody>
+        </table>
+
+        <h4>Example CSV</h4>
+        <pre><code>source_path,destination_path,type
+/store/summer-sale-c5678,/store/winter-sale-c5678,301
+/store/blue-widget-p12345,/store/blue-widget-v2-p12345,301
+/store/promo,/store/deals,302</code></pre>
+
+        <h3 id="import-workflow">Import Workflow</h3>
+        <h4>Step 1: Upload</h4>
+        <p>Click <strong>Choose File</strong> or drag and drop a <code>.csv</code> file.</p>
+
+        <h4>Step 2: Preview</h4>
+        <p>The app parses the CSV and shows a preview of up to 100 rows. Valid rows are highlighted in green, invalid rows in red with error messages.</p>
+
+        <h4>Step 3: Import</h4>
+        <p>Click <strong>Import</strong> to submit the valid rows. The backend validates for loops, chains, and duplicates.</p>
+
+        <h4>Step 4: Results</h4>
+        <p>A summary card shows: Total rows submitted, Created, Skipped, and Errors with per-row details.</p>
+
+        <h3>Tips</h3>
+        <ul>
+          <li>Fix errors in your CSV file and re-import. Already-created redirects are skipped as duplicates.</li>
+          <li>The import processes rows sequentially. If one row fails, valid rows still get created.</li>
+          <li>Large files are accepted, but the preview shows only the first 100 rows.</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 4: Broken URLs & 404 Detection -->
+      <section id="broken-urls">
+        <h2>4. Broken URLs &amp; 404 Detection</h2>
+        <p><strong>Requires Pro plan.</strong></p>
+        <p>The <strong>404 Errors</strong> page shows pages on your storefront that visitors tried to access but resulted in a 404 error.</p>
+
+        <h3>Quick Access from Dashboard</h3>
+        <p>Pro users see a <strong>404 Detector Panel</strong> at the bottom of the Dashboard showing recent unresolved 404 errors with quick actions: Create Redirect, Ignore, or View All 404s.</p>
+
+        <h3 id="how-detection-works">How Detection Works</h3>
+        <p>The storefront script monitors page loads. When a page is not found, the broken URL is reported to the backend.</p>
+        <ul>
+          <li>Detection is automatic — no configuration needed.</li>
+          <li>Reports are batched and debounced (3-second window).</li>
+          <li>Each unique broken URL is recorded once. Repeat visits increment the hit count.</li>
+          <li>The referrer is captured when available.</li>
+        </ul>
+
+        <h3 id="the-404-errors-page">The 404 Errors Page</h3>
+        <table>
+          <thead>
+            <tr><th>Column</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>URL Path</strong></td><td>The broken URL that returned 404</td></tr>
+            <tr><td><strong>Hits</strong></td><td>Number of times visitors hit this 404</td></tr>
+            <tr><td><strong>Referrer</strong></td><td>The source URL that linked to the broken page</td></tr>
+            <tr><td><strong>Last Seen</strong></td><td>When the most recent 404 hit occurred</td></tr>
+            <tr><td><strong>Status</strong></td><td>Unresolved or Resolved</td></tr>
+          </tbody>
+        </table>
+        <p>Use the search box to filter by URL path or referrer. Use the status filter dropdown (Unresolved, Resolved, All). Click column headers to sort.</p>
+
+        <h3 id="fixing-a-broken-url">Fixing a Broken URL</h3>
+        <h4>Option 1: Create a Redirect (Recommended)</h4>
+        <ol>
+          <li>Find the broken URL in the table.</li>
+          <li>Click <strong>Create Redirect</strong>.</li>
+          <li>Enter the destination — the correct page visitors should reach.</li>
+          <li>Select the redirect type (301 or 302).</li>
+          <li>Click <strong>Create</strong>.</li>
+        </ol>
+        <p>The app creates the redirect, marks the broken URL as resolved, and syncs the rule to your storefront.</p>
+
+        <h4>Option 2: Resolve Without Redirecting</h4>
+        <p>If the 404 is expected, click <strong>Resolve</strong> to mark it as handled without creating a redirect.</p>
+
+        <h4>Option 3: Delete</h4>
+        <p>Click <strong>Delete</strong> to remove the record from the log entirely.</p>
+
+        <h3>Limits and Cleanup</h3>
+        <table>
+          <thead>
+            <tr><th>Limit</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Max broken URL records per store</td><td>10,000</td></tr>
+            <tr><td>Report rate limit</td><td>100 per store per hour</td></tr>
+            <tr><td>Auto-cleanup</td><td>Records older than 90 days are deleted</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 5: Automatic Redirects -->
+      <section id="automatic-redirects">
+        <h2>5. Automatic Redirects</h2>
+        <p><strong>Requires Pro plan.</strong></p>
+        <p>The app automatically creates redirects when you rename a product or category in your Ecwid store.</p>
+
+        <h3 id="auto-how-it-works">How It Works</h3>
+        <ol>
+          <li>You rename a product or category in your Ecwid admin.</li>
+          <li>Ecwid changes the URL slug.</li>
+          <li>Ecwid sends a webhook notification to the app.</li>
+          <li>The app compares the new slug against the previously recorded slug.</li>
+          <li>If the slug changed, a 301 redirect is created from the old URL to the new one.</li>
+          <li>The redirect is synced to your storefront immediately.</li>
+        </ol>
+
+        <h3>What Gets Tracked</h3>
+        <p>The app tracks slugs for both <strong>products</strong> and <strong>categories</strong>. If a custom slug is set, it takes precedence. The app detects changes to whichever slug is currently active.</p>
+
+        <h3 id="initial-catalog-sync">Initial Catalog Sync</h3>
+        <p>When you first install the app, it reads all your products and categories and records their current slugs. This baseline allows the app to detect future changes.</p>
+
+        <h3>Auto-Redirect in the Redirect List</h3>
+        <p>Auto-created redirects appear in the Dashboard with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit, disable, or delete them. Auto-redirects are always type 301 (permanent).</p>
+
+        <h3>What Happens When a Product or Category Is Deleted</h3>
+        <ul>
+          <li>Redirects where the deleted item's URL was the <strong>destination</strong> are marked with a "destination broken" indicator.</li>
+          <li>Redirects where the deleted item's URL was the <strong>source</strong> continue to function normally.</li>
+          <li>No new redirect is created for deletions.</li>
+        </ul>
+
+        <h3 id="enabling-disabling-auto">Enabling and Disabling Auto-Redirect</h3>
+        <p>Toggle auto-redirect in <strong>Settings &gt; Slug History Synchronization &gt; Enable Automatic Sync</strong>. When disabled, slug changes are still tracked but no redirects are automatically created. Auto-redirect is enabled by default on Pro plans.</p>
+
+        <h3>Deduplication</h3>
+        <p>If you edit a product multiple times in quick succession, the app deduplicates webhook events within a 5-second window, preventing duplicate redirects.</p>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 6: Free vs Pro Plans -->
+      <section id="free-vs-pro">
+        <h2>6. Free vs Pro Plans</h2>
+
+        <h3 id="feature-comparison">Feature Comparison</h3>
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Free</th><th>Pro ($5.99/mo)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Manual redirects</td><td>Up to 25</td><td>Unlimited</td></tr>
+            <tr><td>Redirect types</td><td>301 only</td><td>301 + 302</td></tr>
+            <tr><td>Bulk CSV import</td><td>No</td><td>Yes</td></tr>
+            <tr><td>404 detection &amp; broken URL dashboard</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Automatic slug change redirects</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Redirect analytics (hit counts)</td><td>No</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Free Plan Limits</h3>
+        <ul>
+          <li><strong>25 redirect maximum.</strong> Once reached, new redirect creation is blocked until you delete an existing one or upgrade.</li>
+          <li><strong>301 only.</strong> Only permanent redirects can be created.</li>
+          <li><strong>No CSV import.</strong> Bulk import is not available.</li>
+          <li><strong>No 404 detection.</strong> The storefront script does not report 404s.</li>
+          <li><strong>No auto-redirect.</strong> Slug changes are not tracked.</li>
+        </ul>
+
+        <h3 id="upgrading-to-pro">Upgrading to Pro</h3>
+        <p>Billing is handled through the Ecwid App Market. Navigate to <strong>Apps &gt; SEO Redirect Manager</strong> and follow the upgrade prompt. The Pro plan activates immediately after purchase.</p>
+        <p>When you upgrade: the redirect limit is removed, 302 redirects become available, 404 detection starts automatically, and auto-redirect is enabled by default.</p>
+
+        <h3 id="what-happens-on-downgrade">What Happens on Downgrade</h3>
+        <h4>Redirect Deactivation</h4>
+        <ol>
+          <li><strong>302 redirects are deactivated.</strong> Free plan only supports 301.</li>
+          <li><strong>Excess redirects are deactivated.</strong> If you have more than 25, the newest ones beyond 25 are disabled.</li>
+        </ol>
+        <p>Deactivated redirects are not deleted — they can be reactivated by re-subscribing.</p>
+
+        <h4>Feature Restrictions</h4>
+        <ul>
+          <li>404 detection stops. Existing records remain but the page shows a Pro upgrade prompt.</li>
+          <li>Auto-redirect stops. Existing auto-created redirects remain active if within the 25-redirect limit.</li>
+          <li>CSV import is locked.</li>
+        </ul>
+
+        <h4>Re-upgrading</h4>
+        <p>If you re-subscribe to Pro, all previously deactivated redirects are automatically reactivated. No data is lost.</p>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 7: How Redirects Work -->
+      <section id="how-redirects-work">
+        <h2>7. How Redirects Work</h2>
+
+        <h3 id="client-side-execution">Client-Side Redirect Execution</h3>
+        <p>The app injects a small JavaScript file (under 5KB) into your Ecwid storefront. This script runs on every page load:</p>
+        <ol>
+          <li><strong>Load rules</strong> — Reads redirect rules from Ecwid Application Storage. No extra network request needed.</li>
+          <li><strong>Normalize the current URL</strong> — Strips query strings, fragments, and trailing slashes. Converts to lowercase.</li>
+          <li><strong>Exact match</strong> — Checks the current URL against exact-match rules via hash-map lookup.</li>
+          <li><strong>Wildcard match</strong> — If no exact match, checks wildcard patterns sorted by specificity (longest prefix first).</li>
+          <li><strong>Redirect</strong> — If a match is found, executes <code>window.location.replace(destination)</code>.</li>
+        </ol>
+        <p>If no match is found, the script exits silently with no impact on page performance.</p>
+
+        <h3 id="url-matching-rules">URL Matching Rules</h3>
+        <h4>Path Normalization</h4>
+        <ul>
+          <li>Leading slash is ensured</li>
+          <li>Trailing slash is removed</li>
+          <li>Converted to lowercase</li>
+          <li>Query strings and fragments are stripped</li>
+        </ul>
+        <p>This means <code>/Store/My-Product/</code> and <code>/store/my-product</code> are treated as the same path.</p>
+
+        <h4>Exact Match vs Wildcard</h4>
+        <ul>
+          <li><strong>Exact match</strong> rules match a single specific path.</li>
+          <li><strong>Wildcard</strong> rules use <code>*</code> as a suffix to match any path that starts with the given prefix.</li>
+        </ul>
+        <p>Exact match rules always take priority over wildcard rules.</p>
+
+        <h4>Supported URL Formats</h4>
+        <p>Ecwid stores can use clean URLs (<code>/store/product-name-p12345</code>) or hash-based URLs (<code>#!/product/product-name</code>). The app handles both formats.</p>
+
+        <h3 id="application-storage">Application Storage and the 256KB Limit</h3>
+        <p>Redirect rules are stored in Ecwid Application Storage as JSON. Ecwid imposes a <strong>256KB limit</strong> on public Application Storage.</p>
+
+        <h4>Overflow Mode</h4>
+        <p>When rules exceed 256KB:</p>
+        <ol>
+          <li>Application Storage stores a lightweight marker with a hash and API endpoint URL.</li>
+          <li>The storefront script detects the marker and fetches full rules from the backend.</li>
+          <li>Rules are cached in <code>sessionStorage</code> using the hash as a cache key.</li>
+          <li>Subsequent page loads use the cache (no network request).</li>
+          <li>If the hash changes (rules were updated), the cache is invalidated.</li>
+        </ol>
+
+        <h3>Client-Side vs Server-Side Redirects</h3>
+        <p>The app uses <strong>client-side redirects</strong>. The browser loads the page, JavaScript runs, then navigates to the new URL. For SEO-critical redirects, server-side rule export is planned for a future release.</p>
+
+        <h3>Error Handling</h3>
+        <p>The storefront script is designed to never break your store. All redirect logic is wrapped in error handling. If anything fails, the page loads normally. Errors are reported for monitoring with no impact on page load.</p>
+      </section>
+
+      <hr>
+
+      <!-- Chapter 8: Troubleshooting -->
+      <section id="troubleshooting">
+        <h2>8. Troubleshooting</h2>
+
+        <h3 id="redirect-not-working">Redirect Not Working</h3>
+        <p><strong>The redirect is enabled but visitors are not being redirected.</strong></p>
+        <ol>
+          <li><strong>Check the status.</strong> Confirm the redirect shows "Active" status in the Dashboard.</li>
+          <li><strong>Check the source path.</strong> Make sure it matches the actual URL visitors are using. Paths are normalized (lowercase, no trailing slash).</li>
+          <li><strong>Wait for sync.</strong> After creating or editing a redirect, try a hard refresh (Ctrl+Shift+R / Cmd+Shift+R).</li>
+          <li><strong>Clear browser cache.</strong> Test in an incognito/private window.</li>
+          <li><strong>Check for conflicting redirects.</strong> Search for the source path in the Dashboard.</li>
+          <li><strong>Verify the storefront script is loaded.</strong> Check your Ecwid admin to confirm the app is installed and active.</li>
+        </ol>
+
+        <h3 id="404s-not-detected">404s Not Being Detected</h3>
+        <p><strong>The 404 Errors page is empty even though your store has broken links.</strong></p>
+        <ol>
+          <li><strong>Confirm Pro plan.</strong> 404 detection is a Pro feature.</li>
+          <li><strong>Visit the broken URL.</strong> Detection only triggers when someone actually visits a broken page.</li>
+          <li><strong>Wait for batching.</strong> Reports are batched with a 3-second debounce.</li>
+          <li><strong>Check rate limits.</strong> Up to 100 reports per store per hour.</li>
+        </ol>
+
+        <h3 id="csv-import-errors">CSV Import Errors</h3>
+        <p><strong>The import preview shows errors on some rows.</strong></p>
+        <table>
+          <thead>
+            <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Missing <code>source_path</code></td><td>Column is empty for this row</td><td>Add a valid source path</td></tr>
+            <tr><td>Missing <code>destination_path</code></td><td>Column is empty</td><td>Add a valid destination</td></tr>
+            <tr><td>Self-redirect</td><td>Source and destination are the same</td><td>Use a different destination</td></tr>
+            <tr><td>Invalid type</td><td>Not <code>301</code> or <code>302</code></td><td>Change to <code>301</code> or <code>302</code></td></tr>
+          </tbody>
+        </table>
+        <p><strong>CSV fails to parse:</strong> Ensure it's a valid <code>.csv</code> with comma-separated values. The first row must be a header: <code>source_path,destination_path,type</code>.</p>
+        <p><strong>Backend errors after submitting:</strong></p>
+        <ul>
+          <li><code>REDIRECT_LOOP</code> — One of the rows creates a redirect loop with an existing rule.</li>
+          <li><code>DUPLICATE_SOURCE</code> — A redirect for that source path already exists (row is skipped).</li>
+        </ul>
+
+        <h3>Plan Limit Reached</h3>
+        <p><strong>"You've reached the redirect limit for your plan."</strong></p>
+        <p>Free plan allows 25 redirects. Delete redirects you no longer need, or upgrade to Pro for unlimited redirects.</p>
+
+        <h3>Chain and Loop Warnings</h3>
+        <p><strong>"Creating this redirect would cause a loop."</strong> — Delete or modify the conflicting redirect first.</p>
+        <p><strong>"This redirect creates a chain: A &rarr; B &rarr; C."</strong> — This is a warning, not an error. Consider updating A to point directly to C.</p>
+
+        <h3>Redirect Shows "Destination Broken"</h3>
+        <p>The product or category the redirect points to has been deleted. Edit the redirect to change the destination to an active page, or delete it if no longer needed.</p>
+
+        <h3>Auto-Redirects Not Being Created</h3>
+        <ol>
+          <li><strong>Confirm Pro plan.</strong> Auto-redirect requires Pro.</li>
+          <li><strong>Check Settings.</strong> Confirm <strong>Enable Automatic Sync</strong> is on in Settings &gt; Slug History Synchronization.</li>
+          <li><strong>Check the slug actually changed.</strong> If you only changed the product name but not the slug, no redirect is created.</li>
+          <li><strong>Custom slug override.</strong> If the product has a custom slug, changes to the name won't affect the URL.</li>
+        </ol>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="fv-footer">
+    <div class="fv-container">
+      <div class="fv-footer-brand">
+        <img src="/shared/assets/fv-logo.png" alt="Forest Valley">
+        <span>Forest Valley</span>
+      </div>
+      <div class="fv-footer-links">
+        <a href="/">All Apps</a>
+        <a href="/seo-redirect-manager/">SEO Redirect Manager</a>
+        <a href="mailto:support@fv.dev">Support</a>
+        <a href="https://fv.dev">fv.dev</a>
+      </div>
+      <div class="fv-footer-copy">
+        &copy; 2025 Forest Valley. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

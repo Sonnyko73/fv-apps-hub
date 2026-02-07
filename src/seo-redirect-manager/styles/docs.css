@@ -1,0 +1,228 @@
+/* Docs Layout */
+.docs-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--fv-space-2xl);
+  padding-top: var(--fv-space-xl);
+  padding-bottom: var(--fv-space-3xl);
+  align-items: start;
+}
+
+/* Sidebar */
+.docs-sidebar {
+  position: sticky;
+  top: var(--fv-space-lg);
+  max-height: calc(100vh - var(--fv-space-xl));
+  overflow-y: auto;
+  padding: var(--fv-space-lg);
+  background: var(--fv-gray-50);
+  border-radius: var(--fv-radius);
+  border: 1px solid var(--fv-gray-200);
+}
+
+.docs-sidebar-title {
+  font-size: var(--fv-fs-lg);
+  margin-bottom: var(--fv-space-md);
+  color: var(--fv-navy);
+}
+
+.docs-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-nav > li {
+  margin-bottom: var(--fv-space-sm);
+}
+
+.docs-nav > li > a {
+  display: block;
+  padding: var(--fv-space-xs) 0;
+  font-weight: 600;
+  color: var(--fv-navy);
+  text-decoration: none;
+  font-size: var(--fv-fs-sm);
+}
+
+.docs-nav > li > a:hover {
+  color: var(--fv-green);
+}
+
+.docs-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--fv-space-xs) var(--fv-space-md);
+}
+
+.docs-nav ul li a {
+  display: block;
+  padding: 2px 0;
+  color: var(--fv-gray-600);
+  text-decoration: none;
+  font-size: var(--fv-fs-xs);
+  line-height: 1.5;
+}
+
+.docs-nav ul li a:hover {
+  color: var(--fv-green);
+}
+
+/* Content */
+.docs-content {
+  min-width: 0;
+}
+
+.docs-content h1 {
+  font-size: var(--fv-fs-3xl);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.docs-intro {
+  font-size: var(--fv-fs-lg);
+  color: var(--fv-gray-600);
+  margin-bottom: var(--fv-space-2xl);
+  line-height: 1.6;
+}
+
+.docs-content h2 {
+  font-size: var(--fv-fs-2xl);
+  margin-top: var(--fv-space-2xl);
+  margin-bottom: var(--fv-space-lg);
+  padding-top: var(--fv-space-lg);
+  color: var(--fv-navy);
+}
+
+.docs-content section:first-of-type h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.docs-content h3 {
+  font-size: var(--fv-fs-xl);
+  margin-top: var(--fv-space-xl);
+  margin-bottom: var(--fv-space-sm);
+  color: var(--fv-navy);
+}
+
+.docs-content h4 {
+  font-size: var(--fv-fs-lg);
+  margin-top: var(--fv-space-lg);
+  margin-bottom: var(--fv-space-sm);
+  color: var(--fv-navy-light);
+}
+
+.docs-content p {
+  margin-bottom: var(--fv-space-md);
+  line-height: 1.7;
+  color: var(--fv-gray-800);
+}
+
+.docs-content ul,
+.docs-content ol {
+  margin-bottom: var(--fv-space-md);
+  padding-left: var(--fv-space-lg);
+}
+
+.docs-content li {
+  margin-bottom: var(--fv-space-xs);
+  line-height: 1.6;
+  color: var(--fv-gray-800);
+}
+
+.docs-content li ul,
+.docs-content li ol {
+  margin-top: var(--fv-space-xs);
+  margin-bottom: var(--fv-space-xs);
+}
+
+/* Tables */
+.docs-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--fv-space-lg);
+  font-size: var(--fv-fs-sm);
+}
+
+.docs-content thead {
+  background: var(--fv-gray-50);
+}
+
+.docs-content th {
+  text-align: left;
+  padding: var(--fv-space-sm) var(--fv-space-md);
+  font-weight: 600;
+  color: var(--fv-navy);
+  border-bottom: 2px solid var(--fv-gray-200);
+}
+
+.docs-content td {
+  padding: var(--fv-space-sm) var(--fv-space-md);
+  border-bottom: 1px solid var(--fv-gray-100);
+  color: var(--fv-gray-800);
+}
+
+/* Code */
+.docs-content code {
+  background: var(--fv-gray-50);
+  padding: 1px 6px;
+  border-radius: var(--fv-radius-sm);
+  font-family: var(--fv-font-mono);
+  font-size: 0.9em;
+  color: var(--fv-navy);
+}
+
+.docs-content pre {
+  background: var(--fv-navy);
+  color: var(--fv-gray-100);
+  padding: var(--fv-space-md) var(--fv-space-lg);
+  border-radius: var(--fv-radius);
+  overflow-x: auto;
+  margin-bottom: var(--fv-space-lg);
+  line-height: 1.5;
+}
+
+.docs-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: var(--fv-fs-sm);
+}
+
+/* Horizontal rules */
+.docs-content hr {
+  border: none;
+  border-top: 1px solid var(--fv-gray-200);
+  margin: var(--fv-space-2xl) 0;
+}
+
+/* Strong */
+.docs-content strong {
+  color: var(--fv-navy);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+    gap: var(--fv-space-lg);
+  }
+
+  .docs-sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .docs-content h1 {
+    font-size: var(--fv-fs-2xl);
+  }
+
+  .docs-content h2 {
+    font-size: var(--fv-fs-xl);
+  }
+
+  .docs-content table {
+    display: block;
+    overflow-x: auto;
+  }
+}
