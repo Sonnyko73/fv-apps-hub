@@ -21,7 +21,12 @@ fv-apps-hub/
 │   ├── assets/
 │   │   └── hero.png
 │   └── {app-slug}/         # App pages (generated from docs/)
-│       └── index.html
+│       ├── index.html       # Landing page
+│       ├── docs/
+│       │   └── index.html   # User manual (single-page, all chapters)
+│       └── styles/
+│           ├── landing.css  # Landing page styles
+│           └── docs.css     # Manual page styles
 ├── docs/                    # App manuals (source of truth)
 │   └── {app-slug}-app-docs/
 │       ├── about.md         # App info for catalog card + landing page
@@ -53,7 +58,8 @@ fv-apps-hub/
 - `apps.fv.dev/` -- Main catalog page
 - `apps.fv.dev/shared/styles/` -- Shared CSS (consumed by all app pages)
 - `apps.fv.dev/shared/assets/` -- Shared assets (logos, fonts)
-- `apps.fv.dev/{app-slug}/` -- App pages (served from this repo)
+- `apps.fv.dev/{app-slug}/` -- App landing page
+- `apps.fv.dev/{app-slug}/docs/` -- App user manual
 
 ## Shared Design System
 
@@ -65,7 +71,7 @@ App pages consume shared styles via `<link>` tags with relative paths:
 <link rel="stylesheet" href="/shared/styles/base.css">
 ```
 
-See `SHARED-STYLES.md` for the full reference (tokens, utility classes, header/footer markup, page template).
+See `SHARED-STYLES.md` for the full reference (tokens, utility classes, header/footer markup, page template). See `SITE_SPEC.md` for app page structure and generation rules.
 
 ### Design Tokens (`variables.css`)
 
@@ -140,6 +146,11 @@ The docs folder is the **source of truth** for all app content on the site. App 
 ## Adding a New App
 
 1. Add app manual to `docs/{app-slug}-app-docs/` (about.md + README.md + chapter files)
-2. Generate the app page under `src/{app-slug}/` from the docs
-3. Add an app card to `src/index.html` (using info from `about.md`)
+2. Run `/generate-app-page {app-slug}` to generate:
+   - Landing page (`src/{app-slug}/index.html`) from `about.md`
+   - Landing styles (`src/{app-slug}/styles/landing.css`)
+   - User manual (`src/{app-slug}/docs/index.html`) from chapter files (merchant-facing only)
+   - Manual styles (`src/{app-slug}/styles/docs.css`)
+   - Catalog card update in `src/index.html`
+3. Run `npm run build` to verify
 4. Push to `main`
