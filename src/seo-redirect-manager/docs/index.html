@@ -322,13 +322,21 @@
         <p>Pro users see a <strong>404 Detector Panel</strong> at the bottom of the Dashboard showing recent unresolved 404 errors with quick actions: Create Redirect, Ignore, or View All 404s.</p>
 
         <h3 id="how-detection-works">How Detection Works</h3>
-        <p>The storefront script monitors page loads. When a page is not found, the broken URL is reported to the backend.</p>
+        <p>The app's storefront script uses two mechanisms to detect broken URLs:</p>
+        <ol>
+          <li><strong>Ecwid.OnPageLoaded listener</strong> — When Ecwid reports that a page type is empty or explicitly <code>PAGE_NOT_FOUND</code>, the script reports it as a 404.</li>
+          <li><strong>Hash change fallback</strong> — For hash-based URLs like <code>#!/product/nonexistent-slug</code>, Ecwid may not fire <code>OnPageLoaded</code> with a 404 type. Instead, it falls back to showing the catalog (type <code>CATEGORY</code>). The script detects this mismatch — if the URL requests a product but Ecwid loads a category page, it's treated as a 404.</li>
+        </ol>
+        <p>Key details:</p>
         <ul>
           <li>Detection is automatic — no configuration needed.</li>
-          <li>Reports are batched and debounced (3-second window).</li>
+          <li>Reports are batched and debounced (3-second window) to avoid excessive requests.</li>
           <li>Each unique broken URL is recorded once. Repeat visits increment the hit count.</li>
-          <li>The referrer is captured when available.</li>
+          <li>The referrer (the page that linked to the broken URL) is captured when available.</li>
         </ul>
+
+        <h4>Known Limitation</h4>
+        <p>404 detection only works on pages where the Ecwid storefront widget is loaded. On <strong>Ecwid Instant Site</strong>, visiting a completely invalid URL (e.g. <code>https://yourstore.company.site/products/nonexistent</code>) returns a static 404 page that does not load the Ecwid SDK or any app scripts. These static 404s cannot be detected client-side. Detection works for in-store navigation (hash-based URLs) and any page where the Ecwid widget is active.</p>
 
         <h3 id="the-404-errors-page">The 404 Errors Page</h3>
         <table>
