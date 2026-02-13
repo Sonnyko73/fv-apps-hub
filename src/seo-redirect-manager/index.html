@@ -200,7 +200,7 @@
       <div class="faq-list">
         <details class="faq-item">
           <summary>Does this work with Ecwid Instant Site?</summary>
-          <p>Yes. The storefront script runs on any platform where your Ecwid store is embedded, including Instant Site, WordPress, Wix, and custom sites. Note: On Instant Site, 404 detection works for in-store navigation (hash-based URLs) but not for direct visits to completely invalid URLs, because Ecwid's static 404 page does not load app scripts.</p>
+          <p>Partially. The redirect management dashboard, bulk import, and webhook-based slug change detection work on all platforms including Instant Site. However, <strong>client-side redirect execution and 404 detection are unreliable on Instant Site</strong> because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The admin UI automatically detects your store type and hides features that don't work on Instant Site. This app is designed primarily for embedded stores (WordPress, Wix, Squarespace, Joomla, custom sites).</p>
         </details>
         <details class="faq-item">
           <summary>Are these real 301 redirects for Google?</summary>
@@ -236,7 +236,7 @@
         <a href="https://fv.dev">fv.dev</a>
       </div>
       <div class="fv-footer-copy">
-        &copy; 2025 Forest Valley. All rights reserved.
+        &copy; 2026 Forest Valley. All rights reserved.
       </div>
     </div>
   </footer>

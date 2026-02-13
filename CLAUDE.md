@@ -19,7 +19,8 @@ fv-apps-hub/
 │   ├── styles.css           # Catalog-specific styles
 │   ├── 404.html             # Custom 404 page
 │   ├── assets/
-│   │   └── hero.png
+│   │   ├── hero.png
+│   │   └── seo-redirect-manager-icon.png
 │   └── {app-slug}/         # App pages (generated from docs/)
 │       ├── index.html       # Landing page
 │       ├── docs/
