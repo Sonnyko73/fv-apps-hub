@@ -118,6 +118,7 @@ App data is hardcoded in HTML. When adding a new app, manually add a card. App i
 
 ```
 /shared/*
+  Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
 ```
 
