@@ -40,8 +40,6 @@ Add these to your app's `<head>` (order matters):
 | File | URL |
 |------|-----|
 | `fv-logo.png` | `/shared/assets/fv-logo.png` |
-| `fv-logo.svg` | `/shared/assets/fv-logo.svg` |
-| `fv-logo-dark.svg` | `/shared/assets/fv-logo-dark.svg` |
 | `favicon.ico` | `/shared/assets/favicon.ico` |
 
 ## Design Tokens (`variables.css`)

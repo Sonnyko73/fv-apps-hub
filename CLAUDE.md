@@ -37,8 +37,6 @@ fv-apps-hub/
 │   │   └── base.css         # Typography, containers, utilities
 │   ├── assets/              # SOURCE OF TRUTH for all assets (logos, icons, favicon)
 │   │   ├── fv-logo.png         # Primary logo (used in headers/footers)
-│   │   ├── fv-logo.svg
-│   │   ├── fv-logo-dark.svg
 │   │   ├── favicon.ico
 │   │   └── {app-slug}-app-logo.png  # App icons (referenced as /shared/assets/)
 │   └── components/

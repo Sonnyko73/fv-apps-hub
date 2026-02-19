@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none">
-  <!-- Top-left leaf (dark green) — same logo, suitable for dark backgrounds -->
-  <path d="M10 60 Q10 40 30 40 L90 40 Q110 40 100 60 L80 80 Q70 100 50 100 L10 100 Q-10 100 10 60Z" fill="#27ae60"/>
-  <!-- Top-right leaf (light green) -->
-  <path d="M100 10 Q100 0 120 0 L180 0 Q200 0 190 20 L170 50 Q160 70 140 70 L100 70 Q80 70 100 10Z" fill="#2ecc71"/>
-  <!-- Bottom-center leaf (teal green) -->
-  <path d="M80 80 Q80 65 100 65 L160 65 Q180 65 170 85 L150 110 Q140 130 120 130 L80 130 Q60 130 80 80Z" fill="#219a52"/>
-</svg>
