@@ -18,9 +18,6 @@ fv-apps-hub/
 │   ├── index.html          # Catalog page (hardcoded app cards)
 │   ├── styles.css           # Catalog-specific styles
 │   ├── 404.html             # Custom 404 page
-│   ├── assets/
-│   │   ├── hero.png
-│   │   └── seo-redirect-manager-icon.png
 │   └── {app-slug}/         # App pages (generated from docs/)
 │       ├── index.html       # Landing page
 │       ├── docs/
@@ -38,11 +35,12 @@ fv-apps-hub/
 │   │   ├── reset.css        # Minimal CSS reset
 │   │   ├── variables.css    # Brand tokens (design system)
 │   │   └── base.css         # Typography, containers, utilities
-│   ├── assets/
+│   ├── assets/              # SOURCE OF TRUTH for all assets (logos, icons, favicon)
 │   │   ├── fv-logo.png         # Primary logo (used in headers/footers)
 │   │   ├── fv-logo.svg
 │   │   ├── fv-logo-dark.svg
-│   │   └── favicon.ico
+│   │   ├── favicon.ico
+│   │   └── {app-slug}-app-logo.png  # App icons (referenced as /shared/assets/)
 │   └── components/
 │       ├── header.css       # Shared header styles
 │       └── footer.css       # Shared footer styles
