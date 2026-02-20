@@ -79,15 +79,7 @@
           </ul>
         </li>
         <li>
-          <a href="#free-vs-pro">6. Free vs Pro Plans</a>
-          <ul>
-            <li><a href="#feature-comparison">Comparison</a></li>
-            <li><a href="#upgrading-to-pro">Upgrading</a></li>
-            <li><a href="#what-happens-on-downgrade">Downgrade</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#how-redirects-work">7. How Redirects Work</a>
+          <a href="#how-redirects-work">6. How Redirects Work</a>
           <ul>
             <li><a href="#client-side-execution">Client-Side Execution</a></li>
             <li><a href="#url-matching-rules">URL Matching</a></li>
@@ -96,7 +88,7 @@
           </ul>
         </li>
         <li>
-          <a href="#troubleshooting">8. Troubleshooting</a>
+          <a href="#troubleshooting">7. Troubleshooting</a>
           <ul>
             <li><a href="#redirect-not-working">Redirect Not Working</a></li>
             <li><a href="#hash-url-issues">Hash-URL Stores</a></li>
@@ -293,7 +285,6 @@
       <!-- Chapter 3: Bulk CSV Import -->
       <section id="bulk-csv-import">
         <h2>3. Bulk CSV Import</h2>
-        <p><strong>Requires Pro plan.</strong></p>
         <p>Bulk CSV import lets you upload a CSV file to create many redirects at once instead of adding them one by one.</p>
 
         <h3 id="csv-format">CSV Format</h3>
@@ -355,9 +346,6 @@
           <li>Large files are accepted, but the preview displays only the first 100 rows.</li>
           <li>All imported redirects are labeled with the "Manual" origin.</li>
         </ul>
-
-        <h3>Free Plan Users</h3>
-        <p>On the Free plan, bulk CSV import is not available. You can still create redirects individually using the <strong>+ Add New Redirect</strong> button.</p>
       </section>
 
       <hr>
@@ -365,7 +353,6 @@
       <!-- Chapter 4: Broken URLs & 404 Detection -->
       <section id="broken-urls">
         <h2>4. Broken URLs &amp; 404 Detection</h2>
-        <p><strong>Requires Pro plan.</strong></p>
         <p>The <strong>404 Errors</strong> page (accessible from the sidebar) shows pages on your storefront that visitors tried to access but resulted in a 404 (page not found) error. You can review these broken URLs and create redirects to fix them.</p>
 
         <h3>Quick Access from Dashboard</h3>
@@ -393,9 +380,9 @@
 
         <h3 id="detection-platform-compatibility">Platform Compatibility</h3>
         <p>404 detection is designed for <strong>embedded stores</strong> (WordPress, Squarespace, Joomla, custom sites) where the host page always loads the Ecwid storefront widget and app scripts. On these embedded stores, all detection mechanisms work reliably.</p>
-        <p><strong>Wix stores:</strong> 404 detection is <strong>not available</strong> on Wix. Ecwid runs inside a Wix TPA iframe where the detection mechanisms produce false positives (Ecwid fires incorrect page-not-found events on the normal store page). The app automatically detects the Wix iframe and disables 404 reporting. Redirect execution via Ecwid's navigation API still works on Wix.</p>
+        <p><strong>Wix stores:</strong> 404 detection is <strong>available</strong> on Wix with some limitations. Ecwid runs inside a Wix TPA iframe, so the app uses a segment-count guard to filter false positives: the normal Wix store root has 3 path segments, so only paths with 4+ segments are treated as real 404s. Both detection mechanisms (empty page type and root-category fallback) are active on Wix with this guard.</p>
         <p><strong>Instant Site stores:</strong> 404 detection is <strong>not available</strong> on Ecwid Instant Site. Ecwid controls the server on Instant Site and may return a static 404 page that does not load the Ecwid SDK or any app scripts. Because the app's JavaScript never executes on these pages, broken URLs cannot be detected client-side.</p>
-        <p>For both Wix and Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic slug change detection) continue to work on all platforms.</p>
+        <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic slug change detection) continue to work on all platforms.</p>
 
         <h3 id="the-404-errors-page">The 404 Errors Page</h3>
         <table>
@@ -459,14 +446,6 @@
           </tbody>
         </table>
         <p>When the 10,000 record limit is reached, the oldest records are automatically removed to make room for new ones.</p>
-
-        <h3>Free Plan Users</h3>
-        <p>On the Free plan:</p>
-        <ul>
-          <li>The 404 Errors page displays a message explaining that 404 detection is a Pro feature.</li>
-          <li>The 404 Detector Panel on the Dashboard shows an upgrade prompt instead.</li>
-          <li>No 404 data is collected or displayed.</li>
-        </ul>
       </section>
 
       <hr>
@@ -474,7 +453,6 @@
       <!-- Chapter 5: Automatic Redirects -->
       <section id="automatic-redirects">
         <h2>5. Automatic Redirects</h2>
-        <p><strong>Requires Pro plan.</strong></p>
         <p>The app can automatically create redirects when you rename a product or category in your Ecwid store. This prevents broken links and preserves search engine rankings without any manual work.</p>
 
         <h3 id="auto-how-it-works">How It Works</h3>
@@ -512,95 +490,23 @@
         <p>You can find redirects with broken destinations in the Dashboard's Managed Redirects table and update them to point to an active page.</p>
 
         <h3 id="enabling-disabling-auto">Enabling and Disabling Auto-Redirect</h3>
-        <p>Auto-redirect can be toggled on or off in the <strong>Settings</strong> page (accessible from the sidebar) under the <strong>Slug History Synchronization</strong> section using the <strong>Enable Automatic Sync</strong> toggle. When disabled:</p>
+        <p>Auto-redirect can be toggled on or off in the <strong>Settings</strong> page (accessible from the sidebar) under the <strong>Slug History Synchronization</strong> section using the <strong>Enable Automatic Sync</strong> toggle. Synchronization is webhook-driven (real-time), not polled. When disabled:</p>
         <ul>
           <li>Slug changes are still tracked (the app records the new slug).</li>
           <li>No redirects are automatically created.</li>
           <li>You can re-enable it at any time. Future slug changes will generate auto-redirects again.</li>
         </ul>
-        <p>Auto-redirect is enabled by default on Pro plans.</p>
+        <p>Auto-redirect is enabled by default.</p>
 
         <h3>Deduplication</h3>
         <p>If you edit a product multiple times in quick succession (e.g., changing the name several times), the app deduplicates webhook events within a 5-second window. Only one slug change check runs per entity per 5-second period, preventing duplicate redirects.</p>
-
-        <h3>Free Plan Users</h3>
-        <p>On the Free plan, auto-redirect is not available. Slug changes are not tracked, and no automatic redirects are created. You can still create redirects manually.</p>
       </section>
 
       <hr>
 
-      <!-- Chapter 6: Free vs Pro Plans -->
-      <section id="free-vs-pro">
-        <h2>6. Free vs Pro Plans</h2>
-
-        <h3 id="feature-comparison">Feature Comparison</h3>
-        <table>
-          <thead>
-            <tr><th>Feature</th><th>Free</th><th>Pro ($5.99/mo)</th><th>Platform</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Manual redirects</td><td>Up to 25</td><td>Unlimited</td><td>All</td></tr>
-            <tr><td>Redirect types</td><td>301 only</td><td>301 + 302</td><td>All</td></tr>
-            <tr><td>Bulk CSV import</td><td>No</td><td>Yes</td><td>All</td></tr>
-            <tr><td>404 detection &amp; broken URL dashboard</td><td>No</td><td>Yes</td><td>Embedded only</td></tr>
-            <tr><td>Automatic slug change redirects</td><td>No</td><td>Yes</td><td>All (webhook); Embedded only (client-side execution)</td></tr>
-            <tr><td>Redirect analytics (hit counts)</td><td>No</td><td>Yes</td><td>Embedded only</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Platform note:</strong> Features marked "Embedded only" require the app's storefront JavaScript to execute, which works reliably on embedded stores (WordPress, Wix, Squarespace, custom sites) but not on Instant Site. Features marked "All" work on every platform. See <a href="#how-redirects-work">How Redirects Work</a> for details.</p>
-
-        <h3>Free Plan Limits</h3>
-        <ul>
-          <li><strong>25 redirect maximum.</strong> You can create up to 25 redirects. The current count and limit are shown on the Settings page. Once you reach 25, new redirect creation is blocked until you delete an existing one or upgrade.</li>
-          <li><strong>301 only.</strong> The redirect type selector shows 302 as unavailable. Only permanent redirects can be created.</li>
-          <li><strong>No CSV import.</strong> Bulk CSV import is not available on the Free plan.</li>
-          <li><strong>No 404 detection.</strong> The 404 Errors page shows a Pro upgrade prompt. The Dashboard shows an upgrade banner instead of the 404 Detector Panel. The storefront script does not report 404s.</li>
-          <li><strong>No auto-redirect.</strong> Slug changes are not tracked or monitored.</li>
-        </ul>
-
-        <h3 id="upgrading-to-pro">Upgrading to Pro</h3>
-        <p>Billing is handled through the Ecwid App Market. To upgrade:</p>
-        <ol>
-          <li>Go to your Ecwid admin panel.</li>
-          <li>Navigate to <strong>Apps &gt; SEO Redirect Manager</strong>.</li>
-          <li>Follow the upgrade prompt.</li>
-        </ol>
-        <p>Ecwid manages the subscription and payment. The Pro plan activates immediately after purchase.</p>
-        <p>When you upgrade:</p>
-        <ul>
-          <li>The redirect limit is removed.</li>
-          <li>302 redirects become available.</li>
-          <li>404 detection starts automatically. The 404 Detector Panel appears on the Dashboard.</li>
-          <li>Auto-redirect is enabled by default (configurable in Settings).</li>
-          <li>The 404 Errors page becomes fully accessible.</li>
-        </ul>
-
-        <h3 id="what-happens-on-downgrade">What Happens on Downgrade</h3>
-        <p>If your Pro subscription is cancelled or expires, the app transitions to the Free plan:</p>
-        <h4>Redirect Deactivation</h4>
-        <ol>
-          <li><strong>302 redirects are deactivated.</strong> Free plan only supports 301. All 302 redirects are disabled but not deleted.</li>
-          <li><strong>Excess redirects are deactivated.</strong> If you have more than 25 redirects, the newest ones beyond 25 are disabled. The oldest 25 remain active.</li>
-        </ol>
-        <p>Deactivated redirects are marked internally so they can be reactivated later.</p>
-
-        <h4>Feature Restrictions</h4>
-        <ul>
-          <li>404 detection stops. Existing broken URL records remain in the database but the 404 Errors page shows the Pro upgrade prompt.</li>
-          <li>The 404 Detector Panel on the Dashboard is replaced with an upgrade banner.</li>
-          <li>Auto-redirect stops. Existing auto-created redirects remain active (if within the 25-redirect limit).</li>
-          <li>CSV import is locked.</li>
-        </ul>
-
-        <h4>Re-upgrading</h4>
-        <p>If you re-subscribe to Pro, all previously deactivated redirects are automatically reactivated. No data is lost during a downgrade/upgrade cycle.</p>
-      </section>
-
-      <hr>
-
-      <!-- Chapter 7: How Redirects Work -->
+      <!-- Chapter 6: How Redirects Work -->
       <section id="how-redirects-work">
-        <h2>7. How Redirects Work</h2>
+        <h2>6. How Redirects Work</h2>
         <p>This chapter covers the technical details of how the app executes redirects on your storefront.</p>
 
         <h3 id="client-side-execution">Client-Side Redirect Execution</h3>
@@ -709,9 +615,9 @@
 
       <hr>
 
-      <!-- Chapter 8: Troubleshooting -->
+      <!-- Chapter 7: Troubleshooting -->
       <section id="troubleshooting">
-        <h2>8. Troubleshooting</h2>
+        <h2>7. Troubleshooting</h2>
 
         <h3 id="redirect-not-working">Redirect Not Working</h3>
         <p><strong>The redirect is enabled but visitors are not being redirected.</strong></p>
@@ -738,7 +644,6 @@
         <h3 id="404s-not-detected">404s Not Being Detected</h3>
         <p><strong>The 404 Errors page is empty even though your store has broken links.</strong></p>
         <ol>
-          <li><strong>Confirm you're on the Pro plan.</strong> 404 detection is a Pro feature. Free plan users do not have 404 monitoring.</li>
           <li><strong>Visit the broken URL.</strong> 404 detection only triggers when someone actually visits a broken page. Open the broken URL in your browser to generate a report.</li>
           <li><strong>Wait for batching.</strong> 404 reports are batched with a 3-second debounce. The broken URL should appear within a few seconds of visiting it.</li>
           <li><strong>Clear browser cache.</strong> The storefront script is cached by the browser. After an app update, old versions of the script may continue running until the cache expires. Test in an incognito/private window to ensure you're running the latest version.</li>
@@ -770,14 +675,6 @@
           <li><code>REDIRECT_LOOP</code> — One of the rows creates a redirect loop with an existing rule.</li>
           <li><code>DUPLICATE_SOURCE</code> — A redirect for that source path already exists. The row is skipped.</li>
         </ul>
-
-        <h3>Plan Limit Reached</h3>
-        <p><strong>"You've reached the redirect limit for your plan."</strong></p>
-        <p>Free plan allows 25 redirects. Options:</p>
-        <ol>
-          <li>Delete redirects you no longer need to make room.</li>
-          <li>Upgrade to Pro for unlimited redirects.</li>
-        </ol>
 
         <h3>Chain and Loop Warnings</h3>
         <p><strong>"Creating this redirect would cause a loop."</strong></p>
@@ -830,7 +727,6 @@
         <h3>Auto-Redirects Not Being Created</h3>
         <p><strong>You renamed a product but no auto-redirect appeared.</strong></p>
         <ol>
-          <li><strong>Confirm Pro plan.</strong> Auto-redirect requires Pro.</li>
           <li><strong>Check Settings.</strong> Open the Settings page from the sidebar and confirm <strong>Enable Automatic Sync</strong> is turned on under <strong>Slug History Synchronization</strong>.</li>
           <li><strong>Check the slug actually changed.</strong> If you changed the product name but not the slug (e.g., only changed the description), no redirect is created. The slug must change.</li>
           <li><strong>Custom slug override.</strong> If the product has a custom slug set, changes to the product name won't change the URL (custom slug takes precedence over auto-generated). The slug must actually change for a redirect to be created.</li>
