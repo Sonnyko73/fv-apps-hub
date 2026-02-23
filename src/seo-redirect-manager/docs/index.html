@@ -114,12 +114,12 @@
 
         <h3 id="platform-compatibility">Platform Compatibility</h3>
         <p>This app is designed primarily for <strong>embedded Ecwid stores</strong> — stores embedded on your own website using WordPress, Wix, Squarespace, Joomla, or a custom site. On embedded stores, the app's client-side redirect execution and 404 detection work reliably because the host page loads normally and lets Ecwid (and app scripts) run.</p>
-        <p><strong>Wix users:</strong> The app works on Wix stores with full redirect and 404 detection support. The app uses Ecwid's built-in navigation API (<code>Ecwid.openPage()</code>) to ensure redirects navigate the page correctly on Wix. For best results, ensure your redirect destinations include product or category IDs (e.g., <code>/Product-Name-p12345</code>).</p>
-        <p><strong>Instant Site users</strong> can still use the redirect management dashboard, bulk import, and webhook-based slug change detection. However, client-side redirect execution and 404 detection are unreliable on Instant Site because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The admin UI automatically detects your store type and adjusts which features are shown.</p>
+        <p><strong>Wix users:</strong> The app is designed to work seamlessly with Wix stores that support full redirects and 404 detection. It leverages Ecwid's built-in navigation API (<code>Ecwid.openPage()</code>) to make sure redirects properly navigate the page on Wix. To get the most out of it, make sure your redirect destinations include product or category IDs, like <code>/Product-Name-p12345</code>.</p>
+        <p><strong>Instant Site Users:</strong> Client-side redirect execution and 404 detection are unreliable on Instant Site due to Ecwid's control over the server. This control may resolve or reject URLs before the application's JavaScript loads.</p>
 
         <h3 id="installation">Installation</h3>
         <ol>
-          <li>Find <strong>SEO Redirect Manager</strong> in the Ecwid App Market.</li>
+          <li>Find <strong>SEO Redirect Manager</strong> in the Ecwid App Market or click <strong>here</strong>.</li>
           <li>Click <strong>Install</strong>. The app requests the following permissions:
             <ul>
               <li>Read store profile (store URL and settings)</li>
@@ -128,7 +128,7 @@
               <li>Public storefront access (serve redirect rules to visitors)</li>
             </ul>
           </li>
-          <li>After installation, the app appears in your Ecwid admin panel sidebar.</li>
+          <li>After installation, the app appears in your Ecwid admin panel sidebar in the Marketing section.</li>
         </ol>
         <p>On first install, the app performs an initial catalog sync — it reads all your products and categories to record their current URL slugs. This enables automatic redirect detection if you later rename items.</p>
 
@@ -148,8 +148,9 @@
           </thead>
           <tbody>
             <tr><td><strong>Dashboard</strong></td><td>Overview with stats, redirect table, and 404 preview panel</td></tr>
-            <tr><td><strong>404 Errors</strong></td><td>View all 404 errors detected on your storefront (Pro)</td></tr>
-            <tr><td><strong>Settings</strong></td><td>Store details, sync config, redirect defaults, notifications, plan &amp; usage, activity logs, reset</td></tr>
+            <tr><td><strong>404 Errors</strong></td><td>View all 404 errors detected on your storefront</td></tr>
+            <tr><td><strong>Bulk Import</strong></td><td>Import multiple redirect rules at once from a CSV file</td></tr>
+            <tr><td><strong>Settings</strong></td><td>Store details (ID, URLs, platform), notification preferences, subscription status, activity log</td></tr>
           </tbody>
         </table>
 
@@ -203,10 +204,10 @@
             <tr><th>Column</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Source URL</strong></td><td>The old URL path that triggers the redirect (clickable link to edit)</td></tr>
+            <tr><td><strong>Source URL</strong></td><td>The old URL path that triggers the redirect (clickable link to edit). Wildcard rules show a blue <strong>wildcard</strong> badge.</td></tr>
             <tr><td><strong>Destination URL</strong></td><td>The new URL path visitors are sent to</td></tr>
             <tr><td><strong>Type</strong></td><td>301 (permanent) or 302 (temporary)</td></tr>
-            <tr><td><strong>Status</strong></td><td>Badge showing "Active" or "Inactive"</td></tr>
+            <tr><td><strong>Status</strong></td><td>Badge showing "Active" (green) or "Inactive" (grey). Redirects with unverifiable destinations also show a yellow <strong>⚠ Unverified</strong> badge below the active/inactive badge.</td></tr>
             <tr><td><strong>Hits</strong></td><td>Number of times the redirect has been triggered</td></tr>
             <tr><td><strong>Actions</strong></td><td>Menu with Edit, Activate/Deactivate, and Delete options</td></tr>
           </tbody>
@@ -217,9 +218,10 @@
           <li>Click the <strong>+ Add New Redirect</strong> button in the header bar or the table header.</li>
           <li>Fill in the form:
             <ul>
-              <li><strong>Source Path</strong> (required) — The old URL path, e.g. <code>/store/old-product-name-p12345</code></li>
-              <li><strong>Destination</strong> (required) — The new URL path, e.g. <code>/store/new-product-name-p12345</code></li>
-              <li><strong>Redirect Type</strong> — Select 301 or 302 (302 requires Pro plan)</li>
+              <li><strong>Source Path</strong> (required) — The old URL path, e.g. <code>/store/old-product-name-p12345</code> or <code>#!/old-product-name</code> for hash-URL stores</li>
+              <li><strong>Destination</strong> (required) — The new URL path, e.g. <code>/store/new-product-name-p12345</code> or <code>#!/new-product-name/p/12345</code>. Enter the URL exactly as it appears in your browser's address bar.</li>
+              <li><strong>Redirect Type</strong> — Select 301 or 302</li>
+              <li><strong>Wildcard Pattern</strong> (optional toggle) — Enable to redirect an entire path prefix at once. Use <code>*</code> as a suffix in both source and destination — e.g. source <code>/old-category/*</code> → destination <code>/new-category/*</code>. The toggle auto-enables when the source path ends with <code>/*</code>. Exact matches always take priority over wildcard rules.</li>
               <li><strong>Notes</strong> (optional) — A memo for your own reference, up to 500 characters</li>
             </ul>
           </li>
@@ -228,13 +230,48 @@
         <p>Source paths starting with <code>/</code> have trailing slashes removed and are lowercased automatically. Hash-URL paths starting with <code>#!/</code> or <code>#/</code> are preserved as-is (with lowercase normalization). Paths are case-insensitive.</p>
         <p><strong>You can enter sources in either format.</strong> If your store uses hash URLs (<code>#!/...</code>), you can still enter sources as <code>/old-product</code> — the app automatically matches both <code>/old-product</code> and <code>#!/old-product</code> at runtime. This means you don't need to worry about which URL format your store uses when creating redirects.</p>
 
+        <h4>Live Destination Verification</h4>
+        <p>As you type in the <strong>Destination</strong> field, the form queries your store in real time (debounced 600 ms) and shows colour-coded feedback:</p>
+        <table>
+          <thead>
+            <tr><th>Indicator</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><em>Checking destination…</em> (grey)</td><td>API call in progress</td></tr>
+            <tr><td>✓ <strong>Product/Category found: [name]</strong> (green)</td><td>Entity exists in your store — safe to save</td></tr>
+            <tr><td>(disabled in store) note</td><td>Entity exists but is currently hidden/disabled</td></tr>
+            <tr><td>✗ <strong>Product/Category not found (ID N)</strong> (red)</td><td>Entity does not exist — save will be rejected</td></tr>
+            <tr><td><em>Could not verify…</em> (yellow)</td><td>Ecwid API was temporarily unreachable; you can still save, but double-check the URL</td></tr>
+            <tr><td><strong>Unverified destination</strong> (yellow)</td><td>Path has no Ecwid product or category ID — the app can't verify it. The redirect is still saved (the path may be a valid WordPress/Squarespace page).</td></tr>
+          </tbody>
+        </table>
+        <p>Only paths that contain an Ecwid entity ID pattern (<code>-p12345</code>, <code>/p/12345</code>, <code>-c67</code>, <code>/c/67</code>) are checked against the Ecwid API. External URLs (<code>http://…</code>) and arbitrary paths (<code>/contact</code>) skip the API call.</p>
+
         <h4>Validation Rules</h4>
         <ul>
           <li><strong>No self-redirects</strong> — The source and destination cannot be the same path.</li>
           <li><strong>No duplicate sources</strong> — Each source path can only have one redirect rule. If a rule already exists for that source, you'll get a <code>DUPLICATE_SOURCE</code> error.</li>
           <li><strong>Loop detection</strong> — If redirect A &rarr; B already exists and you try to create B &rarr; A, the app rejects it to prevent an infinite redirect loop.</li>
           <li><strong>Chain warning</strong> — If redirect A &rarr; B exists and you create B &rarr; C, the app shows a warning suggesting you update A to point directly to C instead. This is a warning, not an error — the redirect is still created.</li>
+          <li><strong>Destination existence check</strong> — If the destination contains an Ecwid product ID (e.g. <code>/product-name-p12345</code>) or category ID, the app verifies the entity exists before saving. If not found, the redirect is rejected with a <code>DESTINATION_NOT_FOUND</code> error.</li>
+          <li><strong>Unverifiable destination warning</strong> — If the destination is a plain path (e.g. <code>/contact</code>) with no Ecwid product or category ID, the form shows a yellow warning that the path can't be verified. The redirect is still saved. Saved redirects with unverifiable destinations show a yellow <strong>⚠ Unverified</strong> badge in the Status column.</li>
         </ul>
+
+        <h4>Wildcard Redirects</h4>
+        <p>Wildcard redirects let you redirect an entire category or path prefix with a single rule, instead of creating a separate redirect for every page.</p>
+        <p><strong>Format:</strong> Add <code>*</code> as a suffix to both the source and destination paths. The <code>*</code> matches any path after the prefix, and the matched portion is appended to the destination automatically.</p>
+        <table>
+          <thead>
+            <tr><th>Source</th><th>Destination</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>/old-category/*</code></td><td><code>/new-category/*</code></td><td>Redirects <code>/old-category/red-shoes-p123</code> → <code>/new-category/red-shoes-p123</code></td></tr>
+            <tr><td><code>/sale/*</code></td><td><code>/deals/*</code></td><td>Redirects <code>/sale/summer</code> → <code>/deals/summer</code>, <code>/sale/winter</code> → <code>/deals/winter</code>, etc.</td></tr>
+          </tbody>
+        </table>
+        <p><strong>To create a wildcard redirect:</strong> Enter the source path with a <code>/*</code> suffix — the <strong>Wildcard Pattern</strong> toggle will auto-enable. Enter the destination path with a <code>/*</code> suffix, then save.</p>
+        <p><strong>Priority:</strong> Exact match rules always win. If <code>/old-category/featured</code> has its own exact redirect, that rule applies; the wildcard only matches paths that have no exact rule.</p>
+        <p><strong>Destination verification:</strong> Wildcard destinations cannot be verified in real time. The form shows an "Unverified destination" warning — this is expected and the redirect will be saved normally.</p>
 
         <h3 id="editing-a-redirect">Editing a Redirect</h3>
         <ol>
@@ -263,15 +300,37 @@
         <p>Use the search box above the table to filter redirects. Search matches against both the source path and destination. The search is case-insensitive.</p>
 
         <h3>Sorting</h3>
-        <p>Click a column header to sort the table. Available sort columns: Source path (alphabetical), Created date, Updated date, Hit count. Click the same column again to toggle between ascending and descending order.</p>
+        <p>Click any data column header to sort the table server-side. All five data columns are sortable:</p>
+        <ul>
+          <li><strong>Source URL</strong> — Alphabetical by source path</li>
+          <li><strong>Destination URL</strong> — Alphabetical by destination path</li>
+          <li><strong>Type</strong> — By redirect type (301/302)</li>
+          <li><strong>Status</strong> — By active/inactive state</li>
+          <li><strong>Hits</strong> — By number of times triggered</li>
+        </ul>
+        <p>You can also sort by <strong>Created date</strong> and <strong>Updated date</strong> via the underlying API (default sort is newest first). Click the same column again to toggle between ascending (▲) and descending (▼) order.</p>
 
         <h3 id="bulk-actions">Bulk Actions</h3>
         <p>You can select multiple redirects using the checkboxes and perform bulk operations:</p>
         <ol>
-          <li>Use the checkbox in the header row to select all visible redirects.</li>
-          <li>Or click individual checkboxes to select specific redirects.</li>
-          <li>Click <strong>Bulk Actions</strong> to see available operations.</li>
+          <li>Use the checkbox in the header row to select all visible redirects on the current page.</li>
+          <li>Or click individual row checkboxes to select specific redirects.</li>
+          <li>Click <strong>Bulk Actions (N)</strong> to open the action menu.</li>
+          <li>Choose an action:</li>
         </ol>
+        <table>
+          <thead>
+            <tr><th>Action</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Enable</strong></td><td>Sets selected redirects to Active</td></tr>
+            <tr><td><strong>Disable</strong></td><td>Sets selected redirects to Inactive</td></tr>
+            <tr><td><strong>Redirect type 301</strong></td><td>Changes redirect type to 301 (Permanent)</td></tr>
+            <tr><td><strong>Redirect type 302</strong></td><td>Changes redirect type to 302 (Temporary)</td></tr>
+            <tr><td><strong>Delete</strong></td><td>Permanently deletes selected redirects (requires confirmation)</td></tr>
+          </tbody>
+        </table>
+        <p>Delete requires a two-step confirmation — click Delete, then click <strong>Confirm</strong> in the inline prompt. Click <strong>Cancel</strong> to abort. After any bulk action completes, the selection is cleared and the table refreshes.</p>
 
         <h3>Pagination</h3>
         <p>The Dashboard table shows a preview of your redirects. Use the pagination controls at the bottom to navigate between pages.</p>
@@ -288,7 +347,7 @@
         <p>Bulk CSV import lets you upload a CSV file to create many redirects at once instead of adding them one by one.</p>
 
         <h3 id="csv-format">CSV Format</h3>
-        <p>Your CSV file must have a header row with these three columns:</p>
+        <p>Your CSV file must have a header row with these columns:</p>
         <table>
           <thead>
             <tr><th>Column</th><th>Required</th><th>Description</th></tr>
@@ -297,22 +356,35 @@
             <tr><td><code>source_path</code></td><td>Yes</td><td>The old URL path (e.g. <code>/old-page</code>)</td></tr>
             <tr><td><code>destination_path</code></td><td>Yes</td><td>The new URL path (e.g. <code>/new-page</code>)</td></tr>
             <tr><td><code>type</code></td><td>Yes</td><td><code>301</code> or <code>302</code></td></tr>
+            <tr><td><code>is_wildcard</code></td><td>No</td><td><code>true</code> or <code>false</code> (default: <code>false</code>). Set to <code>true</code> to create a wildcard pattern redirect.</td></tr>
           </tbody>
         </table>
 
         <h4>Example CSV</h4>
-        <pre><code>source_path,destination_path,type
-/store/summer-sale-c5678,/store/winter-sale-c5678,301
-/store/blue-widget-p12345,/store/blue-widget-v2-p12345,301
-/store/promo,/store/deals,302</code></pre>
-        <p>Column headers are case-insensitive and trimmed of whitespace. The <code>type</code> column accepts both numbers and strings (<code>301</code> or <code>"301"</code>).</p>
+        <pre><code>source_path,destination_path,type,is_wildcard
+/store/summer-sale-c5678,/store/winter-sale-c5678,301,false
+/store/blue-widget-p12345,/store/blue-widget-v2-p12345,301,false
+/store/promo,/store/deals,302,false
+/store/old-category/*,/store/new-category/*,301,true</code></pre>
+        <p>Column headers are case-insensitive and trimmed of whitespace. The <code>type</code> column accepts both numbers and strings (<code>301</code> or <code>"301"</code>). The <code>is_wildcard</code> column accepts <code>true</code>, <code>1</code>, <code>yes</code> (treated as <code>true</code>) or any other value (treated as <code>false</code>).</p>
 
         <h3 id="import-workflow">Import Workflow</h3>
         <h4>Step 1: Upload</h4>
-        <p>Use the bulk import feature (available to Pro users). Click <strong>Choose File</strong> or drag and drop a <code>.csv</code> file.</p>
+        <p>Click <strong>Choose File</strong> or drag and drop a <code>.csv</code> file.</p>
 
         <h4>Step 2: Preview</h4>
-        <p>After uploading, the app parses the CSV and shows a preview table of up to 100 rows. Valid rows are highlighted in green, invalid rows in red with error messages.</p>
+        <p>After uploading, the app parses the CSV and shows a preview table of up to 100 rows. The <strong>Status</strong> column uses colour-coded pill badges:</p>
+        <table>
+          <thead>
+            <tr><th>Badge</th><th>Colour</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>OK</strong></td><td>Green</td><td>Row is valid and ready to import</td></tr>
+            <tr><td><strong>⚠ Unverified</strong></td><td>Yellow</td><td>Row is valid but the destination has no Ecwid product or category ID — it may be a WordPress page or other custom path. Hover over the badge for details. These rows are still imported.</td></tr>
+            <tr><td><strong>Error</strong></td><td>Red</td><td>Row has a validation error and will be skipped. Hover over the badge to see the error details.</td></tr>
+          </tbody>
+        </table>
+        <p>Error rows have a red background; unverified rows have a light yellow background.</p>
         <p>Common row-level errors:</p>
         <ul>
           <li>Missing <code>source_path</code> or <code>destination_path</code></li>
@@ -345,6 +417,7 @@
           <li>The import processes rows sequentially. If one row fails, subsequent valid rows still get created.</li>
           <li>Large files are accepted, but the preview displays only the first 100 rows.</li>
           <li>All imported redirects are labeled with the "Manual" origin.</li>
+          <li>To import wildcard redirects, add an <code>is_wildcard</code> column with value <code>true</code>. Wildcard rows display a blue <strong>wildcard</strong> badge in the preview table.</li>
         </ul>
       </section>
 
@@ -356,7 +429,7 @@
         <p>The <strong>404 Errors</strong> page (accessible from the sidebar) shows pages on your storefront that visitors tried to access but resulted in a 404 (page not found) error. You can review these broken URLs and create redirects to fix them.</p>
 
         <h3>Quick Access from Dashboard</h3>
-        <p>Pro users also see a <strong>404 Detector Panel</strong> at the bottom of the Dashboard showing the most recent unresolved 404 errors. From here you can:</p>
+        <p>A <strong>404 Detector Panel</strong> at the bottom of the Dashboard shows the most recent unresolved 404 errors. From here you can:</p>
         <ul>
           <li><strong>Create Redirect</strong> — Quickly fix a broken URL</li>
           <li><strong>Ignore</strong> — Dismiss expected 404s</li>
@@ -385,16 +458,18 @@
         <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic slug change detection) continue to work on all platforms.</p>
 
         <h3 id="the-404-errors-page">The 404 Errors Page</h3>
+        <p>The 404 Errors page displays a table with these columns:</p>
         <table>
           <thead>
             <tr><th>Column</th><th>Description</th></tr>
           </thead>
           <tbody>
             <tr><td><strong>URL Path</strong></td><td>The broken URL that returned 404</td></tr>
-            <tr><td><strong>Hits</strong></td><td>Number of times visitors hit this 404</td></tr>
             <tr><td><strong>Referrer</strong></td><td>The source URL that linked to the broken page (if available)</td></tr>
             <tr><td><strong>Last Seen</strong></td><td>When the most recent 404 hit occurred</td></tr>
-            <tr><td><strong>Status</strong></td><td>Unresolved or Resolved</td></tr>
+            <tr><td><strong>Status</strong></td><td>Unresolved or Resolved badge</td></tr>
+            <tr><td><strong>Hits</strong></td><td>Number of times visitors hit this 404</td></tr>
+            <tr><td><strong>Actions</strong></td><td>Create Redirect, Resolve, and Delete buttons</td></tr>
           </tbody>
         </table>
 
@@ -411,6 +486,9 @@
 
         <h4>Sorting</h4>
         <p>Click a column header to sort. Available sort options: last seen, first seen, hit count, URL path.</p>
+
+        <h4>Bulk Actions</h4>
+        <p>Select multiple records using the checkboxes and click <strong>Bulk Actions (N)</strong> to delete them all at once. Deletion requires a two-step inline confirmation.</p>
 
         <h4>Pagination</h4>
         <p>The table shows 25 records per page.</p>
@@ -512,25 +590,33 @@
         <h3 id="client-side-execution">Client-Side Redirect Execution</h3>
         <p>The app injects a small JavaScript file (under 5KB) into your Ecwid storefront. This script runs on every page load and performs the following:</p>
         <ol>
-          <li><strong>Wait for Ecwid API</strong> — The script waits for <code>Ecwid.OnAPILoaded</code> before reading config. It attempts an early call wrapped in try/catch, then falls back to the <code>OnAPILoaded</code> callback.</li>
+          <li><strong>Wait for Ecwid API</strong> — The script waits for <code>Ecwid.OnAPILoaded</code> before reading config. It attempts an early call wrapped in try/catch (the API throws an error if not yet initialized), then falls back to the <code>OnAPILoaded</code> callback.</li>
           <li><strong>Load rules</strong> — Reads redirect rules from Ecwid Application Storage (<code>Ecwid.getAppPublicConfig</code>). This data is already available on the page — no extra network request is needed.</li>
           <li><strong>Normalize the current URL</strong> — For clean-URL stores, strips query strings, fragments, and trailing slashes. For hash-URL stores (<code>#!/...</code> or <code>#/...</code>), preserves the hash prefix and normalizes only query strings and trailing slashes. Converts to lowercase.</li>
           <li><strong>Exact match</strong> — Checks the current URL path against all exact-match redirect rules. First tries a direct lookup, then uses <strong>suffix matching</strong> to handle embedded stores where the full URL includes a platform-specific base path (e.g., <code>/my-store/online-store/old-product</code> matches the redirect source <code>/old-product</code>).</li>
           <li><strong>Cross-format match</strong> — If no exact match, tries the alternate URL format (<code>/path</code> ↔ <code>#!/path</code>).</li>
           <li><strong>Wildcard match</strong> — If still no match, checks against wildcard pattern rules sorted by specificity (longest prefix first).</li>
-          <li><strong>Redirect</strong> — If a match is found and the rule is active, the script navigates using the best available method:
+          <li><strong>Redirect</strong> — If a match is found and the rule is active, the script navigates the visitor using the best available method:
             <ul>
-              <li><strong>Product/category destinations:</strong> Uses <code>Ecwid.openPage()</code> to navigate via Ecwid's internal routing. Works correctly on all platforms, including Wix.</li>
+              <li><strong>Product/category destinations:</strong> Uses <code>Ecwid.openPage()</code> to navigate via Ecwid's internal routing. This works correctly on all platforms, including Wix where the script runs inside an iframe.</li>
               <li><strong>Hash-URL destinations</strong> (starting with <code>#</code>): Sets <code>window.location.hash</code> to trigger Ecwid's SPA router.</li>
               <li><strong>Other destinations:</strong> Falls back to <code>window.location.replace(destination)</code>.</li>
             </ul>
+            For SPA navigation (Ecwid.openPage and hash changes), the script temporarily hides the storefront to prevent a flash of the wrong content while the target page loads. The storefront reappears once the target page has rendered.
           </li>
-          <li><strong>SPA re-check</strong> — The script listens for <code>hashchange</code> events and re-runs matching on every hash navigation, so redirects work during SPA navigation too.</li>
+          <li><strong>SPA re-check</strong> — The script listens for <code>hashchange</code> events and re-runs matching on every hash navigation. This ensures redirects work even when Ecwid changes the hash after initial page load.</li>
         </ol>
         <p>If no match is found, the script exits silently with no impact on page performance.</p>
 
         <h3>Debugging Redirects</h3>
-        <p>If a redirect isn't working as expected, activate diagnostic logging by adding <code>?srm_debug=1</code> to any storefront URL. This outputs detailed <code>[SRM]</code> messages to the browser console showing whether config was loaded, the current URL path being matched, each suffix matching attempt, and which redirect execution method was used. Open the browser developer console (F12 → Console tab) to see the output.</p>
+        <p>If a redirect isn't working as expected, you can activate diagnostic logging by adding <code>?srm_debug=1</code> to any storefront URL. This outputs detailed <code>[SRM]</code> messages to the browser console showing:</p>
+        <ul>
+          <li>Whether the config was loaded from Application Storage</li>
+          <li>The current URL path being matched</li>
+          <li>Each suffix matching attempt and its result</li>
+          <li>Which redirect execution method was used</li>
+        </ul>
+        <p>Open the browser developer console (F12 → Console tab) to see the output.</p>
 
         <h3 id="url-matching-rules">URL Matching Rules</h3>
         <h4>Path Normalization</h4>
@@ -546,6 +632,24 @@
           <li><strong>Wildcard</strong> rules use <code>*</code> as a suffix to match any path that starts with the given prefix. Example: <code>/store/old-category/*</code> matches <code>/store/old-category/product-a</code>, <code>/store/old-category/product-b</code>, etc.</li>
         </ul>
         <p>Exact match rules always take priority over wildcard rules. If both match, the exact rule wins.</p>
+
+        <h5>Wildcard Source Format</h5>
+        <p>The source path must end with <code>/*</code> (e.g. <code>/store/old-category/*</code>). The prefix is everything before the <code>/*</code>.</p>
+
+        <h5>Destination Substitution</h5>
+        <p>The destination must also end with <code>*</code>. When a wildcard rule matches, the portion of the URL path that was captured by <code>*</code> is appended to the destination prefix.</p>
+        <p><strong>Example:</strong></p>
+        <ul>
+          <li>Source: <code>/old-cat/*</code>, Destination: <code>/new-cat/*</code></li>
+          <li>Visitor hits <code>/old-cat/red-shoes-p123</code> → matched portion is <code>red-shoes-p123</code> → redirected to <code>/new-cat/red-shoes-p123</code></li>
+          <li>Visitor hits <code>/old-cat/summer/sandals-p456</code> → matched portion is <code>summer/sandals-p456</code> → redirected to <code>/new-cat/summer/sandals-p456</code></li>
+        </ul>
+
+        <h5>Specificity Ordering</h5>
+        <p>When multiple wildcard rules could match the same URL, the rule with the <strong>longest prefix</strong> wins. For example, if both <code>/store/*</code> and <code>/store/sale/*</code> exist, a URL like <code>/store/sale/item-p99</code> matches <code>/store/sale/*</code> (more specific).</p>
+
+        <h5>Cross-Format Matching for Wildcards</h5>
+        <p>Wildcard matching applies to both clean URLs and hash-URL formats. A wildcard source <code>/old-cat/*</code> also matches hash-URL paths like <code>#!/old-cat/product-name</code>. The matched suffix is extracted and appended to the destination in the same format.</p>
 
         <h4>Supported URL Formats &amp; Cross-Format Matching</h4>
         <p>Ecwid stores can use two URL formats:</p>
@@ -577,7 +681,7 @@
         <p>Overflow mode adds a small delay on the first page load of a session (one network request). Subsequent pages load instantly from cache.</p>
 
         <h3>Client-Side vs Server-Side Redirects</h3>
-        <p>The app uses <strong>client-side redirects</strong> (<code>window.location.replace()</code>). This works on any hosting platform without configuration, but has a limitation:</p>
+        <p>The app uses <strong>client-side redirects</strong> via Ecwid's navigation API (<code>Ecwid.openPage()</code>) and <code>window.location.replace()</code> as a fallback. This works on any hosting platform without configuration, but has a limitation:</p>
         <ul>
           <li><strong>Client-side:</strong> The browser loads the page, the JavaScript runs, then the browser navigates to the new URL. Search engines may not treat this identically to a true HTTP 301.</li>
           <li><strong>Server-side:</strong> The server responds with a 301 HTTP status before any page content loads. Search engines handle this as a definitive redirect signal.</li>
