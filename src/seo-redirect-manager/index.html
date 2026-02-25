@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEO Redirect Manager for Ecwid — Forest Valley Apps</title>
-  <meta name="description" content="Manage URL redirects (301/302) for your Ecwid store. Fix broken links, detect 404 errors, and preserve SEO when product URLs change.">
+  <meta name="description" content="Manage URL redirects for your Ecwid store. Fix broken links, detect 404 errors, and preserve SEO when product URLs change.">
   <meta property="og:title" content="SEO Redirect Manager for Ecwid — Forest Valley Apps">
-  <meta property="og:description" content="Manage URL redirects (301/302) for your Ecwid store. Fix broken links, detect 404 errors, and preserve SEO when product URLs change.">
+  <meta property="og:description" content="Manage URL redirects for your Ecwid store. Fix broken links, detect 404 errors, and preserve SEO when product URLs change.">
   <meta property="og:image" content="https://apps.fv.dev/seo-redirect-manager/assets/og.png">
   <meta property="og:url" content="https://apps.fv.dev/seo-redirect-manager/">
   <meta property="og:type" content="website">
@@ -41,7 +41,7 @@
     <div class="fv-container">
       <div class="hero-content">
         <h1>Stop Losing SEO When Your URLs Change</h1>
-        <p class="hero-subtitle">SEO Redirect Manager for Ecwid automatically detects broken links, creates 301/302 redirects, and preserves your search rankings. Designed for embedded stores on WordPress, Wix, Squarespace, Joomla, and custom sites — so every URL change is handled before Google even notices.</p>
+        <p class="hero-subtitle">SEO Redirect Manager for Ecwid automatically detects broken links, creates redirects to preserve your search rankings. Designed for embedded stores on WordPress, Wix, Squarespace, Joomla, and custom sites — so every URL change is handled before Google even notices.</p>
         <div class="hero-actions">
           <a href="https://my.ecwid.com/store/130416012#develop-apps:name=seo-redirect-manager-dev" class="fv-btn fv-btn-primary hero-btn">Install Free on Ecwid</a>
           <a href="/seo-redirect-manager/docs/" class="fv-btn fv-btn-outline hero-btn">View Documentation</a>
@@ -87,7 +87,7 @@
       <div class="features-grid">
         <div class="fv-card feature-card">
           <h3>Manual Redirects</h3>
-          <p>Create 301 (permanent) or 302 (temporary) redirects with a few clicks. Map any old URL path to any new destination. The app validates rules to prevent loops, self-redirects, and conflicts.</p>
+          <p>Create redirects with a few clicks. Map any old URL path to any new destination. The app validates rules to prevent loops, self-redirects, and conflicts.</p>
         </div>
         <div class="fv-card feature-card">
           <h3>404 Detection</h3>
@@ -95,7 +95,7 @@
         </div>
         <div class="fv-card feature-card">
           <h3>Auto Slug Tracking</h3>
-          <p>When you rename a product or category, the app detects the URL change via webhooks and automatically creates a 301 redirect — no manual work required.</p>
+          <p>When you rename a product or category, the app detects the URL change via webhooks and automatically creates a redirect — no manual work required.</p>
         </div>
         <div class="fv-card feature-card">
           <h3>Bulk CSV Import</h3>
@@ -151,7 +151,6 @@
           <ul class="pricing-features">
             <li>All features included</li>
             <li>Unlimited redirects</li>
-            <li>301 + 302 redirect types</li>
             <li>Bulk CSV import</li>
             <li>404 detection &amp; dashboard</li>
             <li>Automatic slug change redirects</li>
@@ -174,12 +173,12 @@
           <p>Partially. The redirect management dashboard, bulk import, and webhook-based slug change detection work on all platforms including Instant Site. However, <strong>client-side redirect execution and 404 detection are unreliable on Instant Site</strong> because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The admin UI automatically detects your store type and hides features that don't work on Instant Site. This app is designed primarily for embedded stores (WordPress, Wix, Squarespace, Joomla, custom sites).</p>
         </details>
         <details class="faq-item">
-          <summary>Are these real 301 redirects for Google?</summary>
-          <p>The storefront script performs client-side redirects, which are detected by Google. For true server-side 301s, server-side rule export is planned for a future release.</p>
+          <summary>Are these real HTTP 301 redirects?</summary>
+          <p>The app performs client-side redirects using JavaScript (<code>Ecwid.openPage()</code> or <code>window.location.replace()</code>). These are not true HTTP 301 status codes — the browser loads the page, the script runs, and then navigates to the new URL. Google does follow JavaScript redirects and transfers link equity, though true server-side 301s are considered stronger signals. For most Ecwid merchants on embedded stores, client-side redirects are the only practical option since you typically don't have direct access to your hosting server's redirect configuration.</p>
         </details>
         <details class="faq-item">
           <summary>Can I import redirects from another tool?</summary>
-          <p>Yes. Pro users can import redirects via CSV. The format is simple: source URL, destination URL, redirect type.</p>
+          <p>Yes. You can import redirects via CSV. The format is simple: source URL, destination URL.</p>
         </details>
         <details class="faq-item">
           <summary>Is my data safe?</summary>

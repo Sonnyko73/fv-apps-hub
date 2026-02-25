@@ -41,7 +41,6 @@
             <li><a href="#installation">Installation</a></li>
             <li><a href="#opening-the-app">Opening the App</a></li>
             <li><a href="#admin-ui-layout">Admin UI Layout</a></li>
-            <li><a href="#understanding-redirect-types">Redirect Types</a></li>
           </ul>
         </li>
         <li>
@@ -105,7 +104,7 @@
     <main class="docs-content">
 
       <h1>SEO Redirect Manager — User Manual</h1>
-      <p class="docs-intro">URL redirect management for Ecwid stores. Create 301/302 redirects, detect broken URLs, and automatically preserve SEO when product or category URLs change.</p>
+      <p class="docs-intro">URL redirect management for Ecwid stores. Create redirects, detect broken URLs, and automatically preserve SEO when product or category URLs change.</p>
       <p class="docs-intro"><strong>Best for embedded stores.</strong> This app is designed primarily for merchants who embed Ecwid on their own website (WordPress, Wix, Squarespace, Joomla, or custom sites). Client-side redirect execution and 404 detection work reliably on embedded stores. Instant Site users benefit from redirect management and webhook automation, but client-side features are limited. See <a href="#how-redirects-work">How Redirects Work</a> for details.</p>
 
       <!-- Chapter 1: Getting Started -->
@@ -160,25 +159,13 @@
           <li><strong>Stats Cards</strong> — Three cards showing key metrics:
             <ul>
               <li><strong>Total Redirects</strong> — Number of redirect rules in your store</li>
-              <li><strong>404s Detected</strong> — Number of unresolved broken URLs (Pro)</li>
+              <li><strong>404s Detected</strong> — Number of unresolved broken URLs</li>
               <li><strong>Redirects Hit</strong> — Total number of times redirects have been triggered</li>
             </ul>
           </li>
           <li><strong>Managed Redirects Table</strong> — View, search, and manage all your redirect rules with search bar, filter options, bulk actions, and pagination controls.</li>
-          <li><strong>404 Detector Panel</strong> (Pro) — A preview of recent 404 errors with quick actions: Create Redirect, Ignore, or View All 404s.</li>
+          <li><strong>404 Detector Panel</strong> — A preview of recent 404 errors with quick actions: Create Redirect, Ignore, or View All 404s.</li>
         </ol>
-
-        <h3 id="understanding-redirect-types">Understanding Redirect Types</h3>
-        <table>
-          <thead>
-            <tr><th>Type</th><th>Name</th><th>When to Use</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>301</strong></td><td>Permanent redirect</td><td>The old URL will never come back. Tells search engines to transfer all SEO value to the new URL. Use for renamed products, merged categories, or permanent URL changes.</td></tr>
-            <tr><td><strong>302</strong></td><td>Temporary redirect (Pro)</td><td>The old URL may return. Tells search engines to keep the old URL indexed. Use for seasonal pages, A/B tests, or temporary promotions.</td></tr>
-          </tbody>
-        </table>
-        <p>In most cases, <strong>301</strong> is the correct choice. Use 302 only when you plan to restore the original URL later.</p>
 
         <h3>What Happens After You Create a Redirect</h3>
         <p>When you save a redirect rule, the app:</p>
@@ -206,7 +193,6 @@
           <tbody>
             <tr><td><strong>Source URL</strong></td><td>The old URL path that triggers the redirect (clickable link to edit). Wildcard rules show a blue <strong>wildcard</strong> badge.</td></tr>
             <tr><td><strong>Destination URL</strong></td><td>The new URL path visitors are sent to</td></tr>
-            <tr><td><strong>Type</strong></td><td>301 (permanent) or 302 (temporary)</td></tr>
             <tr><td><strong>Status</strong></td><td>Badge showing "Active" (green) or "Inactive" (grey). Redirects with unverifiable destinations also show a yellow <strong>⚠ Unverified</strong> badge below the active/inactive badge.</td></tr>
             <tr><td><strong>Hits</strong></td><td>Number of times the redirect has been triggered</td></tr>
             <tr><td><strong>Actions</strong></td><td>Menu with Edit, Activate/Deactivate, and Delete options</td></tr>
@@ -220,7 +206,6 @@
             <ul>
               <li><strong>Source Path</strong> (required) — The old URL path, e.g. <code>/store/old-product-name-p12345</code> or <code>#!/old-product-name</code> for hash-URL stores</li>
               <li><strong>Destination</strong> (required) — The new URL path, e.g. <code>/store/new-product-name-p12345</code> or <code>#!/new-product-name/p/12345</code>. Enter the URL exactly as it appears in your browser's address bar.</li>
-              <li><strong>Redirect Type</strong> — Select 301 or 302</li>
               <li><strong>Wildcard Pattern</strong> (optional toggle) — Enable to redirect an entire path prefix at once. Use <code>*</code> as a suffix in both source and destination — e.g. source <code>/old-category/*</code> → destination <code>/new-category/*</code>. The toggle auto-enables when the source path ends with <code>/*</code>. Exact matches always take priority over wildcard rules.</li>
               <li><strong>Notes</strong> (optional) — A memo for your own reference, up to 500 characters</li>
             </ul>
@@ -276,7 +261,7 @@
         <h3 id="editing-a-redirect">Editing a Redirect</h3>
         <ol>
           <li>Click the <strong>Source URL</strong> link or use the <strong>Actions</strong> menu (&vellip;) and select <strong>Edit</strong>.</li>
-          <li>Modify any field (source, destination, type, notes).</li>
+          <li>Modify any field (source, destination, notes).</li>
           <li>Click <strong>Save</strong>.</li>
         </ol>
         <p>The same validation rules apply to edits.</p>
@@ -300,11 +285,10 @@
         <p>Use the search box above the table to filter redirects. Search matches against both the source path and destination. The search is case-insensitive.</p>
 
         <h3>Sorting</h3>
-        <p>Click any data column header to sort the table server-side. All five data columns are sortable:</p>
+        <p>Click any data column header to sort the table server-side. The following columns are sortable:</p>
         <ul>
           <li><strong>Source URL</strong> — Alphabetical by source path</li>
           <li><strong>Destination URL</strong> — Alphabetical by destination path</li>
-          <li><strong>Type</strong> — By redirect type (301/302)</li>
           <li><strong>Status</strong> — By active/inactive state</li>
           <li><strong>Hits</strong> — By number of times triggered</li>
         </ul>
@@ -325,8 +309,6 @@
           <tbody>
             <tr><td><strong>Enable</strong></td><td>Sets selected redirects to Active</td></tr>
             <tr><td><strong>Disable</strong></td><td>Sets selected redirects to Inactive</td></tr>
-            <tr><td><strong>Redirect type 301</strong></td><td>Changes redirect type to 301 (Permanent)</td></tr>
-            <tr><td><strong>Redirect type 302</strong></td><td>Changes redirect type to 302 (Temporary)</td></tr>
             <tr><td><strong>Delete</strong></td><td>Permanently deletes selected redirects (requires confirmation)</td></tr>
           </tbody>
         </table>
@@ -355,18 +337,16 @@
           <tbody>
             <tr><td><code>source_path</code></td><td>Yes</td><td>The old URL path (e.g. <code>/old-page</code>)</td></tr>
             <tr><td><code>destination_path</code></td><td>Yes</td><td>The new URL path (e.g. <code>/new-page</code>)</td></tr>
-            <tr><td><code>type</code></td><td>Yes</td><td><code>301</code> or <code>302</code></td></tr>
-            <tr><td><code>is_wildcard</code></td><td>No</td><td><code>true</code> or <code>false</code> (default: <code>false</code>). Set to <code>true</code> to create a wildcard pattern redirect.</td></tr>
           </tbody>
         </table>
 
         <h4>Example CSV</h4>
-        <pre><code>source_path,destination_path,type,is_wildcard
-/store/summer-sale-c5678,/store/winter-sale-c5678,301,false
-/store/blue-widget-p12345,/store/blue-widget-v2-p12345,301,false
-/store/promo,/store/deals,302,false
-/store/old-category/*,/store/new-category/*,301,true</code></pre>
-        <p>Column headers are case-insensitive and trimmed of whitespace. The <code>type</code> column accepts both numbers and strings (<code>301</code> or <code>"301"</code>). The <code>is_wildcard</code> column accepts <code>true</code>, <code>1</code>, <code>yes</code> (treated as <code>true</code>) or any other value (treated as <code>false</code>).</p>
+        <pre><code>source_path,destination_path
+/store/summer-sale-c5678,/store/winter-sale-c5678
+/store/blue-widget-p12345,/store/blue-widget-v2-p12345
+/store/promo,/store/deals
+/store/old-category/*,/store/new-category/*</code></pre>
+        <p>Column headers are case-insensitive and trimmed of whitespace. Wildcard redirects are auto-detected from source paths ending with <code>*</code>.</p>
 
         <h3 id="import-workflow">Import Workflow</h3>
         <h4>Step 1: Upload</h4>
@@ -389,7 +369,6 @@
         <ul>
           <li>Missing <code>source_path</code> or <code>destination_path</code></li>
           <li>Source and destination are the same (self-redirect)</li>
-          <li>Invalid redirect type (not 301 or 302)</li>
           <li>Empty fields</li>
         </ul>
 
@@ -417,7 +396,7 @@
           <li>The import processes rows sequentially. If one row fails, subsequent valid rows still get created.</li>
           <li>Large files are accepted, but the preview displays only the first 100 rows.</li>
           <li>All imported redirects are labeled with the "Manual" origin.</li>
-          <li>To import wildcard redirects, add an <code>is_wildcard</code> column with value <code>true</code>. Wildcard rows display a blue <strong>wildcard</strong> badge in the preview table.</li>
+          <li>Wildcard redirects are auto-detected from source paths ending with <code>*</code>. Wildcard rows display a blue <strong>wildcard</strong> badge in the preview table.</li>
         </ul>
       </section>
 
@@ -500,7 +479,6 @@
           <li>Click <strong>Create Redirect</strong>.</li>
           <li>An inline form appears with the source path pre-filled.</li>
           <li>Enter the <strong>destination</strong> — the correct page visitors should reach.</li>
-          <li>Select the <strong>redirect type</strong> (301 or 302).</li>
           <li>Click <strong>Create</strong>.</li>
         </ol>
         <p>The app creates the redirect, marks the broken URL as resolved, and syncs the rule to your storefront. Future visitors landing on that URL will be redirected.</p>
@@ -539,7 +517,7 @@
           <li>Ecwid changes the URL slug from <code>blue-widget</code> to <code>blue-widget-v2</code>.</li>
           <li>Ecwid sends a webhook notification to the app.</li>
           <li>The app compares the new slug against the previously recorded slug.</li>
-          <li>If the slug changed, the app creates a 301 redirect from the old URL to the new one.</li>
+          <li>If the slug changed, the app creates a redirect from the old URL to the new one.</li>
           <li>The redirect is synced to your storefront immediately.</li>
         </ol>
         <p>The entire process happens in the background within seconds of the name change.</p>
@@ -557,7 +535,7 @@
         <p>When you first install the app, it reads all your products and categories and records their current slugs. This baseline allows the app to detect future changes. The sync runs once automatically on installation.</p>
 
         <h3>Auto-Redirect in the Redirect List</h3>
-        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit, disable, or delete them. Auto-redirects are always type 301 (permanent).</p>
+        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit, disable, or delete them.</p>
 
         <h3>What Happens When a Product or Category Is Deleted</h3>
         <ul>
@@ -680,14 +658,6 @@
         </ol>
         <p>Overflow mode adds a small delay on the first page load of a session (one network request). Subsequent pages load instantly from cache.</p>
 
-        <h3>Client-Side vs Server-Side Redirects</h3>
-        <p>The app uses <strong>client-side redirects</strong> via Ecwid's navigation API (<code>Ecwid.openPage()</code>) and <code>window.location.replace()</code> as a fallback. This works on any hosting platform without configuration, but has a limitation:</p>
-        <ul>
-          <li><strong>Client-side:</strong> The browser loads the page, the JavaScript runs, then the browser navigates to the new URL. Search engines may not treat this identically to a true HTTP 301.</li>
-          <li><strong>Server-side:</strong> The server responds with a 301 HTTP status before any page content loads. Search engines handle this as a definitive redirect signal.</li>
-        </ul>
-        <p>For SEO-critical redirects, server-side rules are preferred. Server-side rule export (generating <code>.htaccess</code>, <code>nginx.conf</code>, <code>_redirects</code>, or <code>vercel.json</code> files) is planned for a future release.</p>
-
         <h3 id="platform-compatibility-details">Platform Compatibility</h3>
         <p>The app's client-side redirect execution and 404 detection work reliably on <strong>embedded stores</strong> (including Wix) but not on <strong>Instant Site</strong>.</p>
         <table>
@@ -699,7 +669,6 @@
             <tr><td>404 detection</td><td>Reliable</td><td>Not available — disabled due to false positives in Wix iframe</td><td>Not available — server may handle 404 before JS loads</td></tr>
             <tr><td>Webhook slug change detection</td><td>Works</td><td>Works</td><td>Works (server-to-server)</td></tr>
             <tr><td>Redirect management dashboard</td><td>Works</td><td>Works</td><td>Works</td></tr>
-            <tr><td>Server-side rule export</td><td>Useful — merchant applies to hosting</td><td>Limited — Wix controls hosting</td><td>Limited — no server access</td></tr>
             <tr><td>Redirect analytics (hit counts)</td><td>Counted by JS</td><td>Counted by JS</td><td>Not counted if JS doesn't execute</td></tr>
           </tbody>
         </table>
@@ -765,13 +734,12 @@
             <tr><td>Missing <code>source_path</code></td><td>The <code>source_path</code> column is empty for this row</td><td>Add a valid source path</td></tr>
             <tr><td>Missing <code>destination_path</code></td><td>The <code>destination_path</code> column is empty</td><td>Add a valid destination</td></tr>
             <tr><td>Self-redirect</td><td>Source and destination are the same</td><td>Use a different destination</td></tr>
-            <tr><td>Invalid type</td><td>The <code>type</code> column is not <code>301</code> or <code>302</code></td><td>Change to <code>301</code> or <code>302</code></td></tr>
           </tbody>
         </table>
         <p><strong>The CSV fails to parse at all:</strong></p>
         <ul>
           <li>Ensure the file is a valid <code>.csv</code> with comma-separated values.</li>
-          <li>The first row must be a header: <code>source_path,destination_path,type</code></li>
+          <li>The first row must be a header: <code>source_path,destination_path</code></li>
           <li>Column headers are case-insensitive but must match the expected names.</li>
         </ul>
         <p><strong>Backend errors after submitting:</strong></p>
@@ -826,7 +794,7 @@
         <h3>Redirects Not Executing on Instant Site</h3>
         <p><strong>Redirect rules are created but visitors are not being redirected on Instant Site.</strong></p>
         <p>Client-side redirect execution is unreliable on Instant Site because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The redirect rules are still stored and visible in the dashboard, and webhook-based slug change detection still works.</p>
-        <p>For reliable redirects on Instant Site, server-side rule export is planned for a future release. In the meantime, the redirect management dashboard and automatic slug tracking remain useful for keeping a record of URL changes.</p>
+        <p>The redirect management dashboard and automatic slug tracking remain useful for keeping a record of URL changes even on Instant Site.</p>
 
         <h3>Auto-Redirects Not Being Created</h3>
         <p><strong>You renamed a product but no auto-redirect appeared.</strong></p>
