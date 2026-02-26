@@ -73,7 +73,7 @@
           <a href="#automatic-redirects">5. Automatic Redirects</a>
           <ul>
             <li><a href="#auto-how-it-works">How It Works</a></li>
-            <li><a href="#initial-catalog-sync">Catalog Sync</a></li>
+            <li><a href="#initial-url-sync">Initial URL Sync</a></li>
             <li><a href="#enabling-disabling-auto">Enable / Disable</a></li>
           </ul>
         </li>
@@ -81,6 +81,7 @@
           <a href="#how-redirects-work">6. How Redirects Work</a>
           <ul>
             <li><a href="#client-side-execution">Client-Side Execution</a></li>
+            <li><a href="#testing-redirects">Test URL</a></li>
             <li><a href="#url-matching-rules">URL Matching</a></li>
             <li><a href="#application-storage">Storage &amp; Overflow</a></li>
             <li><a href="#platform-compatibility-details">Platform Compatibility</a></li>
@@ -122,14 +123,14 @@
           <li>Click <strong>Install</strong>. The app requests the following permissions:
             <ul>
               <li>Read store profile (store URL and settings)</li>
-              <li>Read catalog (product and category data for slug tracking)</li>
+              <li>Read catalog (product and category data for deletion detection)</li>
               <li>Customize storefront (inject the redirect script)</li>
               <li>Public storefront access (serve redirect rules to visitors)</li>
             </ul>
           </li>
           <li>After installation, the app appears in your Ecwid admin panel sidebar in the Marketing section.</li>
         </ol>
-        <p>On first install, the app performs an initial catalog sync — it reads all your products and categories to record their current URL slugs. This enables automatic redirect detection if you later rename items.</p>
+        <p>On first install, the app performs an initial catalog sync — it reads all your products and categories to record their current URLs. This enables automatic redirect creation if you later delete items.</p>
 
         <h3 id="opening-the-app">Opening the App</h3>
         <p>Navigate to <strong>Apps &gt; SEO Redirect Manager</strong> in the Ecwid admin panel. The app loads inside the admin as an embedded panel.</p>
@@ -149,6 +150,7 @@
             <tr><td><strong>Dashboard</strong></td><td>Overview with stats, redirect table, and 404 preview panel</td></tr>
             <tr><td><strong>404 Errors</strong></td><td>View all 404 errors detected on your storefront</td></tr>
             <tr><td><strong>Bulk Import</strong></td><td>Import multiple redirect rules at once from a CSV file</td></tr>
+            <tr><td><strong>Test URL</strong></td><td>Enter a URL path and see which redirect rule matches, the resolved destination, and the full redirect chain</td></tr>
             <tr><td><strong>Settings</strong></td><td>Store details (ID, URLs, platform), notification preferences, subscription status, activity log</td></tr>
           </tbody>
         </table>
@@ -231,6 +233,22 @@
           </tbody>
         </table>
         <p>Only paths that contain an Ecwid entity ID pattern (<code>-p12345</code>, <code>/p/12345</code>, <code>-c67</code>, <code>/c/67</code>) are checked against the Ecwid API. External URLs (<code>http://…</code>) and arbitrary paths (<code>/contact</code>) skip the API call.</p>
+
+        <h4>Custom URL Paths</h4>
+        <p>Redirects double as <strong>custom URL paths</strong> for your store. Ecwid's built-in custom slug feature only works on Instant Site — if your store is embedded on WordPress, Wix, Squarespace, or another platform, you can't set custom product URLs through Ecwid alone. This app fills that gap.</p>
+        <p>Create a redirect with a clean, memorable source path and point it to any product or category:</p>
+        <table>
+          <thead>
+            <tr><th>Source (custom URL path)</th><th>Destination (actual product URL)</th><th>Use case</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>/best-seller</code></td><td><code>/Blue-Widget-p12345</code></td><td>Promotional vanity URL</td></tr>
+            <tr><td><code>/summer-sale</code></td><td><code>/Summer-Collection-c5678</code></td><td>Seasonal category link</td></tr>
+            <tr><td><code>/new</code></td><td><code>/New-Arrivals-c9012</code></td><td>Permanent shortcut</td></tr>
+          </tbody>
+        </table>
+        <p>Visitors who hit the custom URL path are seamlessly redirected to the product or category page. You can share these custom paths in marketing emails, social media, print materials, or anywhere you want a clean URL.</p>
+        <p><strong>Tip:</strong> Combine custom URL paths with <strong>wildcard redirects</strong> to create custom paths for entire categories. For example, <code>/shop/*</code> → <code>/Store-Category/*</code> redirects all paths under <code>/shop/</code> to your store's category structure.</p>
 
         <h4>Validation Rules</h4>
         <ul>
@@ -434,7 +452,7 @@
         <p>404 detection is designed for <strong>embedded stores</strong> (WordPress, Squarespace, Joomla, custom sites) where the host page always loads the Ecwid storefront widget and app scripts. On these embedded stores, all detection mechanisms work reliably.</p>
         <p><strong>Wix stores:</strong> 404 detection is <strong>available</strong> on Wix with some limitations. Ecwid runs inside a Wix TPA iframe, so the app uses a segment-count guard to filter false positives: the normal Wix store root has 3 path segments, so only paths with 4+ segments are treated as real 404s. Both detection mechanisms (empty page type and root-category fallback) are active on Wix with this guard.</p>
         <p><strong>Instant Site stores:</strong> 404 detection is <strong>not available</strong> on Ecwid Instant Site. Ecwid controls the server on Instant Site and may return a static 404 page that does not load the Ecwid SDK or any app scripts. Because the app's JavaScript never executes on these pages, broken URLs cannot be detected client-side.</p>
-        <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic slug change detection) continue to work on all platforms.</p>
+        <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic redirect for deleted products) continue to work on all platforms.</p>
 
         <h3 id="the-404-errors-page">The 404 Errors Page</h3>
         <p>The 404 Errors page displays a table with these columns:</p>
@@ -509,53 +527,35 @@
       <!-- Chapter 5: Automatic Redirects -->
       <section id="automatic-redirects">
         <h2>5. Automatic Redirects</h2>
-        <p>The app can automatically create redirects when you rename a product or category in your Ecwid store. This prevents broken links and preserves search engine rankings without any manual work.</p>
+        <p>The app can automatically create redirects when you delete a product or category from your Ecwid store. When a product is removed, its URL stops working — any bookmarks, backlinks, or Google search results pointing to it will lead to a 404 error. Automatic redirects prevent this by creating a redirect from the deleted product's URL before visitors notice the broken link.</p>
 
         <h3 id="auto-how-it-works">How It Works</h3>
         <ol>
-          <li>You rename a product or category in your Ecwid admin (e.g., "Blue Widget" becomes "Blue Widget V2").</li>
-          <li>Ecwid changes the URL slug from <code>blue-widget</code> to <code>blue-widget-v2</code>.</li>
+          <li>You delete a product or category in your Ecwid admin.</li>
           <li>Ecwid sends a webhook notification to the app.</li>
-          <li>The app compares the new slug against the previously recorded slug.</li>
-          <li>If the slug changed, the app creates a redirect from the old URL to the new one.</li>
+          <li>The app looks up the deleted entity's last known URL (recorded during initial sync or previous updates).</li>
+          <li>The app automatically creates a redirect from the old URL to a fallback destination (e.g., the parent category page or your store's homepage).</li>
           <li>The redirect is synced to your storefront immediately.</li>
         </ol>
-        <p>The entire process happens in the background within seconds of the name change.</p>
-        <p><strong>Works on all platforms.</strong> Automatic slug change detection is server-to-server (via Ecwid webhooks) and works on both embedded stores and Instant Site. However, the client-side redirect execution that makes the old URL redirect to the new one is only reliable on embedded stores. On Instant Site, the redirect rule is created and stored, but may not execute if Ecwid's server resolves the URL before the app's JavaScript loads.</p>
+        <p>The entire process happens in the background within seconds of the deletion.</p>
+        <p><strong>Works on all platforms.</strong> Deletion detection is server-to-server (via Ecwid webhooks) and works on both embedded stores and Instant Site. However, the client-side redirect execution that makes the old URL redirect to the new destination is only reliable on embedded stores. On Instant Site, the redirect rule is created and stored, but may not execute if Ecwid's server handles the URL before the app's JavaScript loads.</p>
 
-        <h3>What Gets Tracked</h3>
-        <p>The app tracks slugs for both <strong>products</strong> and <strong>categories</strong>. Ecwid products and categories each have two slug fields:</p>
-        <ul>
-          <li><strong>Auto-generated slug</strong> — Created automatically from the product/category name.</li>
-          <li><strong>Custom slug</strong> — A slug you set manually in the Ecwid admin.</li>
-        </ul>
-        <p>If a custom slug is set, it takes precedence. The app detects changes to whichever slug is currently active.</p>
-
-        <h3 id="initial-catalog-sync">Initial Catalog Sync</h3>
-        <p>When you first install the app, it reads all your products and categories and records their current slugs. This baseline allows the app to detect future changes. The sync runs once automatically on installation.</p>
+        <h3 id="initial-url-sync">Initial URL Sync</h3>
+        <p>When you first install the app, it reads all your products and categories and records their current URLs. This baseline is necessary so the app knows where deleted products were located. The sync runs once automatically on installation.</p>
 
         <h3>Auto-Redirect in the Redirect List</h3>
-        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit, disable, or delete them.</p>
+        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit the destination, disable, or delete them.</p>
 
-        <h3>What Happens When a Product or Category Is Deleted</h3>
+        <h3 id="enabling-disabling-auto">Enabling and Disabling Automatic Redirects</h3>
+        <p>Automatic redirects can be toggled on or off in the <strong>Settings</strong> page (accessible from the sidebar) under the <strong>Automatic Redirects</strong> section. When disabled:</p>
         <ul>
-          <li>Redirects where the deleted item's URL was the <strong>destination</strong> are marked with a "destination broken" indicator.</li>
-          <li>Redirects where the deleted item's URL was the <strong>source</strong> continue to function normally.</li>
-          <li>No new redirect is created for deletions (there's no new URL to redirect to).</li>
-        </ul>
-        <p>You can find redirects with broken destinations in the Dashboard's Managed Redirects table and update them to point to an active page.</p>
-
-        <h3 id="enabling-disabling-auto">Enabling and Disabling Auto-Redirect</h3>
-        <p>Auto-redirect can be toggled on or off in the <strong>Settings</strong> page (accessible from the sidebar) under the <strong>Slug History Synchronization</strong> section using the <strong>Enable Automatic Sync</strong> toggle. Synchronization is webhook-driven (real-time), not polled. When disabled:</p>
-        <ul>
-          <li>Slug changes are still tracked (the app records the new slug).</li>
+          <li>Product and category deletions are still detected by the app.</li>
           <li>No redirects are automatically created.</li>
-          <li>You can re-enable it at any time. Future slug changes will generate auto-redirects again.</li>
+          <li>You can re-enable it at any time. Future deletions will generate auto-redirects again.</li>
         </ul>
-        <p>Auto-redirect is enabled by default.</p>
 
         <h3>Deduplication</h3>
-        <p>If you edit a product multiple times in quick succession (e.g., changing the name several times), the app deduplicates webhook events within a 5-second window. Only one slug change check runs per entity per 5-second period, preventing duplicate redirects.</p>
+        <p>If Ecwid fires multiple webhook events for the same deletion in quick succession, the app deduplicates within a 5-second window. Only one redirect is created per deleted entity.</p>
       </section>
 
       <hr>
@@ -586,8 +586,24 @@
         </ol>
         <p>If no match is found, the script exits silently with no impact on page performance.</p>
 
-        <h3>Debugging Redirects</h3>
-        <p>If a redirect isn't working as expected, you can activate diagnostic logging by adding <code>?srm_debug=1</code> to any storefront URL. This outputs detailed <code>[SRM]</code> messages to the browser console showing:</p>
+        <h3 id="testing-redirects">Testing Redirects from the Admin UI</h3>
+        <p>The <strong>Test URL</strong> page (sidebar navigation) lets you simulate which redirect rule would fire for any URL path — without visiting your storefront.</p>
+        <p>Enter a store-relative path (e.g. <code>/old-product-name</code> or <code>#!/old-slug</code>) and click <strong>Test</strong>. The result shows:</p>
+        <ul>
+          <li><strong>Match found / No match</strong> — whether any active rule would redirect this URL.</li>
+          <li><strong>Redirect chain</strong> — each hop in sequence, with the match type badge (exact, suffix, or wildcard) and the resolved destination. For wildcard rules, the actual substituted destination is shown (e.g. <code>/new-category/product-a</code> rather than <code>/new-category/*</code>).</li>
+          <li><strong>Final destination</strong> — the URL the visitor would ultimately land on.</li>
+          <li><strong>Warnings</strong> — a loop warning if the chain is circular, or a chain warning if there are multiple hops (which adds latency).</li>
+        </ul>
+        <p>This is particularly useful for:</p>
+        <ul>
+          <li>Verifying wildcard rules match the URLs you expect and produce the right resolved destination.</li>
+          <li>Debugging chains: if a rule points to a destination that is itself a source, the full path is shown.</li>
+          <li>Confirming that a rule is active before going live.</li>
+        </ul>
+
+        <h3>Debugging Redirects (browser console)</h3>
+        <p>If a redirect isn't working as expected on your storefront, you can activate diagnostic logging by adding <code>?srm_debug=1</code> to any storefront URL. This outputs detailed <code>[SRM]</code> messages to the browser console showing:</p>
         <ul>
           <li>Whether the config was loaded from Application Storage</li>
           <li>The current URL path being matched</li>
@@ -643,7 +659,9 @@
         <p>The app handles this automatically using <strong>suffix matching</strong> — it checks if the current page URL <strong>ends with</strong> your redirect source path. This works on any platform without needing to configure the store's base path, and works even if your store is embedded on multiple sites simultaneously with different base paths.</p>
 
         <h3 id="application-storage">Application Storage and the 256KB Limit</h3>
-        <p>Redirect rules are stored in Ecwid Application Storage as a JSON object. This allows the storefront script to read rules without making a network request.</p>
+        <p>The app performs redirects entirely in the visitor's browser via the storefront script — not on a server. That script needs to know your redirect rules on every page load, but it cannot make an authenticated call to the app's backend each time (that would add latency and create a dependency on an external server being available).</p>
+        <p>Instead, redirect rules are published to <strong>Ecwid Application Storage</strong> — a key-value store built into every Ecwid store. The public config key is readable in the browser with no authentication via <code>Ecwid.getAppPublicConfig()</code>, served by Ecwid's own infrastructure. When the storefront script runs, the rules are already available on the page with no extra network request needed.</p>
+        <p>The app's backend is the source of truth (PostgreSQL). Application Storage is the distribution layer that makes rules available to the browser script cheaply and reliably.</p>
         <p>Ecwid imposes a <strong>256KB limit</strong> on public Application Storage. For most stores, all redirect rules fit within this limit.</p>
 
         <h4>Overflow Mode</h4>
@@ -667,7 +685,7 @@
           <tbody>
             <tr><td>Client-side redirect execution</td><td>Reliable</td><td>Reliable (via Ecwid's navigation API)</td><td>Unreliable — server may reject URL before JS loads</td></tr>
             <tr><td>404 detection</td><td>Reliable</td><td>Not available — disabled due to false positives in Wix iframe</td><td>Not available — server may handle 404 before JS loads</td></tr>
-            <tr><td>Webhook slug change detection</td><td>Works</td><td>Works</td><td>Works (server-to-server)</td></tr>
+            <tr><td>Deleted product auto-redirect</td><td>Works</td><td>Works</td><td>Works (server-to-server)</td></tr>
             <tr><td>Redirect management dashboard</td><td>Works</td><td>Works</td><td>Works</td></tr>
             <tr><td>Redirect analytics (hit counts)</td><td>Counted by JS</td><td>Counted by JS</td><td>Not counted if JS doesn't execute</td></tr>
           </tbody>
@@ -793,15 +811,15 @@
 
         <h3>Redirects Not Executing on Instant Site</h3>
         <p><strong>Redirect rules are created but visitors are not being redirected on Instant Site.</strong></p>
-        <p>Client-side redirect execution is unreliable on Instant Site because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The redirect rules are still stored and visible in the dashboard, and webhook-based slug change detection still works.</p>
-        <p>The redirect management dashboard and automatic slug tracking remain useful for keeping a record of URL changes even on Instant Site.</p>
+        <p>Client-side redirect execution is unreliable on Instant Site because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The redirect rules are still stored and visible in the dashboard, and webhook-based deletion detection still works.</p>
+        <p>The redirect management dashboard and automatic deletion detection remain useful for keeping a record of URL changes even on Instant Site.</p>
 
         <h3>Auto-Redirects Not Being Created</h3>
-        <p><strong>You renamed a product but no auto-redirect appeared.</strong></p>
+        <p><strong>You deleted a product but no auto-redirect appeared.</strong></p>
         <ol>
-          <li><strong>Check Settings.</strong> Open the Settings page from the sidebar and confirm <strong>Enable Automatic Sync</strong> is turned on under <strong>Slug History Synchronization</strong>.</li>
-          <li><strong>Check the slug actually changed.</strong> If you changed the product name but not the slug (e.g., only changed the description), no redirect is created. The slug must change.</li>
-          <li><strong>Custom slug override.</strong> If the product has a custom slug set, changes to the product name won't change the URL (custom slug takes precedence over auto-generated). The slug must actually change for a redirect to be created.</li>
+          <li><strong>Check Settings.</strong> Open the Settings page from the sidebar and confirm <strong>Automatic Redirects</strong> is enabled.</li>
+          <li><strong>Ensure the product was fully deleted.</strong> Disabling or hiding a product does not trigger an auto-redirect — only permanent deletion does.</li>
+          <li><strong>Check that the product URL was recorded.</strong> Auto-redirects require the app to know the deleted product's URL. If the product was created before the app was installed and the initial catalog sync was incomplete, the URL may not be on record. Try running a manual sync from the Settings page.</li>
         </ol>
       </section>
 
