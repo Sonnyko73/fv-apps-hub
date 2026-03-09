@@ -69,7 +69,7 @@ Use `stat` to compare modification times. If a source `.md` file is newer than i
   - Wrap TOC in `<div class="legal-toc"><h2>Table of Contents</h2><ol>...</ol></div>`
 - Use the shared page template: standard FV header + `<main class="fv-container"><div class="legal-header">` + `<div class="legal-body">` + standard FV footer with all legal links
 - Reference `/legal.css` in the `<head>`
-- Keep the footer links consistent: All Apps, Privacy Policy, Terms of Service, Regional Data Protection, info@fv.dev, fv.dev
+- Keep the footer links consistent: All Apps, Terms of Service, Privacy Policy, Regional Data Protection, info@fv.dev, fv.dev
 
 If no legal files changed, report "Legal pages up to date" and continue.
 

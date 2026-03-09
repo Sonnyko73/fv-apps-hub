@@ -116,7 +116,7 @@ Sections:
 3. **What We Do** -- Description of the company's approach and focus
 4. **App Grid** -- Card per app with: icon, name, one-line description, platform badges, pricing badge (Free/Freemium/Paid), "View details" link
 5. **Why Forest Valley** -- Three value props: Built by Developers, Reliable & Secure, Real Support
-6. **Footer** -- copyright, legal page links (Privacy Policy, Terms of Service, Regional Data Protection), contact email, link to fv.dev
+6. **Footer** -- copyright, legal page links (Terms of Service, Privacy Policy, Regional Data Protection), contact email, link to fv.dev
 
 App data is hardcoded in HTML. When adding a new app, manually add a card. App info comes from `docs/{app-slug}-app-docs/about.md`.
 
