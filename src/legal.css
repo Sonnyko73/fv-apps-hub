@@ -1,0 +1,136 @@
+/* Forest Valley — Legal Pages */
+
+.legal-header {
+  padding: var(--fv-space-3xl) 0 var(--fv-space-xl);
+  border-bottom: 1px solid var(--fv-gray-200);
+  margin-bottom: var(--fv-space-3xl);
+}
+
+.legal-header h1 {
+  font-size: var(--fv-fs-2xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-xs);
+}
+
+.legal-header .legal-date {
+  font-size: var(--fv-fs-sm);
+  color: var(--fv-gray-500);
+}
+
+.legal-body {
+  max-width: 760px;
+  padding-bottom: var(--fv-space-3xl);
+}
+
+.legal-body h2 {
+  font-size: var(--fv-fs-lg);
+  color: var(--fv-navy);
+  margin-top: var(--fv-space-3xl);
+  margin-bottom: var(--fv-space-md);
+  padding-bottom: var(--fv-space-xs);
+  border-bottom: 1px solid var(--fv-gray-200);
+}
+
+.legal-body h3 {
+  font-size: var(--fv-fs-base);
+  font-weight: 600;
+  color: var(--fv-navy);
+  margin-top: var(--fv-space-xl);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.legal-body p {
+  margin-bottom: var(--fv-space-md);
+  color: var(--fv-gray-700);
+  line-height: 1.7;
+}
+
+.legal-body ul,
+.legal-body ol {
+  margin-bottom: var(--fv-space-md);
+  padding-left: var(--fv-space-xl);
+}
+
+.legal-body li {
+  margin-bottom: var(--fv-space-sm);
+  color: var(--fv-gray-700);
+  line-height: 1.7;
+}
+
+.legal-body a {
+  color: var(--fv-green);
+  text-decoration: none;
+}
+
+.legal-body a:hover {
+  text-decoration: underline;
+}
+
+.legal-body strong {
+  color: var(--fv-navy);
+  font-weight: 600;
+}
+
+.legal-toc {
+  background: var(--fv-gray-50);
+  border: 1px solid var(--fv-gray-200);
+  border-radius: var(--fv-radius);
+  padding: var(--fv-space-lg) var(--fv-space-xl);
+  margin-bottom: var(--fv-space-3xl);
+}
+
+.legal-toc h2 {
+  font-size: var(--fv-fs-base);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: var(--fv-space-md);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.legal-toc ol {
+  margin-bottom: 0;
+}
+
+.legal-toc li {
+  margin-bottom: var(--fv-space-xs);
+}
+
+.legal-summary {
+  background: var(--fv-gray-50);
+  border-left: 3px solid var(--fv-green);
+  padding: var(--fv-space-lg);
+  border-radius: 0 var(--fv-radius) var(--fv-radius) 0;
+  margin-bottom: var(--fv-space-3xl);
+}
+
+.legal-summary ul {
+  margin-bottom: 0;
+}
+
+.legal-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--fv-space-lg);
+  font-size: var(--fv-fs-sm);
+}
+
+.legal-body th {
+  background: var(--fv-gray-100);
+  text-align: left;
+  padding: var(--fv-space-sm) var(--fv-space-md);
+  font-weight: 600;
+  color: var(--fv-navy);
+  border: 1px solid var(--fv-gray-300);
+}
+
+.legal-body td {
+  padding: var(--fv-space-sm) var(--fv-space-md);
+  border: 1px solid var(--fv-gray-200);
+  color: var(--fv-gray-700);
+  vertical-align: top;
+}
+
+.legal-body tr:nth-child(even) td {
+  background: var(--fv-gray-50);
+}

@@ -17,7 +17,14 @@ fv-apps-hub/
 ├── src/
 │   ├── index.html          # Catalog page (hardcoded app cards)
 │   ├── styles.css           # Catalog-specific styles
+│   ├── legal.css            # Shared legal page styles
 │   ├── 404.html             # Custom 404 page
+│   ├── privacy/
+│   │   └── index.html       # Privacy Policy page
+│   ├── terms/
+│   │   └── index.html       # Terms of Service page
+│   ├── rdpp/
+│   │   └── index.html       # Regional Data Protection Policy page
 │   └── {app-slug}/         # App pages (generated from docs/)
 │       ├── index.html       # Landing page
 │       ├── docs/
@@ -53,6 +60,9 @@ fv-apps-hub/
 ## URL Routing
 
 - `apps.fv.dev/` -- Main catalog page
+- `apps.fv.dev/privacy/` -- Privacy Policy
+- `apps.fv.dev/terms/` -- Terms of Service
+- `apps.fv.dev/rdpp/` -- Regional Data Protection Policy
 - `apps.fv.dev/shared/styles/` -- Shared CSS (consumed by all app pages)
 - `apps.fv.dev/shared/assets/` -- Shared assets (logos, fonts)
 - `apps.fv.dev/{app-slug}/` -- App landing page
@@ -106,7 +116,7 @@ Sections:
 3. **What We Do** -- Description of the company's approach and focus
 4. **App Grid** -- Card per app with: icon, name, one-line description, platform badges, pricing badge (Free/Freemium/Paid), "View details" link
 5. **Why Forest Valley** -- Three value props: Built by Developers, Reliable & Secure, Real Support
-6. **Footer** -- copyright, link to fv.dev, contact email
+6. **Footer** -- copyright, legal page links (Privacy Policy, Terms of Service, Regional Data Protection), contact email, link to fv.dev
 
 App data is hardcoded in HTML. When adding a new app, manually add a card. App info comes from `docs/{app-slug}-app-docs/about.md`.
 
@@ -140,6 +150,16 @@ Each app has a manual in `docs/{app-slug}-app-docs/` with:
 - **`01-*.md`, `02-*.md`, ...** -- Manual chapters (getting started, features, troubleshooting, etc.).
 
 The docs folder is the **source of truth** for all app content on the site. App pages and catalog cards should be built from these docs.
+
+## Legal Pages (`src/privacy/`, `src/terms/`, `src/rdpp/`)
+
+Legal pages are generated from source files in `Legal/`:
+
+- `Legal/FVR Privacy Policy.md` → `src/privacy/index.html`
+- `Legal/FVR Terms of service.md` → `src/terms/index.html`
+- `Legal/FVR RDPP.md` → `src/rdpp/index.html`
+
+All legal pages share `src/legal.css` for styling. When a legal `.md` file is updated, regenerate its HTML page following the markdown-to-HTML conversion rules in `.claude/commands/build.md` (Step 3).
 
 ## Adding a New App
 
