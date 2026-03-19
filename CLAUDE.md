@@ -37,8 +37,12 @@ fv-apps-hub/
 │       ├── about.md         # App info for catalog card + landing page
 │       ├── README.md        # Manual table of contents
 │       └── *.md             # Manual chapters
-├── shared/                  # Hosted at apps.fv.dev/shared/
-│   ├── styles/
+├── Legal -> ../Legal              # Symlink to legal source docs (READ-ONLY — never write here)
+│   ├── FVR Privacy Policy.md      # Source for src/privacy/index.html
+│   ├── FVR Terms of service.md    # Source for src/terms/index.html
+│   └── FVR RDPP.md                # Source for src/rdpp/index.html
+├── Shared-assets -> ../Shared assets   # Symlink to shared design system (READ-ONLY — never write here)
+│   ├── styles/              # Hosted at apps.fv.dev/shared/styles/
 │   │   ├── reset.css        # Minimal CSS reset
 │   │   ├── variables.css    # Brand tokens (design system)
 │   │   └── base.css         # Typography, containers, utilities
@@ -63,8 +67,8 @@ fv-apps-hub/
 - `apps.fv.dev/privacy/` -- Privacy Policy
 - `apps.fv.dev/terms/` -- Terms of Service
 - `apps.fv.dev/rdpp/` -- Regional Data Protection Policy
-- `apps.fv.dev/shared/styles/` -- Shared CSS (consumed by all app pages)
-- `apps.fv.dev/shared/assets/` -- Shared assets (logos, fonts)
+- `apps.fv.dev/shared/styles/` -- Shared CSS (built from `Shared-assets/styles/`)
+- `apps.fv.dev/shared/assets/` -- Shared assets (built from `Shared-assets/assets/`)
 - `apps.fv.dev/{app-slug}/` -- App landing page
 - `apps.fv.dev/{app-slug}/docs/` -- App user manual
 

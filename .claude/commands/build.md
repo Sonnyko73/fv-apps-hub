@@ -77,7 +77,7 @@ If no legal files changed, report "Legal pages up to date" and continue.
 
 Read `CLAUDE.md` and compare it against the current project state:
 
-- Check the **Project Structure** tree matches actual files/folders in `src/`, `docs/`, `shared/`, `scripts/`. Look for missing or extra entries.
+- Check the **Project Structure** tree matches actual files/folders in `src/`, `docs/`, `Shared-assets/`, `scripts/`. Look for missing or extra entries.
 - Check the **URL Routing** section matches existing app pages in `src/`.
 - Check the **App Docs** section matches the actual `docs/` folder contents.
 - Check the **Adding a New App** workflow is still accurate.

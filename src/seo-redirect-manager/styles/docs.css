@@ -189,6 +189,23 @@
   font-size: var(--fv-fs-sm);
 }
 
+/* Notes / callouts */
+.docs-note {
+  background: var(--fv-gray-50);
+  border-left: 4px solid var(--fv-green);
+  padding: var(--fv-space-md) var(--fv-space-lg);
+  margin-bottom: var(--fv-space-lg);
+  border-radius: 0 var(--fv-radius-sm) var(--fv-radius-sm) 0;
+}
+
+.docs-note p {
+  margin-bottom: 0;
+}
+
+.docs-note p + p {
+  margin-top: var(--fv-space-sm);
+}
+
 /* Horizontal rules */
 .docs-content hr {
   border: none;

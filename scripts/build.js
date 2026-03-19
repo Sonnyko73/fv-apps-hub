@@ -40,8 +40,8 @@ async function build() {
   // Copy src → dist
   copyDir(path.join(ROOT, 'src'), DIST);
 
-  // Copy shared → dist/shared
-  copyDir(path.join(ROOT, 'shared'), path.join(DIST, 'shared'));
+  // Copy Shared-assets → dist/shared (read-only source, symlink to ../Shared assets)
+  copyDir(path.join(ROOT, 'Shared-assets'), path.join(DIST, 'shared'));
 
   // Copy _redirects and _headers to dist
   for (const file of ['_redirects', '_headers']) {

@@ -74,6 +74,7 @@
           <ul>
             <li><a href="#auto-how-it-works">How It Works</a></li>
             <li><a href="#initial-url-sync">Initial URL Sync</a></li>
+            <li><a href="#default-redirect-destination">Default Destination</a></li>
             <li><a href="#enabling-disabling-auto">Enable / Disable</a></li>
           </ul>
         </li>
@@ -295,7 +296,7 @@
         <ol>
           <li>Click the <strong>Actions</strong> menu (&vellip;) on the redirect row.</li>
           <li>Select <strong>Delete</strong>.</li>
-          <li>The redirect is removed immediately.</li>
+          <li>An inline confirmation appears inside the menu: click <strong>Confirm</strong> to proceed or <strong>Cancel</strong> to abort.</li>
         </ol>
         <p>Deleted redirects are permanently removed from the database and from the storefront rules.</p>
 
@@ -371,18 +372,21 @@
         <p>Click <strong>Choose File</strong> or drag and drop a <code>.csv</code> file.</p>
 
         <h4>Step 2: Preview</h4>
-        <p>After uploading, the app parses the CSV and shows a preview table of up to 100 rows. The <strong>Status</strong> column uses colour-coded pill badges:</p>
+        <p>After uploading, the app parses the CSV and shows a preview table of up to 100 rows. For rows whose destination contains an Ecwid product or category ID, the app immediately checks whether that entity exists in your store. The <strong>Status</strong> column uses colour-coded pill badges:</p>
         <table>
           <thead>
             <tr><th>Badge</th><th>Colour</th><th>Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>OK</strong></td><td>Green</td><td>Row is valid and ready to import</td></tr>
-            <tr><td><strong>⚠ Unverified</strong></td><td>Yellow</td><td>Row is valid but the destination has no Ecwid product or category ID — it may be a WordPress page or other custom path. Hover over the badge for details. These rows are still imported.</td></tr>
+            <tr><td><strong>Checking…</strong></td><td>Grey</td><td>The app is verifying whether the destination product or category exists. The Import button is disabled until all checks complete.</td></tr>
+            <tr><td><strong>OK</strong></td><td>Green</td><td>Row is valid and the destination entity was confirmed to exist in your store.</td></tr>
+            <tr><td><strong>Not Found</strong></td><td>Red</td><td>The destination product or category was not found in your store. This row will be excluded from the import.</td></tr>
+            <tr><td><strong>⚠ Unverified</strong></td><td>Yellow</td><td>Row is valid but the destination has no Ecwid product or category ID (e.g. a WordPress page or custom path) — or the store API was unreachable. These rows are still imported.</td></tr>
+            <tr><td><strong>Duplicate</strong></td><td>Red</td><td>The source path already exists in your store's redirects, or it appeared earlier in the same CSV file. This row will be excluded from the import.</td></tr>
             <tr><td><strong>Error</strong></td><td>Red</td><td>Row has a validation error and will be skipped. Hover over the badge to see the error details.</td></tr>
           </tbody>
         </table>
-        <p>Error rows have a red background; unverified rows have a light yellow background.</p>
+        <p>Error and "Not Found" rows have a red background; unverified rows have a light yellow background.</p>
         <p>Common row-level errors:</p>
         <ul>
           <li>Missing <code>source_path</code> or <code>destination_path</code></li>
@@ -391,7 +395,12 @@
         </ul>
 
         <h4>Step 3: Import</h4>
-        <p>Click <strong>Import</strong> to submit the valid rows. The backend performs additional validation: loop detection, chain detection, and duplicate source handling.</p>
+        <p>Click <strong>Import</strong> to submit the valid rows to the backend. The backend performs additional validation:</p>
+        <ul>
+          <li>Loop detection (checks against existing redirects)</li>
+          <li>Chain detection (warns if new redirects create chains)</li>
+          <li>Duplicate source handling (skips rows with sources that already exist)</li>
+        </ul>
 
         <h4>Step 4: Results</h4>
         <p>After import, a summary card shows:</p>
@@ -434,12 +443,7 @@
         </ul>
 
         <h3 id="how-detection-works">How Detection Works</h3>
-        <p>The app's storefront script uses three mechanisms to detect broken URLs:</p>
-        <ol>
-          <li><strong>Ecwid.OnPageLoaded listener</strong> — When Ecwid reports that a page type is empty or explicitly <code>PAGE_NOT_FOUND</code>, the script reports it as a 404.</li>
-          <li><strong>Root-category fallback detection</strong> — On SPA-hosted stores (Cloudflare Pages, Vercel, Netlify, etc.), Ecwid may show the main catalog (root category) for unrecognized URLs instead of reporting a 404. The script detects this by checking: if Ecwid loads the root category (<code>CATEGORY</code> type with <code>categoryId: 0</code>) but the browser's URL path doesn't match the store's base path, it's treated as a 404. The store's base path is read from <code>window.ec.config.baseUrl</code> when available.</li>
-          <li><strong>Hash change fallback</strong> — For hash-based URLs like <code>#!/product/nonexistent-slug</code>, Ecwid may not fire <code>OnPageLoaded</code> with a 404 type. Instead, it falls back to showing the catalog (type <code>CATEGORY</code>). The script detects this mismatch — if the URL requests a product but Ecwid loads a category page, it's treated as a 404.</li>
-        </ol>
+        <p>The app's storefront script automatically detects when a visitor lands on a page that doesn't exist. Detection covers all common scenarios: explicit 404 responses, stores that show the main catalog for unknown URLs, and hash-based navigation. Detection is passive — no configuration needed, and it has no impact on store performance.</p>
         <p>Key details:</p>
         <ul>
           <li>Detection is automatic — no configuration needed.</li>
@@ -450,7 +454,7 @@
 
         <h3 id="detection-platform-compatibility">Platform Compatibility</h3>
         <p>404 detection is designed for <strong>embedded stores</strong> (WordPress, Squarespace, Joomla, custom sites) where the host page always loads the Ecwid storefront widget and app scripts. On these embedded stores, all detection mechanisms work reliably.</p>
-        <p><strong>Wix stores:</strong> 404 detection is <strong>available</strong> on Wix with some limitations. Ecwid runs inside a Wix TPA iframe, so the app uses a segment-count guard to filter false positives: the normal Wix store root has 3 path segments, so only paths with 4+ segments are treated as real 404s. Both detection mechanisms (empty page type and root-category fallback) are active on Wix with this guard.</p>
+        <p><strong>Wix stores:</strong> 404 detection is <strong>available</strong> on Wix with some limitations. The app applies additional filtering to avoid false positives caused by how Ecwid runs inside a Wix embedded frame.</p>
         <p><strong>Instant Site stores:</strong> 404 detection is <strong>not available</strong> on Ecwid Instant Site. Ecwid controls the server on Instant Site and may return a static 404 page that does not load the Ecwid SDK or any app scripts. Because the app's JavaScript never executes on these pages, broken URLs cannot be detected client-side.</p>
         <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic redirect for deleted products) continue to work on all platforms.</p>
 
@@ -506,7 +510,7 @@
         <p>If the 404 is expected (e.g., you intentionally removed a page), click <strong>Resolve</strong> to mark it as handled without creating a redirect. The broken URL moves to the Resolved filter.</p>
 
         <h4>Option 3: Delete</h4>
-        <p>Click <strong>Delete</strong> to remove the broken URL record from the log entirely. This does not affect any existing redirects.</p>
+        <p>Click <strong>Delete</strong> to remove the broken URL record from the log entirely. An inline confirmation appears — click <strong>Confirm</strong> to proceed or <strong>Cancel</strong> to abort. This does not affect any existing redirects.</p>
 
         <h3>Limits and Cleanup</h3>
         <table>
@@ -531,26 +535,41 @@
 
         <h3 id="auto-how-it-works">How It Works</h3>
         <ol>
-          <li>You delete a product or category in your Ecwid admin.</li>
-          <li>Ecwid sends a webhook notification to the app.</li>
-          <li>The app looks up the deleted entity's last known URL (recorded during initial sync or previous updates).</li>
-          <li>The app automatically creates a redirect from the old URL to a fallback destination (e.g., the parent category page or your store's homepage).</li>
-          <li>The redirect is synced to your storefront immediately.</li>
+          <li>You create or update a product or category in your Ecwid store. The app receives a webhook (<code>product.created</code>, <code>product.updated</code>, <code>category.created</code>, or <code>category.updated</code>), fetches the entity's current URL from the Ecwid API, and records it in the <code>entity_urls</code> table.</li>
+          <li>You delete the product or category. Ecwid sends a <code>product.deleted</code> or <code>category.deleted</code> webhook.</li>
+          <li>The app looks up the deleted entity's last known URL from its records.</li>
+          <li>Any existing redirects whose destination points to the now-deleted URL are marked as <code>destination_broken</code>.</li>
+          <li>If auto-redirects are enabled in Settings, the app creates a redirect from the old URL to the <strong>default redirect destination</strong> (configurable in Settings, defaults to <code>/</code> — your store homepage).</li>
+          <li>The new redirect is synced to your storefront immediately via Application Storage.</li>
         </ol>
         <p>The entire process happens in the background within seconds of the deletion.</p>
-        <p><strong>Works on all platforms.</strong> Deletion detection is server-to-server (via Ecwid webhooks) and works on both embedded stores and Instant Site. However, the client-side redirect execution that makes the old URL redirect to the new destination is only reliable on embedded stores. On Instant Site, the redirect rule is created and stored, but may not execute if Ecwid's server handles the URL before the app's JavaScript loads.</p>
+        <div class="docs-note">
+          <p><strong>Wildcard fallback.</strong> In rare cases where an entity is deleted before the app has recorded its URL (for example, if created and deleted in quick succession before any update webhook arrived), the app creates a wildcard redirect <code>*{entityId}</code> instead of an exact URL redirect. This pattern matches any Ecwid URL that <strong>ends with</strong> that entity ID — so the redirect still fires correctly. Wildcard fallback redirects appear in the dashboard with an <strong>Auto-created</strong> badge.</p>
+        </div>
+        <div class="docs-note">
+          <p><strong>Works on all platforms.</strong> Deletion detection is server-to-server (via Ecwid webhooks) and works on both embedded stores and Instant Site. However, the client-side redirect execution that makes the old URL redirect to the new destination is only reliable on embedded stores. On Instant Site, the redirect rule is created and stored, but may not execute if Ecwid's server handles the URL before the app's JavaScript loads.</p>
+        </div>
 
         <h3 id="initial-url-sync">Initial URL Sync</h3>
         <p>When you first install the app, it reads all your products and categories and records their current URLs. This baseline is necessary so the app knows where deleted products were located. The sync runs once automatically on installation.</p>
 
         <h3>Auto-Redirect in the Redirect List</h3>
-        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with the <strong>Auto</strong> origin label. They behave the same as manually created redirects — you can edit the destination, disable, or delete them.</p>
+        <p>Auto-created redirects appear in the Dashboard's Managed Redirects table with an <strong>Auto-created</strong> badge in the Status column. They behave the same as manually created redirects — you can edit the destination, deactivate, or delete them.</p>
+
+        <h3 id="default-redirect-destination">Default Redirect Destination</h3>
+        <p>The destination for auto-created redirects is controlled by the <strong>Default Redirect Destination</strong> setting on the Settings page. This is where deleted products/categories will redirect to. Common choices:</p>
+        <ul>
+          <li><code>/</code> — your store homepage (the default)</li>
+          <li>A specific category page URL</li>
+        </ul>
+        <p>You can change this at any time. The new destination applies to future auto-redirects only; existing ones keep their current destination (edit them individually if needed).</p>
 
         <h3 id="enabling-disabling-auto">Enabling and Disabling Automatic Redirects</h3>
         <p>Automatic redirects can be toggled on or off in the <strong>Settings</strong> page (accessible from the sidebar) under the <strong>Automatic Redirects</strong> section. When disabled:</p>
         <ul>
           <li>Product and category deletions are still detected by the app.</li>
-          <li>No redirects are automatically created.</li>
+          <li>Redirects pointing to deleted URLs are still marked as <code>destination_broken</code>.</li>
+          <li>No new redirects are automatically created.</li>
           <li>You can re-enable it at any time. Future deletions will generate auto-redirects again.</li>
         </ul>
 
@@ -684,14 +703,14 @@
           </thead>
           <tbody>
             <tr><td>Client-side redirect execution</td><td>Reliable</td><td>Reliable (via Ecwid's navigation API)</td><td>Unreliable — server may reject URL before JS loads</td></tr>
-            <tr><td>404 detection</td><td>Reliable</td><td>Not available — disabled due to false positives in Wix iframe</td><td>Not available — server may handle 404 before JS loads</td></tr>
+            <tr><td>404 detection</td><td>Reliable</td><td>Available with additional filtering</td><td>Not available — server may handle 404 before JS loads</td></tr>
             <tr><td>Deleted product auto-redirect</td><td>Works</td><td>Works</td><td>Works (server-to-server)</td></tr>
             <tr><td>Redirect management dashboard</td><td>Works</td><td>Works</td><td>Works</td></tr>
             <tr><td>Redirect analytics (hit counts)</td><td>Counted by JS</td><td>Counted by JS</td><td>Not counted if JS doesn't execute</td></tr>
           </tbody>
         </table>
         <p><strong>Why the difference?</strong> On embedded stores, the host website (e.g. WordPress) returns HTTP 200 for all pages and lets the Ecwid widget handle routing client-side. The app's storefront script loads on every page and can intercept URLs before the visitor sees the content.</p>
-        <p>On Wix, Ecwid runs inside an iframe (Wix TPA). The app's script still loads and executes redirects using <code>Ecwid.openPage()</code> to ensure the parent page navigates correctly. However, 404 detection is disabled on Wix because Ecwid fires incorrect page-not-found events on the normal store page within the iframe, causing false positives.</p>
+        <p>On Wix, the app's script executes redirects using Ecwid's internal navigation API to ensure the parent page navigates correctly. 404 detection is available on Wix but applies additional filtering to avoid false positives caused by how Ecwid runs inside a Wix embedded frame.</p>
         <p>On Instant Site, Ecwid controls the web server. The server may resolve or reject a URL (returning a 404 page or redirecting) before the page loads and before the app's JavaScript has a chance to run. Static 404 pages on Instant Site do not load the Ecwid SDK or app scripts at all.</p>
         <p><strong>Automatic detection:</strong> The app detects your store platform on installation and on first admin load by checking the Ecwid store profile. If <code>instantSiteUrl</code> is present, the store is classified as Instant Site. The admin UI adjusts which features are shown accordingly.</p>
 
@@ -802,7 +821,7 @@
           <li><strong>Use debug mode.</strong> Add <code>?srm_debug=1</code> to the URL and check the browser console for <code>[SRM]</code> messages. Note: on Wix, debug messages may appear in the Ecwid iframe's console — you may need to select the correct iframe context in your browser's developer tools.</li>
           <li><strong>Hard refresh.</strong> Press Ctrl+Shift+R (Cmd+Shift+R on Mac) to clear cached scripts.</li>
         </ol>
-        <p><strong>Note about 404 detection on Wix:</strong> 404 detection is not available on Wix due to false positives in the Ecwid iframe. This is expected behavior — the admin UI hides 404 detection features automatically on Wix stores.</p>
+        <p><strong>Note about 404 paths on Wix:</strong> 404 errors detected on Wix may show simplified paths (e.g., <code>/old-product-z</code>) rather than the full Wix page URL. This is normal — the app extracts the store-relative slug for cleaner reporting.</p>
 
         <h3 id="instant-site-issues">404 Detection Not Working on Instant Site</h3>
         <p><strong>The 404 Errors page is hidden or shows a message about embedded stores.</strong></p>
