@@ -175,7 +175,7 @@
         </details>
         <details class="faq-item">
           <summary>Does this work with Ecwid Instant Site?</summary>
-          <p>Partially. The redirect management dashboard, bulk import, and webhook-based deletion detection work on all platforms including Instant Site. However, <strong>client-side redirect execution and 404 detection are unreliable on Instant Site</strong> because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The admin UI automatically detects your store type and hides features that don't work on Instant Site. This app is designed primarily for embedded stores (WordPress, Wix, Squarespace, Joomla, custom sites).</p>
+          <p>No. This app is designed for embedded Ecwid stores (WordPress, Wix, Squarespace, Joomla, custom sites). On Instant Site, Ecwid controls the server and the app's redirect scripts cannot execute. Instant Site is not supported.</p>
         </details>
         <details class="faq-item">
           <summary>Are these real HTTP 301 redirects?</summary>
@@ -187,7 +187,7 @@
         </details>
         <details class="faq-item">
           <summary>Is my data safe?</summary>
-          <p>All data is stored securely in your Ecwid Application Storage and an encrypted database. Data is never shared with third parties.</p>
+          <p>Redirect rules are stored in an encrypted database and published to Ecwid Application Storage so the storefront script can read them without an extra network request. Data is never shared with third parties.</p>
         </details>
       </div>
     </div>
@@ -202,10 +202,11 @@
       </div>
       <div class="fv-footer-links">
         <a href="/">All Apps</a>
+        <a href="/seo-redirect-manager/docs/">Documentation</a>
         <a href="/terms/">Terms of Service</a>
         <a href="/privacy/">Privacy Policy</a>
         <a href="/rdpp/">Regional Data Protection</a>
-        <a href="mailto:info@fv.dev">info@fv.dev</a>
+        <a href="mailto:support@fv.dev">support@fv.dev</a>
         <a href="https://fv.dev">fv.dev</a>
       </div>
       <div class="fv-footer-copy">

@@ -106,8 +106,10 @@
     <main class="docs-content">
 
       <h1>SEO Redirect Manager — User Manual</h1>
-      <p class="docs-intro">URL redirect management for Ecwid stores. Create redirects, detect broken URLs, and automatically preserve SEO when product or category URLs change.</p>
-      <p class="docs-intro"><strong>Best for embedded stores.</strong> This app is designed primarily for merchants who embed Ecwid on their own website (WordPress, Wix, Squarespace, Joomla, or custom sites). Client-side redirect execution and 404 detection work reliably on embedded stores. Instant Site users benefit from redirect management and webhook automation, but client-side features are limited. See <a href="#how-redirects-work">How Redirects Work</a> for details.</p>
+      <p class="docs-intro">Custom URL paths, redirect management, and 404 detection for Ecwid stores. Create custom URL paths for your products on any platform, detect broken URLs, and automatically redirect visitors when products are deleted.</p>
+      <div class="docs-note">
+        <p><strong>For embedded stores only.</strong> This app is designed for merchants who embed Ecwid on their own website (WordPress, Wix, Squarespace, Joomla, or custom sites). It brings custom URL paths, client-side redirect execution, and 404 detection to embedded stores. <strong>Ecwid Instant Site is not supported.</strong> See <a href="#how-redirects-work">How Redirects Work</a> for platform details.</p>
+      </div>
 
       <!-- Chapter 1: Getting Started -->
       <section id="getting-started">
@@ -116,7 +118,7 @@
         <h3 id="platform-compatibility">Platform Compatibility</h3>
         <p>This app is designed primarily for <strong>embedded Ecwid stores</strong> — stores embedded on your own website using WordPress, Wix, Squarespace, Joomla, or a custom site. On embedded stores, the app's client-side redirect execution and 404 detection work reliably because the host page loads normally and lets Ecwid (and app scripts) run.</p>
         <p><strong>Wix users:</strong> The app is designed to work seamlessly with Wix stores that support full redirects and 404 detection. It leverages Ecwid's built-in navigation API (<code>Ecwid.openPage()</code>) to make sure redirects properly navigate the page on Wix. To get the most out of it, make sure your redirect destinations include product or category IDs, like <code>/Product-Name-p12345</code>.</p>
-        <p><strong>Instant Site Users:</strong> Client-side redirect execution and 404 detection are unreliable on Instant Site due to Ecwid's control over the server. This control may resolve or reject URLs before the application's JavaScript loads.</p>
+        <p><strong>Instant Site:</strong> Not supported. On Instant Site, Ecwid controls the server and the app's redirect scripts cannot execute.</p>
 
         <h3 id="installation">Installation</h3>
         <ol>
@@ -152,7 +154,7 @@
             <tr><td><strong>404 Errors</strong></td><td>View all 404 errors detected on your storefront</td></tr>
             <tr><td><strong>Bulk Import</strong></td><td>Import multiple redirect rules at once from a CSV file</td></tr>
             <tr><td><strong>Test URL</strong></td><td>Enter a URL path and see which redirect rule matches, the resolved destination, and the full redirect chain</td></tr>
-            <tr><td><strong>Settings</strong></td><td>Store details (ID, URLs, platform), notification preferences, subscription status, activity log</td></tr>
+            <tr><td><strong>Settings</strong></td><td>Store details (ID, URLs, platform), automatic redirect configuration, notification preferences (coming soon), subscription status, activity log with CSV export, and Delete All Data (Danger Zone)</td></tr>
           </tbody>
         </table>
 
@@ -196,7 +198,7 @@
           <tbody>
             <tr><td><strong>Source URL</strong></td><td>The old URL path that triggers the redirect (clickable link to edit). Wildcard rules show a blue <strong>wildcard</strong> badge.</td></tr>
             <tr><td><strong>Destination URL</strong></td><td>The new URL path visitors are sent to</td></tr>
-            <tr><td><strong>Status</strong></td><td>Badge showing "Active" (green) or "Inactive" (grey). Redirects with unverifiable destinations also show a yellow <strong>⚠ Unverified</strong> badge below the active/inactive badge.</td></tr>
+            <tr><td><strong>Status</strong></td><td>Badge showing "Active" (green) or "Inactive" (grey). Redirects with unverifiable destinations also show a yellow <strong>&#x26A0; Unverified</strong> badge below the active/inactive badge.</td></tr>
             <tr><td><strong>Hits</strong></td><td>Number of times the redirect has been triggered</td></tr>
             <tr><td><strong>Actions</strong></td><td>Menu with Edit, Activate/Deactivate, and Delete options</td></tr>
           </tbody>
@@ -208,8 +210,14 @@
           <li>Fill in the form:
             <ul>
               <li><strong>Source Path</strong> (required) — The old URL path, e.g. <code>/store/old-product-name-p12345</code> or <code>#!/old-product-name</code> for hash-URL stores</li>
-              <li><strong>Destination</strong> (required) — The new URL path, e.g. <code>/store/new-product-name-p12345</code> or <code>#!/new-product-name/p/12345</code>. Enter the URL exactly as it appears in your browser's address bar.</li>
-              <li><strong>Wildcard Pattern</strong> (optional toggle) — Enable to redirect an entire path prefix at once. Use <code>*</code> as a suffix in both source and destination — e.g. source <code>/old-category/*</code> → destination <code>/new-category/*</code>. The toggle auto-enables when the source path ends with <code>/*</code>. Exact matches always take priority over wildcard rules.</li>
+              <li><strong>Destination</strong> (required) — The new URL path. Must include the Ecwid product or category code at the end. Format varies by platform:
+                <ul>
+                  <li><strong>Embedded stores</strong> (WordPress, Squarespace, etc.): <code>#!/New-Product/p/0123456789</code> (product) or <code>#!/New-Category/c/0123456789</code> (category)</li>
+                  <li><strong>Wix</strong>: <code>/New-Product-p0123456789</code> (product) or <code>/New-Category-c0123456789</code> (category)</li>
+                </ul>
+                Enter the URL exactly as it appears in your browser's address bar when visiting the product or category page.
+              </li>
+              <li><strong>Wildcard Pattern</strong> (optional toggle) — Enable to redirect an entire path prefix at once. Use <code>*</code> as a suffix in both source and destination — e.g. source <code>/old-category/*</code> &rarr; destination <code>/new-category/*</code>. The toggle auto-enables when the source path ends with <code>/*</code>. Exact matches always take priority over wildcard rules.</li>
               <li><strong>Notes</strong> (optional) — A memo for your own reference, up to 500 characters</li>
             </ul>
           </li>
@@ -225,15 +233,15 @@
             <tr><th>Indicator</th><th>Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><em>Checking destination…</em> (grey)</td><td>API call in progress</td></tr>
-            <tr><td>✓ <strong>Product/Category found: [name]</strong> (green)</td><td>Entity exists in your store — safe to save</td></tr>
+            <tr><td><em>Checking destination&hellip;</em> (grey)</td><td>API call in progress</td></tr>
+            <tr><td>&#x2713; <strong>Product/Category found: [name]</strong> (green)</td><td>Entity exists in your store — safe to save</td></tr>
             <tr><td>(disabled in store) note</td><td>Entity exists but is currently hidden/disabled</td></tr>
-            <tr><td>✗ <strong>Product/Category not found (ID N)</strong> (red)</td><td>Entity does not exist — save will be rejected</td></tr>
-            <tr><td><em>Could not verify…</em> (yellow)</td><td>Ecwid API was temporarily unreachable; you can still save, but double-check the URL</td></tr>
-            <tr><td><strong>Unverified destination</strong> (yellow)</td><td>Path has no Ecwid product or category ID — the app can't verify it. The redirect is still saved (the path may be a valid WordPress/Squarespace page).</td></tr>
+            <tr><td>&#x2717; <strong>Product/Category not found (ID N)</strong> (red)</td><td>Entity does not exist — save will be rejected</td></tr>
+            <tr><td><em>Could not verify&hellip;</em> (yellow)</td><td>Ecwid API was temporarily unreachable; you can still save, but double-check the URL</td></tr>
+            <tr><td><strong>Unverified destination</strong> (yellow) + <strong>Note</strong> (blue)</td><td>Path has no Ecwid product or category ID — the app can't verify it. The redirect is still saved (the path may be a valid page on your site). A blue note also reminds you that the app does not work with Ecwid Instant Site.</td></tr>
           </tbody>
         </table>
-        <p>Only paths that contain an Ecwid entity ID pattern (<code>-p12345</code>, <code>/p/12345</code>, <code>-c67</code>, <code>/c/67</code>) are checked against the Ecwid API. External URLs (<code>http://…</code>) and arbitrary paths (<code>/contact</code>) skip the API call.</p>
+        <p>Only paths that contain an Ecwid entity ID pattern (<code>-p12345</code>, <code>/p/12345</code>, <code>-c67</code>, <code>/c/67</code>) are checked against the Ecwid API. External URLs (<code>http://&hellip;</code>) and arbitrary paths (<code>/contact</code>) skip the API call.</p>
 
         <h4>Custom URL Paths</h4>
         <p>Redirects double as <strong>custom URL paths</strong> for your store. Ecwid's built-in custom slug feature only works on Instant Site — if your store is embedded on WordPress, Wix, Squarespace, or another platform, you can't set custom product URLs through Ecwid alone. This app fills that gap.</p>
@@ -249,7 +257,7 @@
           </tbody>
         </table>
         <p>Visitors who hit the custom URL path are seamlessly redirected to the product or category page. You can share these custom paths in marketing emails, social media, print materials, or anywhere you want a clean URL.</p>
-        <p><strong>Tip:</strong> Combine custom URL paths with <strong>wildcard redirects</strong> to create custom paths for entire categories. For example, <code>/shop/*</code> → <code>/Store-Category/*</code> redirects all paths under <code>/shop/</code> to your store's category structure.</p>
+        <p><strong>Tip:</strong> Combine custom URL paths with <strong>wildcard redirects</strong> to create custom paths for entire categories. For example, <code>/shop/*</code> &rarr; <code>/Store-Category/*</code> redirects all paths under <code>/shop/</code> to your store's category structure.</p>
 
         <h4>Validation Rules</h4>
         <ul>
@@ -257,8 +265,8 @@
           <li><strong>No duplicate sources</strong> — Each source path can only have one redirect rule. If a rule already exists for that source, you'll get a <code>DUPLICATE_SOURCE</code> error.</li>
           <li><strong>Loop detection</strong> — If redirect A &rarr; B already exists and you try to create B &rarr; A, the app rejects it to prevent an infinite redirect loop.</li>
           <li><strong>Chain warning</strong> — If redirect A &rarr; B exists and you create B &rarr; C, the app shows a warning suggesting you update A to point directly to C instead. This is a warning, not an error — the redirect is still created.</li>
-          <li><strong>Destination existence check</strong> — If the destination contains an Ecwid product ID (e.g. <code>/product-name-p12345</code>) or category ID, the app verifies the entity exists before saving. If not found, the redirect is rejected with a <code>DESTINATION_NOT_FOUND</code> error.</li>
-          <li><strong>Unverifiable destination warning</strong> — If the destination is a plain path (e.g. <code>/contact</code>) with no Ecwid product or category ID, the form shows a yellow warning that the path can't be verified. The redirect is still saved. Saved redirects with unverifiable destinations show a yellow <strong>⚠ Unverified</strong> badge in the Status column.</li>
+          <li><strong>Destination existence check</strong> — If the destination contains an Ecwid product ID (e.g. <code>/product-name-p12345</code>) or category ID, the app verifies the entity exists before saving. If not found, the redirect is rejected with a <code>DESTINATION_NOT_FOUND</code> error. (The live form verification above gives you instant feedback before you even click Save.)</li>
+          <li><strong>Unverifiable destination warning</strong> — If the destination is a plain path (e.g. <code>/contact</code>) with no Ecwid product or category ID, the form shows a <strong>yellow warning</strong> that the path can't be verified. The redirect is still saved — the path may be valid on your site (e.g. a WordPress page). A blue note also reminds you that the app does not work with Ecwid Instant Site. Saved redirects with unverifiable destinations show a yellow <strong>&#x26A0; Unverified</strong> badge in the Status column of the redirect table.</li>
         </ul>
 
         <h4>Wildcard Redirects</h4>
@@ -269,13 +277,13 @@
             <tr><th>Source</th><th>Destination</th><th>What it does</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>/old-category/*</code></td><td><code>/new-category/*</code></td><td>Redirects <code>/old-category/red-shoes-p123</code> → <code>/new-category/red-shoes-p123</code></td></tr>
-            <tr><td><code>/sale/*</code></td><td><code>/deals/*</code></td><td>Redirects <code>/sale/summer</code> → <code>/deals/summer</code>, <code>/sale/winter</code> → <code>/deals/winter</code>, etc.</td></tr>
+            <tr><td><code>/old-category/*</code></td><td><code>/new-category/*</code></td><td>Redirects <code>/old-category/red-shoes-p123</code> &rarr; <code>/new-category/red-shoes-p123</code></td></tr>
+            <tr><td><code>/sale/*</code></td><td><code>/deals/*</code></td><td>Redirects <code>/sale/summer</code> &rarr; <code>/deals/summer</code>, <code>/sale/winter</code> &rarr; <code>/deals/winter</code>, etc.</td></tr>
           </tbody>
         </table>
         <p><strong>To create a wildcard redirect:</strong> Enter the source path with a <code>/*</code> suffix — the <strong>Wildcard Pattern</strong> toggle will auto-enable. Enter the destination path with a <code>/*</code> suffix, then save.</p>
         <p><strong>Priority:</strong> Exact match rules always win. If <code>/old-category/featured</code> has its own exact redirect, that rule applies; the wildcard only matches paths that have no exact rule.</p>
-        <p><strong>Destination verification:</strong> Wildcard destinations cannot be verified in real time. The form shows an "Unverified destination" warning — this is expected and the redirect will be saved normally.</p>
+        <p><strong>Destination verification:</strong> Wildcard destinations cannot be verified in real time (there is no single product or category ID to look up). The form will show an "Unverified destination" warning — this is expected and the redirect will be saved normally.</p>
 
         <h3 id="editing-a-redirect">Editing a Redirect</h3>
         <ol>
@@ -311,7 +319,7 @@
           <li><strong>Status</strong> — By active/inactive state</li>
           <li><strong>Hits</strong> — By number of times triggered</li>
         </ul>
-        <p>You can also sort by <strong>Created date</strong> and <strong>Updated date</strong> via the underlying API (default sort is newest first). Click the same column again to toggle between ascending (▲) and descending (▼) order.</p>
+        <p>You can also sort by <strong>Created date</strong> and <strong>Updated date</strong> via the underlying API (default sort is newest first). Click the same column again to toggle between ascending (&#x25B2;) and descending (&#x25BC;) order.</p>
 
         <h3 id="bulk-actions">Bulk Actions</h3>
         <p>You can select multiple redirects using the checkboxes and perform bulk operations:</p>
@@ -378,10 +386,10 @@
             <tr><th>Badge</th><th>Colour</th><th>Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Checking…</strong></td><td>Grey</td><td>The app is verifying whether the destination product or category exists. The Import button is disabled until all checks complete.</td></tr>
+            <tr><td><strong>Checking&hellip;</strong></td><td>Grey</td><td>The app is verifying whether the destination product or category exists. The Import button is disabled until all checks complete.</td></tr>
             <tr><td><strong>OK</strong></td><td>Green</td><td>Row is valid and the destination entity was confirmed to exist in your store.</td></tr>
             <tr><td><strong>Not Found</strong></td><td>Red</td><td>The destination product or category was not found in your store. This row will be excluded from the import.</td></tr>
-            <tr><td><strong>⚠ Unverified</strong></td><td>Yellow</td><td>Row is valid but the destination has no Ecwid product or category ID (e.g. a WordPress page or custom path) — or the store API was unreachable. These rows are still imported.</td></tr>
+            <tr><td><strong>&#x26A0; Unverified</strong></td><td>Yellow</td><td>Row is valid but the destination has no Ecwid product or category ID (e.g. a WordPress page or custom path) — or the store API was unreachable. These rows are still imported.</td></tr>
             <tr><td><strong>Duplicate</strong></td><td>Red</td><td>The source path already exists in your store's redirects, or it appeared earlier in the same CSV file. This row will be excluded from the import.</td></tr>
             <tr><td><strong>Error</strong></td><td>Red</td><td>Row has a validation error and will be skipped. Hover over the badge to see the error details.</td></tr>
           </tbody>
@@ -438,7 +446,7 @@
         <p>A <strong>404 Detector Panel</strong> at the bottom of the Dashboard shows the most recent unresolved 404 errors. From here you can:</p>
         <ul>
           <li><strong>Create Redirect</strong> — Quickly fix a broken URL</li>
-          <li><strong>Ignore</strong> — Dismiss expected 404s</li>
+          <li><strong>Mark Resolved</strong> — Dismiss expected 404s without creating a redirect</li>
           <li><strong>View All 404s</strong> — Navigate to the full 404 Errors page</li>
         </ul>
 
@@ -455,8 +463,7 @@
         <h3 id="detection-platform-compatibility">Platform Compatibility</h3>
         <p>404 detection is designed for <strong>embedded stores</strong> (WordPress, Squarespace, Joomla, custom sites) where the host page always loads the Ecwid storefront widget and app scripts. On these embedded stores, all detection mechanisms work reliably.</p>
         <p><strong>Wix stores:</strong> 404 detection is <strong>available</strong> on Wix with some limitations. The app applies additional filtering to avoid false positives caused by how Ecwid runs inside a Wix embedded frame.</p>
-        <p><strong>Instant Site stores:</strong> 404 detection is <strong>not available</strong> on Ecwid Instant Site. Ecwid controls the server on Instant Site and may return a static 404 page that does not load the Ecwid SDK or any app scripts. Because the app's JavaScript never executes on these pages, broken URLs cannot be detected client-side.</p>
-        <p>For Instant Site stores, the admin UI automatically hides 404 detection features and shows an informational message explaining this limitation. Webhook-based features (automatic redirect for deleted products) continue to work on all platforms.</p>
+        <p><strong>Instant Site:</strong> This app is not supported on Ecwid Instant Site. 404 detection and all other app features are unavailable on Instant Site.</p>
 
         <h3 id="the-404-errors-page">The 404 Errors Page</h3>
         <p>The 404 Errors page displays a table with these columns:</p>
@@ -465,11 +472,10 @@
             <tr><th>Column</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>URL Path</strong></td><td>The broken URL that returned 404</td></tr>
-            <tr><td><strong>Referrer</strong></td><td>The source URL that linked to the broken page (if available)</td></tr>
-            <tr><td><strong>Last Seen</strong></td><td>When the most recent 404 hit occurred</td></tr>
+            <tr><td><strong>URL Path</strong></td><td>The broken URL that returned 404. The referrer (the page that linked to it) is shown below the path when available.</td></tr>
             <tr><td><strong>Status</strong></td><td>Unresolved or Resolved badge</td></tr>
             <tr><td><strong>Hits</strong></td><td>Number of times visitors hit this 404</td></tr>
+            <tr><td><strong>Last Seen</strong></td><td>When the most recent 404 hit occurred</td></tr>
             <tr><td><strong>Actions</strong></td><td>Create Redirect, Resolve, and Delete buttons</td></tr>
           </tbody>
         </table>
@@ -544,10 +550,10 @@
         </ol>
         <p>The entire process happens in the background within seconds of the deletion.</p>
         <div class="docs-note">
-          <p><strong>Wildcard fallback.</strong> In rare cases where an entity is deleted before the app has recorded its URL (for example, if created and deleted in quick succession before any update webhook arrived), the app creates a wildcard redirect <code>*{entityId}</code> instead of an exact URL redirect. This pattern matches any Ecwid URL that <strong>ends with</strong> that entity ID — so the redirect still fires correctly. Wildcard fallback redirects appear in the dashboard with an <strong>Auto-created</strong> badge.</p>
+          <p><strong>Wildcard fallback.</strong> In rare cases where an entity is deleted before the app has recorded its URL (for example, if created and deleted in quick succession before any update webhook arrived), the app creates a wildcard redirect <code>*{entityId}</code> instead of an exact URL redirect. This pattern matches any Ecwid URL that <strong>ends with</strong> that entity ID — so the redirect still fires correctly. The match requires a non-digit character before the ID to prevent false matches against unrelated longer numbers. Wildcard fallback redirects appear in the dashboard with an <strong>Auto-created</strong> badge (not the Wildcard badge — the Wildcard badge is only shown on manually created wildcard rules).</p>
         </div>
         <div class="docs-note">
-          <p><strong>Works on all platforms.</strong> Deletion detection is server-to-server (via Ecwid webhooks) and works on both embedded stores and Instant Site. However, the client-side redirect execution that makes the old URL redirect to the new destination is only reliable on embedded stores. On Instant Site, the redirect rule is created and stored, but may not execute if Ecwid's server handles the URL before the app's JavaScript loads.</p>
+          <p><strong>Embedded stores only.</strong> Webhook-based deletion detection is server-to-server and creates the redirect rule automatically — but the redirect only executes for visitors on embedded stores (WordPress, Wix, Squarespace, Joomla, custom sites). Instant Site is not supported.</p>
         </div>
 
         <h3 id="initial-url-sync">Initial URL Sync</h3>
@@ -574,7 +580,7 @@
         </ul>
 
         <h3>Deduplication</h3>
-        <p>If Ecwid fires multiple webhook events for the same deletion in quick succession, the app deduplicates within a 5-second window. Only one redirect is created per deleted entity.</p>
+        <p>If Ecwid fires multiple webhook events for the same deletion in quick succession, the app deduplicates within a 5-second window (via Redis lock). Only one redirect is created per deleted entity.</p>
       </section>
 
       <hr>
@@ -585,23 +591,13 @@
         <p>This chapter covers the technical details of how the app executes redirects on your storefront.</p>
 
         <h3 id="client-side-execution">Client-Side Redirect Execution</h3>
-        <p>The app injects a small JavaScript file (under 5KB) into your Ecwid storefront. This script runs on every page load and performs the following:</p>
+        <p>The app injects a small JavaScript file (under 5KB) into your Ecwid storefront. On every page load, it:</p>
         <ol>
-          <li><strong>Wait for Ecwid API</strong> — The script waits for <code>Ecwid.OnAPILoaded</code> before reading config. It attempts an early call wrapped in try/catch (the API throws an error if not yet initialized), then falls back to the <code>OnAPILoaded</code> callback.</li>
-          <li><strong>Load rules</strong> — Reads redirect rules from Ecwid Application Storage (<code>Ecwid.getAppPublicConfig</code>). This data is already available on the page — no extra network request is needed.</li>
-          <li><strong>Normalize the current URL</strong> — For clean-URL stores, strips query strings, fragments, and trailing slashes. For hash-URL stores (<code>#!/...</code> or <code>#/...</code>), preserves the hash prefix and normalizes only query strings and trailing slashes. Converts to lowercase.</li>
-          <li><strong>Exact match</strong> — Checks the current URL path against all exact-match redirect rules. First tries a direct lookup, then uses <strong>suffix matching</strong> to handle embedded stores where the full URL includes a platform-specific base path (e.g., <code>/my-store/online-store/old-product</code> matches the redirect source <code>/old-product</code>).</li>
-          <li><strong>Cross-format match</strong> — If no exact match, tries the alternate URL format (<code>/path</code> ↔ <code>#!/path</code>).</li>
-          <li><strong>Wildcard match</strong> — If still no match, checks against wildcard pattern rules sorted by specificity (longest prefix first).</li>
-          <li><strong>Redirect</strong> — If a match is found and the rule is active, the script navigates the visitor using the best available method:
-            <ul>
-              <li><strong>Product/category destinations:</strong> Uses <code>Ecwid.openPage()</code> to navigate via Ecwid's internal routing. This works correctly on all platforms, including Wix where the script runs inside an iframe.</li>
-              <li><strong>Hash-URL destinations</strong> (starting with <code>#</code>): Sets <code>window.location.hash</code> to trigger Ecwid's SPA router.</li>
-              <li><strong>Other destinations:</strong> Falls back to <code>window.location.replace(destination)</code>.</li>
-            </ul>
-            For SPA navigation (Ecwid.openPage and hash changes), the script temporarily hides the storefront to prevent a flash of the wrong content while the target page loads. The storefront reappears once the target page has rendered.
-          </li>
-          <li><strong>SPA re-check</strong> — The script listens for <code>hashchange</code> events and re-runs matching on every hash navigation. This ensures redirects work even when Ecwid changes the hash after initial page load.</li>
+          <li>Reads your redirect rules — already available on the page, no extra network request needed.</li>
+          <li>Normalizes the current URL (strips trailing slashes, query strings, converts to lowercase).</li>
+          <li>Checks for an exact match, then a cross-format match (clean URL &#x2194; hash URL), then a wildcard match.</li>
+          <li>If a match is found and the rule is active, navigates the visitor to the destination. For SPA navigation, the storefront is briefly hidden to prevent a flash of the wrong content while the target page loads.</li>
+          <li>Listens for in-page navigation events so redirects also fire during SPA navigation, not just on initial page load.</li>
         </ol>
         <p>If no match is found, the script exits silently with no impact on page performance.</p>
 
@@ -629,7 +625,7 @@
           <li>Each suffix matching attempt and its result</li>
           <li>Which redirect execution method was used</li>
         </ul>
-        <p>Open the browser developer console (F12 → Console tab) to see the output.</p>
+        <p>Open the browser developer console (F12 &rarr; Console tab) to see the output.</p>
 
         <h3 id="url-matching-rules">URL Matching Rules</h3>
         <h4>Path Normalization</h4>
@@ -646,22 +642,22 @@
         </ul>
         <p>Exact match rules always take priority over wildcard rules. If both match, the exact rule wins.</p>
 
-        <h5>Wildcard Source Format</h5>
+        <h4>Wildcard Source Format</h4>
         <p>The source path must end with <code>/*</code> (e.g. <code>/store/old-category/*</code>). The prefix is everything before the <code>/*</code>.</p>
 
-        <h5>Destination Substitution</h5>
+        <h4>Destination Substitution</h4>
         <p>The destination must also end with <code>*</code>. When a wildcard rule matches, the portion of the URL path that was captured by <code>*</code> is appended to the destination prefix.</p>
         <p><strong>Example:</strong></p>
         <ul>
           <li>Source: <code>/old-cat/*</code>, Destination: <code>/new-cat/*</code></li>
-          <li>Visitor hits <code>/old-cat/red-shoes-p123</code> → matched portion is <code>red-shoes-p123</code> → redirected to <code>/new-cat/red-shoes-p123</code></li>
-          <li>Visitor hits <code>/old-cat/summer/sandals-p456</code> → matched portion is <code>summer/sandals-p456</code> → redirected to <code>/new-cat/summer/sandals-p456</code></li>
+          <li>Visitor hits <code>/old-cat/red-shoes-p123</code> &rarr; matched portion is <code>red-shoes-p123</code> &rarr; redirected to <code>/new-cat/red-shoes-p123</code></li>
+          <li>Visitor hits <code>/old-cat/summer/sandals-p456</code> &rarr; matched portion is <code>summer/sandals-p456</code> &rarr; redirected to <code>/new-cat/summer/sandals-p456</code></li>
         </ul>
 
-        <h5>Specificity Ordering</h5>
+        <h4>Specificity Ordering</h4>
         <p>When multiple wildcard rules could match the same URL, the rule with the <strong>longest prefix</strong> wins. For example, if both <code>/store/*</code> and <code>/store/sale/*</code> exist, a URL like <code>/store/sale/item-p99</code> matches <code>/store/sale/*</code> (more specific).</p>
 
-        <h5>Cross-Format Matching for Wildcards</h5>
+        <h4>Cross-Format Matching for Wildcards</h4>
         <p>Wildcard matching applies to both clean URLs and hash-URL formats. A wildcard source <code>/old-cat/*</code> also matches hash-URL paths like <code>#!/old-cat/product-name</code>. The matched suffix is extracted and appended to the destination in the same format.</p>
 
         <h4>Supported URL Formats &amp; Cross-Format Matching</h4>
@@ -675,44 +671,33 @@
 
         <h3>Embedded Store Path Matching</h3>
         <p>When your Ecwid store is embedded on a website (WordPress, Wix, Squarespace, etc.), the store is mounted at a sub-path like <code>/my-store/online-store</code>. You enter redirect sources as simple store-relative paths like <code>/old-product</code>, but the full browser URL is <code>/my-store/online-store/old-product</code>.</p>
-        <p>The app handles this automatically using <strong>suffix matching</strong> — it checks if the current page URL <strong>ends with</strong> your redirect source path. This works on any platform without needing to configure the store's base path, and works even if your store is embedded on multiple sites simultaneously with different base paths.</p>
+        <p>The app handles this automatically using <strong>suffix matching</strong> — it checks if the current page URL <strong>ends with</strong> your redirect source path. This works on any platform without needing to configure the store's base path, and it works even if your store is embedded on multiple sites simultaneously with different base paths.</p>
 
         <h3 id="application-storage">Application Storage and the 256KB Limit</h3>
         <p>The app performs redirects entirely in the visitor's browser via the storefront script — not on a server. That script needs to know your redirect rules on every page load, but it cannot make an authenticated call to the app's backend each time (that would add latency and create a dependency on an external server being available).</p>
-        <p>Instead, redirect rules are published to <strong>Ecwid Application Storage</strong> — a key-value store built into every Ecwid store. The public config key is readable in the browser with no authentication via <code>Ecwid.getAppPublicConfig()</code>, served by Ecwid's own infrastructure. When the storefront script runs, the rules are already available on the page with no extra network request needed.</p>
-        <p>The app's backend is the source of truth (PostgreSQL). Application Storage is the distribution layer that makes rules available to the browser script cheaply and reliably.</p>
+        <p>Instead, redirect rules are published to <strong>Ecwid Application Storage</strong> — a key-value store built into every Ecwid store — served by Ecwid's own infrastructure. When the storefront script runs, the rules are already available on the page with no extra network request needed.</p>
         <p>Ecwid imposes a <strong>256KB limit</strong> on public Application Storage. For most stores, all redirect rules fit within this limit.</p>
 
         <h4>Overflow Mode</h4>
-        <p>When your redirect rules exceed 256KB, the app switches to overflow mode:</p>
-        <ol>
-          <li>Application Storage stores only a lightweight marker containing a hash and an API endpoint URL.</li>
-          <li>The storefront script detects the overflow marker.</li>
-          <li>It fetches the full rules from the app's backend API.</li>
-          <li>The fetched rules are cached in <code>sessionStorage</code> using the hash as a cache key.</li>
-          <li>On subsequent page loads within the same browser session, rules are served from <code>sessionStorage</code> (no network request).</li>
-          <li>If the hash changes (rules were updated), the cache is invalidated and fresh rules are fetched.</li>
-        </ol>
-        <p>Overflow mode adds a small delay on the first page load of a session (one network request). Subsequent pages load instantly from cache.</p>
+        <p>When your redirect rules exceed 256KB, the app automatically switches to overflow mode: the storefront script fetches the full rule set from the app's backend and caches it for the duration of the browser session. Overflow mode adds a small delay on the first page load of a session (one network request). Subsequent pages in the same session load instantly from cache. You don't need to configure this — it activates automatically if needed.</p>
 
         <h3 id="platform-compatibility-details">Platform Compatibility</h3>
-        <p>The app's client-side redirect execution and 404 detection work reliably on <strong>embedded stores</strong> (including Wix) but not on <strong>Instant Site</strong>.</p>
+        <p>The app supports <strong>embedded stores</strong> (WordPress, Wix, Squarespace, Joomla, custom sites). <strong>Instant Site is not supported.</strong></p>
         <table>
           <thead>
             <tr><th>Capability</th><th>Generic Embedded (WordPress, Squarespace, custom)</th><th>Wix</th><th>Instant Site</th></tr>
           </thead>
           <tbody>
-            <tr><td>Client-side redirect execution</td><td>Reliable</td><td>Reliable (via Ecwid's navigation API)</td><td>Unreliable — server may reject URL before JS loads</td></tr>
-            <tr><td>404 detection</td><td>Reliable</td><td>Available with additional filtering</td><td>Not available — server may handle 404 before JS loads</td></tr>
-            <tr><td>Deleted product auto-redirect</td><td>Works</td><td>Works</td><td>Works (server-to-server)</td></tr>
-            <tr><td>Redirect management dashboard</td><td>Works</td><td>Works</td><td>Works</td></tr>
-            <tr><td>Redirect analytics (hit counts)</td><td>Counted by JS</td><td>Counted by JS</td><td>Not counted if JS doesn't execute</td></tr>
+            <tr><td>Client-side redirect execution</td><td>Reliable</td><td>Reliable (via Ecwid's navigation API)</td><td>Not supported</td></tr>
+            <tr><td>404 detection</td><td>Reliable</td><td>Available with filtering (segment-count guard reduces false positives)</td><td>Not supported</td></tr>
+            <tr><td>Deleted product auto-redirect</td><td>Works</td><td>Works</td><td>Not supported</td></tr>
+            <tr><td>Redirect management dashboard</td><td>Works</td><td>Works</td><td>Not supported</td></tr>
+            <tr><td>Redirect analytics (hit counts)</td><td>Counted by JS</td><td>Counted by JS</td><td>Not supported</td></tr>
           </tbody>
         </table>
-        <p><strong>Why the difference?</strong> On embedded stores, the host website (e.g. WordPress) returns HTTP 200 for all pages and lets the Ecwid widget handle routing client-side. The app's storefront script loads on every page and can intercept URLs before the visitor sees the content.</p>
-        <p>On Wix, the app's script executes redirects using Ecwid's internal navigation API to ensure the parent page navigates correctly. 404 detection is available on Wix but applies additional filtering to avoid false positives caused by how Ecwid runs inside a Wix embedded frame.</p>
-        <p>On Instant Site, Ecwid controls the web server. The server may resolve or reject a URL (returning a 404 page or redirecting) before the page loads and before the app's JavaScript has a chance to run. Static 404 pages on Instant Site do not load the Ecwid SDK or app scripts at all.</p>
-        <p><strong>Automatic detection:</strong> The app detects your store platform on installation and on first admin load by checking the Ecwid store profile. If <code>instantSiteUrl</code> is present, the store is classified as Instant Site. The admin UI adjusts which features are shown accordingly.</p>
+        <p><strong>Why the difference?</strong> On embedded stores, the host website returns a page for all URLs and lets the Ecwid widget handle routing client-side — the app's script loads on every page and can intercept URLs before the visitor sees content.</p>
+        <p>On Wix, the app executes redirects using Ecwid's internal navigation API (<code>Ecwid.openPage()</code>) to ensure the parent page navigates correctly. 404 detection works on Wix with a segment-count filter: paths with fewer than four segments are treated as the root store page and not reported, which prevents false positives from normal navigation.</p>
+        <p>On Instant Site, Ecwid controls the web server and resolves or rejects URLs before the page loads and before the app's JavaScript can run. The app is not supported on Instant Site.</p>
 
         <h3>Error Handling</h3>
         <p>The storefront script is designed to never break your store:</p>
@@ -734,12 +719,12 @@
         <ol>
           <li><strong>Check the status.</strong> Open the Dashboard and confirm the redirect shows "Active" status.</li>
           <li><strong>Check the source path.</strong> Make sure the source path matches the actual URL visitors are using. Paths are normalized (lowercase, no trailing slash). You only need to enter the store-relative path (e.g., <code>/old-product</code>), not the full URL — the app uses suffix matching to handle platform base paths automatically.</li>
-          <li><strong>Check the destination format.</strong> For best results on all platforms (including Wix), ensure your destination URL contains the Ecwid product or category ID. For example: <code>/New-Product-Name-p813605964</code> (the <code>-p813605964</code> part is the product ID).</li>
+          <li><strong>Check the destination format.</strong> For best results on all platforms (including Wix), ensure your destination URL contains the Ecwid product or category ID. The app extracts the ID and uses Ecwid's built-in navigation. For example: <code>/New-Product-Name-p813605964</code> (the <code>-p813605964</code> part is the product ID).</li>
           <li><strong>Wait for sync.</strong> After creating or editing a redirect, the app syncs rules to your storefront. This typically happens within a few seconds. Try a hard refresh (Ctrl+Shift+R / Cmd+Shift+R) on your storefront.</li>
           <li><strong>Clear browser cache.</strong> Your browser may have cached the old page. Clear your cache or test in an incognito/private window.</li>
           <li><strong>Check for conflicting redirects.</strong> Search for the source path in the Dashboard's Managed Redirects table. If multiple rules involve the same path, there may be a conflict.</li>
           <li><strong>Verify the storefront script is loaded.</strong> Check your Ecwid admin to confirm the app is installed and the storefront customization is active. The redirect script must be loaded for client-side redirects to work.</li>
-          <li><strong>Use debug mode.</strong> Add <code>?srm_debug=1</code> to the source URL (e.g., <code>https://yourstore.com/store/old-product?srm_debug=1</code>) and open the browser console (F12 → Console). Look for <code>[SRM]</code> messages that show what the script is doing — whether config is loaded, which paths are being matched, and whether a redirect is attempted.</li>
+          <li><strong>Use debug mode.</strong> Add <code>?srm_debug=1</code> to the source URL (e.g., <code>https://yourstore.com/store/old-product?srm_debug=1</code>) and open the browser console (F12 &rarr; Console). Look for <code>[SRM]</code> messages that show what the script is doing — whether config is loaded, which paths are being matched, and whether a redirect is attempted.</li>
         </ol>
 
         <h3 id="hash-url-issues">Redirect Not Working on Hash-URL Store</h3>
@@ -748,7 +733,7 @@
           <li><strong>Either URL format works for sources.</strong> You can enter the source as <code>/old-product-name</code> or <code>#!/old-product-name</code> — the app matches both formats automatically. For destinations on hash-URL stores, use the hash format (e.g. <code>#!/new-product-name/p/12345</code>) as it appears in your browser's address bar.</li>
           <li><strong>Hard refresh after creating the redirect.</strong> Press Ctrl+Shift+R (Cmd+Shift+R on Mac) to clear cache and reload the storefront script.</li>
           <li><strong>Check that the Ecwid API has loaded.</strong> The redirect script waits for Ecwid's API to initialize before reading rules. If the Ecwid widget fails to load, redirects cannot execute.</li>
-          <li><strong>Test by navigating directly.</strong> Paste the full source URL into the browser address bar and press Enter. The redirect should execute within a moment.</li>
+          <li><strong>Test by navigating directly.</strong> Paste the full source URL (e.g. <code>https://yourstore.com/#!/old-product-name</code>) into the browser address bar and press Enter. The redirect should execute within a moment.</li>
         </ol>
 
         <h3 id="404s-not-detected">404s Not Being Detected</h3>
@@ -807,6 +792,10 @@
           <li>Or delete the redirect if it's no longer needed.</li>
         </ol>
 
+        <h3 id="instant-site-issues">App Not Working on Instant Site</h3>
+        <p><strong>The app does not work on Ecwid Instant Site.</strong></p>
+        <p>This app is designed for embedded Ecwid stores (WordPress, Wix, Squarespace, Joomla, custom sites). On Instant Site, Ecwid controls the server and the app's redirect scripts cannot execute. Instant Site is not supported.</p>
+
         <h3 id="wix-issues">Redirects Not Working on Wix</h3>
         <p><strong>The redirect is enabled but visitors see the main store page instead of being redirected on Wix.</strong></p>
         <p>On Wix, the app's storefront script runs inside an Ecwid iframe. The app uses <code>Ecwid.openPage()</code> to navigate, which handles the iframe boundary correctly. If redirects are not working on Wix:</p>
@@ -818,20 +807,10 @@
             </ul>
           </li>
           <li><strong>Ensure the product/category exists.</strong> If the destination product has been deleted, the redirect will fail silently.</li>
-          <li><strong>Use debug mode.</strong> Add <code>?srm_debug=1</code> to the URL and check the browser console for <code>[SRM]</code> messages. Note: on Wix, debug messages may appear in the Ecwid iframe's console — you may need to select the correct iframe context in your browser's developer tools.</li>
+          <li><strong>Use debug mode.</strong> Add <code>?srm_debug=1</code> to the URL and check the browser console for <code>[SRM]</code> messages. Note: on Wix, debug messages may appear in the Ecwid iframe's console, not the main page console. You may need to select the correct iframe context in your browser's developer tools.</li>
           <li><strong>Hard refresh.</strong> Press Ctrl+Shift+R (Cmd+Shift+R on Mac) to clear cached scripts.</li>
         </ol>
         <p><strong>Note about 404 paths on Wix:</strong> 404 errors detected on Wix may show simplified paths (e.g., <code>/old-product-z</code>) rather than the full Wix page URL. This is normal — the app extracts the store-relative slug for cleaner reporting.</p>
-
-        <h3 id="instant-site-issues">404 Detection Not Working on Instant Site</h3>
-        <p><strong>The 404 Errors page is hidden or shows a message about embedded stores.</strong></p>
-        <p>This is expected. 404 detection requires the app's storefront JavaScript to run, which only works reliably on embedded stores (WordPress, Wix, Squarespace, custom sites). On Ecwid Instant Site, the server may return a static 404 page that doesn't load app scripts. The admin UI automatically detects your platform and hides 404 features for Instant Site stores.</p>
-        <p>If you believe your store is incorrectly detected as Instant Site, contact support.</p>
-
-        <h3>Redirects Not Executing on Instant Site</h3>
-        <p><strong>Redirect rules are created but visitors are not being redirected on Instant Site.</strong></p>
-        <p>Client-side redirect execution is unreliable on Instant Site because Ecwid controls the server and may resolve or reject URLs before the app's JavaScript loads. The redirect rules are still stored and visible in the dashboard, and webhook-based deletion detection still works.</p>
-        <p>The redirect management dashboard and automatic deletion detection remain useful for keeping a record of URL changes even on Instant Site.</p>
 
         <h3>Auto-Redirects Not Being Created</h3>
         <p><strong>You deleted a product but no auto-redirect appeared.</strong></p>
@@ -855,10 +834,11 @@
       </div>
       <div class="fv-footer-links">
         <a href="/">All Apps</a>
+        <a href="/seo-redirect-manager/docs/">Documentation</a>
         <a href="/terms/">Terms of Service</a>
         <a href="/privacy/">Privacy Policy</a>
         <a href="/rdpp/">Regional Data Protection</a>
-        <a href="mailto:info@fv.dev">info@fv.dev</a>
+        <a href="mailto:support@fv.dev">support@fv.dev</a>
         <a href="https://fv.dev">fv.dev</a>
       </div>
       <div class="fv-footer-copy">
