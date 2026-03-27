@@ -1,0 +1,55 @@
+/* Forest Valley — Shared Footer */
+.fv-footer {
+  padding: var(--fv-space-xl) 0;
+  background: var(--fv-gray-50);
+  border-top: 1px solid var(--fv-gray-200);
+  margin-top: var(--fv-space-3xl);
+}
+
+.fv-footer .fv-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--fv-space-md);
+}
+
+.fv-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--fv-space-sm);
+  color: var(--fv-gray-600);
+  font-size: var(--fv-fs-sm);
+}
+
+.fv-footer-brand img {
+  height: 24px;
+  width: auto;
+}
+
+.fv-footer-links {
+  display: flex;
+  align-items: center;
+  gap: var(--fv-space-lg);
+}
+
+.fv-footer-links a {
+  font-size: var(--fv-fs-sm);
+  color: var(--fv-gray-500);
+  text-decoration: none;
+  transition: color var(--fv-transition);
+}
+
+.fv-footer-links a:hover {
+  color: var(--fv-green);
+}
+
+.fv-footer-copy {
+  width: 100%;
+  text-align: center;
+  padding-top: var(--fv-space-md);
+  margin-top: var(--fv-space-md);
+  border-top: 1px solid var(--fv-gray-200);
+  font-size: var(--fv-fs-xs);
+  color: var(--fv-gray-400);
+}

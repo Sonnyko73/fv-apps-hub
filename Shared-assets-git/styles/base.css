@@ -1,0 +1,85 @@
+/* Forest Valley — Base Styles & Utilities */
+
+body {
+  font-family: var(--fv-font);
+  font-size: var(--fv-fs-base);
+  line-height: 1.6;
+  color: var(--fv-navy);
+  background-color: var(--fv-white);
+}
+
+/* Container */
+.fv-container {
+  max-width: var(--fv-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--fv-space-lg);
+  padding-right: var(--fv-space-lg);
+}
+
+/* Typography */
+h1 { font-size: var(--fv-fs-3xl); line-height: 1.2; }
+h2 { font-size: var(--fv-fs-2xl); line-height: 1.3; }
+h3 { font-size: var(--fv-fs-xl);  line-height: 1.4; }
+
+/* Buttons */
+.fv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fv-space-sm);
+  padding: var(--fv-space-sm) var(--fv-space-md);
+  font-size: var(--fv-fs-sm);
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--fv-radius);
+  cursor: pointer;
+  transition: background-color var(--fv-transition), border-color var(--fv-transition), color var(--fv-transition);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.fv-btn-primary {
+  background-color: var(--fv-green);
+  color: var(--fv-white);
+  border-color: var(--fv-green);
+}
+
+.fv-btn-primary:hover {
+  background-color: var(--fv-green-dark);
+  border-color: var(--fv-green-dark);
+}
+
+.fv-btn-outline {
+  background-color: transparent;
+  color: var(--fv-green);
+  border-color: var(--fv-green);
+}
+
+.fv-btn-outline:hover {
+  background-color: var(--fv-green);
+  color: var(--fv-white);
+}
+
+/* Card */
+.fv-card {
+  background: var(--fv-white);
+  border-radius: var(--fv-radius-lg);
+  box-shadow: var(--fv-shadow);
+  padding: var(--fv-space-lg);
+  transition: box-shadow var(--fv-transition), transform var(--fv-transition);
+}
+
+.fv-card:hover {
+  box-shadow: var(--fv-shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Text Utilities */
+.fv-text-muted {
+  color: var(--fv-gray-500);
+}
+
+.fv-text-center {
+  text-align: center;
+}

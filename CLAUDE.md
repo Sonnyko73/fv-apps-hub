@@ -5,7 +5,7 @@ Monorepo for `apps.fv.dev/` -- catalog page, shared design system, and all app p
 ## Tech Stack
 
 - Static site: plain HTML + CSS, no JavaScript frameworks
-- Build: Node.js 20 script (`scripts/build.js`) -- copies `src/` to `dist/`, `shared/` to `dist/shared/`, minifies HTML + CSS
+- Build: Node.js 20 script (`scripts/build.js`) -- copies `src/` to `dist/`, `Shared-assets-git/` to `dist/shared/`, minifies HTML + CSS
 - Hosting: Cloudflare Pages (global CDN)
 - Deployment: GitHub Actions (`.github/workflows/deploy.yml`) via `cloudflare/wrangler-action@v3`
 - Project name: `fv-apps-hub`
@@ -37,16 +37,17 @@ fv-apps-hub/
 │       ├── about.md         # App info for catalog card + landing page
 │       ├── README.md        # Manual table of contents
 │       └── *.md             # Manual chapters
-├── Legal -> ../Legal              # Symlink to legal source docs (READ-ONLY — never write here)
+├── Legal -> ../Legal              # Symlink to legal source docs (READ-ONLY, gitignored, local only)
 │   ├── FVR Privacy Policy.md      # Source for src/privacy/index.html
 │   ├── FVR Terms of service.md    # Source for src/terms/index.html
 │   └── FVR RDPP.md                # Source for src/rdpp/index.html
-├── Shared-assets -> ../Shared assets   # Symlink to shared design system (READ-ONLY — never write here)
+├── Shared-assets -> ../Shared-assets  # Symlink to Google Drive source (READ-ONLY, gitignored, local only)
+├── Shared-assets-git/             # Committed copy of shared design system (built by build.js)
 │   ├── styles/              # Hosted at apps.fv.dev/shared/styles/
 │   │   ├── reset.css        # Minimal CSS reset
 │   │   ├── variables.css    # Brand tokens (design system)
 │   │   └── base.css         # Typography, containers, utilities
-│   ├── assets/              # SOURCE OF TRUTH for all assets (logos, icons, favicon)
+│   ├── assets/              # Committed copies of shared assets
 │   │   ├── fv-logo.png         # Primary logo (used in headers/footers)
 │   │   ├── favicon.ico
 │   │   └── {app-slug}-app-logo.png  # App icons (referenced as /shared/assets/)
@@ -54,7 +55,8 @@ fv-apps-hub/
 │       ├── header.css       # Shared header styles
 │       └── footer.css       # Shared footer styles
 ├── scripts/
-│   └── build.js
+│   ├── build.js
+│   └── sync-assets.sh       # Syncs from Google Drive source → Shared-assets-git/
 ├── dist/                    # Build output (gitignored)
 ├── _redirects               # Cloudflare Pages proxy rules
 ├── _headers                 # CORS + cache headers for /shared/*

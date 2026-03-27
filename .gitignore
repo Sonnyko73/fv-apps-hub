@@ -1,3 +1,7 @@
 node_modules/
 dist/
 .DS_Store
+
+# Google Drive symlinks (local-only, not usable on CI)
+Shared-assets
+Legal
