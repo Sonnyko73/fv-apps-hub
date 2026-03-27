@@ -42,7 +42,7 @@ fv-apps-hub/
 │   ├── FVR Terms of service.md    # Source for src/terms/index.html
 │   └── FVR RDPP.md                # Source for src/rdpp/index.html
 ├── Shared-assets -> ../Shared-assets  # Symlink to Google Drive source (READ-ONLY, gitignored, local only)
-├── Shared-assets-git/             # Committed copy of shared design system (built by build.js)
+├── Shared-assets-git/             # Committed copy of shared design system (synced by sync-assets.sh)
 │   ├── styles/              # Hosted at apps.fv.dev/shared/styles/
 │   │   ├── reset.css        # Minimal CSS reset
 │   │   ├── variables.css    # Brand tokens (design system)

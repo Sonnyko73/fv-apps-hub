@@ -36,8 +36,13 @@ rsync -av "$SRC/assets/favicon.ico"     "$DEST/assets/"
 rsync -av "$SRC/assets/fv-logo.png"     "$DEST/assets/"
 
 # App-specific assets (export-ready only)
-rsync -av --include='*.png' --include='*.svg' --exclude='*' \
-  "$SRC/apps-assets/seo-redirect-logo/" "$DEST/assets/" 2>/dev/null || true
+APP_LOGO_DIR="$SRC/apps-assets/seo-redirect-logo"
+if [ -d "$APP_LOGO_DIR" ]; then
+  rsync -av --include='*.png' --include='*.svg' --exclude='*' \
+    "$APP_LOGO_DIR/" "$DEST/assets/"
+else
+  echo "Warning: App logo directory not found at $APP_LOGO_DIR"
+fi
 
 # Styles (if any exist in source — CSS files may be authored locally)
 if ls "$SRC/styles/"*.css 1>/dev/null 2>&1; then
