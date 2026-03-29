@@ -165,4 +165,8 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
 
 1. List all files that were created or modified
 2. Run `npm run build` to verify the build succeeds
-3. Report any issues
+3. If the build succeeds, deploy:
+   - Stage the generated/modified files with `git add`
+   - Commit with a message like `Add/update {App Name} app page`
+   - Push to `main` — this triggers GitHub Actions → Cloudflare Pages deployment
+4. Report the commit hash and confirm the push succeeded
