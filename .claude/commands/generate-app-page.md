@@ -7,11 +7,11 @@ Generate (or regenerate) the landing page, manual page, and catalog card for an 
 The app slug is provided as: $ARGUMENTS
 
 - If a slug is provided (e.g. `seo-redirect-manager`), generate for that app.
-- If no slug is provided, list all available apps by scanning `docs/*-app-docs/` folders and ask which one to generate.
+- If no slug is provided, list all available apps by scanning `docs/*-app-docs/` folders (symlinks, named `{app-slug}-app-docs`) and ask which one to generate.
 
 ## Source files
 
-All content comes from `docs/{app-slug}-app-docs/`:
+All content comes from `docs/{app-slug}-app-docs/` (a symlink to the app's manual folder in Google Drive):
 
 - **`about.md`** — App name, description, problem statement, features, pricing, FAQ, links. This is the primary source for the landing page and catalog card.
 - **`README.md`** — Manual table of contents with chapter list.
