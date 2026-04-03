@@ -1,0 +1,27 @@
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://apps.fv.dev/sitemap.xml
+
+# --- Content Rights Reservation (EU DSM Directive 2019/790 Art. 4) ---
+# search: yes
+# ai-input: no
+# ai-train: no
