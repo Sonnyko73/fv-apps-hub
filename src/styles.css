@@ -170,35 +170,6 @@
   line-height: 1.7;
 }
 
-/* Who It's For */
-.who-its-for {
-  padding: var(--fv-space-2xl) 0;
-  background: var(--fv-gray-50);
-}
-
-.who-its-for h2 {
-  margin-bottom: var(--fv-space-xl);
-  color: var(--fv-navy);
-}
-
-.who-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--fv-space-xl);
-}
-
-.who-item h3 {
-  color: var(--fv-green-dark);
-  margin-bottom: var(--fv-space-sm);
-  font-size: var(--fv-fs-md);
-}
-
-.who-item p {
-  color: var(--fv-gray-600);
-  font-size: var(--fv-fs-sm);
-  line-height: 1.7;
-}
-
 /* Responsive */
 @media (max-width: 640px) {
   .hero {
