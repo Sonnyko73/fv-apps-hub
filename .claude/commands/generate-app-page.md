@@ -264,7 +264,42 @@ A single-page user manual with sidebar navigation, built from chapter files.
 
 CSS for the manual layout: sidebar, content area, responsive behavior, code block styling, table styling. Use `--fv-*` tokens.
 
-### 5. Catalog card update: `src/index.html`
+### 5. Sitemap update: `src/sitemap.xml`
+
+Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`:
+
+```xml
+  <url>
+    <loc>https://apps.fv.dev/{app-slug}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://apps.fv.dev/{app-slug}/docs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+```
+
+If entries for this app already exist, update them (don't duplicate).
+
+### 6. llms.txt update: `src/llms.txt`
+
+Add a new section for the app. Insert before the `## Homepage` section:
+
+```
+## {App Name}
+https://apps.fv.dev/{app-slug}/
+{One-sentence description of what the app does and for which platform.}
+
+## {App Name} Documentation
+https://apps.fv.dev/{app-slug}/docs/
+{One-sentence description of what the docs cover.}
+```
+
+If entries for this app already exist, update them (don't duplicate).
+
+### 7. Catalog card update: `src/index.html`
 
 Read the current `src/index.html`. Look at the `<!-- App Grid -->` section.
 
@@ -308,7 +343,10 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
 1. List all files that were created or modified
 2. Run `npm run build` to verify the build succeeds
 3. If the build succeeds, deploy:
-   - Stage the generated/modified files with `git add`
-   - Commit with a message like `Add/update {App Name} app page`
+   - Stage all generated/modified files with `git add`, including:
+     `src/{app-slug}/index.html`, `src/{app-slug}/styles/landing.css`,
+     `src/{app-slug}/docs/index.html`, `src/{app-slug}/styles/docs.css`,
+     `src/index.html`, `src/sitemap.xml`, `src/llms.txt`
+   - Commit with a message like `feat: add {App Name} app page`
    - Push to `main` — this triggers GitHub Actions → Cloudflare Pages deployment
 4. Report the commit hash and confirm the push succeeded
