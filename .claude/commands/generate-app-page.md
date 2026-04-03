@@ -35,11 +35,21 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{App Name} for {Platform} — Forest Valley Apps</title>
   <meta name="description" content="{One-line description from about.md}">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://apps.fv.dev/{app-slug}/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
   <meta property="og:title" content="{Same as title}">
   <meta property="og:description" content="{Same as description}">
-  <meta property="og:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
   <meta property="og:url" content="https://apps.fv.dev/{app-slug}/">
-  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{Same as title}">
+  <meta name="twitter:description" content="{Same as description}">
+  <meta name="twitter:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
+  <!-- LCP preload — must be first link tag -->
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
   <link rel="stylesheet" href="/shared/styles/reset.css">
   <link rel="stylesheet" href="/shared/styles/variables.css">
@@ -47,12 +57,94 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
   <link rel="stylesheet" href="/shared/components/header.css">
   <link rel="stylesheet" href="/shared/components/footer.css">
   <link rel="stylesheet" href="/{app-slug}/styles/landing.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X5B0LXFJ37');
+  </script>
+  <!-- Schema: SoftwareApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "{App Name}",
+      "description": "{One-line description from about.md}",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://apps.fv.dev/{app-slug}/",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "name": "Free Plan"
+        },
+        {
+          "@type": "Offer",
+          "price": "{Pro plan monthly price from about.md, e.g. 9.99}",
+          "priceCurrency": "USD",
+          "name": "Pro Plan"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forest Valley",
+        "url": "https://fv.dev"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forest Valley Apps",
+          "item": "https://apps.fv.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{App Name}",
+          "item": "https://apps.fv.dev/{app-slug}/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "{FAQ question from about.md}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{FAQ answer from about.md}"
+          }
+        }
+        // ... one entry per FAQ item in about.md
+      ]
+    }
+  ]
+  </script>
 </head>
 ```
 
+**Notes on schema values:**
+- Fill `SoftwareApplication.offers` from "Plans & Pricing" in `about.md`. If free-only, use a single Offer with price "0". If freemium, include both Free and Pro offers with accurate prices.
+- Fill `FAQPage.mainEntity` with every Q&A from the "FAQ" section of `about.md`.
+- If the app is paid-only (no free tier), remove the Free plan Offer entry.
+
 **Required sections (in order):**
 
-1. **Header** — Use the shared header markup from `SHARED-STYLES.md`, but customize nav to include: Features (#features), Pricing (#pricing), Docs (link to `/{app-slug}/docs/`), and a CTA button linking to the platform install URL from `about.md`.
+1. **Header** — Use the shared header markup from `SHARED-STYLES.md`, but customize nav to include: Features (#features), Pricing (#pricing), Docs (link to `/{app-slug}/docs/`), and a CTA button linking to the platform install URL from `about.md`. The logo `<img>` must include explicit dimensions to prevent CLS:
+   ```html
+   <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341">
+   ```
 
 2. **Hero** — Headline (what the app does), subheadline (one paragraph expanding on it), primary CTA button ("Install Free on {Platform}" linking to install URL), secondary CTA ("View Documentation" linking to `/{app-slug}/docs/`).
 
@@ -86,6 +178,21 @@ A single-page user manual with sidebar navigation, built from chapter files.
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{App Name} — User Manual — Forest Valley Apps</title>
   <meta name="description" content="User manual for {App Name}. {Short description}.">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://apps.fv.dev/{app-slug}/docs/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{App Name} — User Manual — Forest Valley Apps">
+  <meta property="og:description" content="User manual for {App Name}. {Short description}.">
+  <meta property="og:url" content="https://apps.fv.dev/{app-slug}/docs/">
+  <meta property="og:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{App Name} — User Manual — Forest Valley Apps">
+  <meta name="twitter:description" content="User manual for {App Name}. {Short description}.">
+  <meta name="twitter:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
+  <!-- LCP preload — must be first link tag -->
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
   <link rel="stylesheet" href="/shared/styles/reset.css">
   <link rel="stylesheet" href="/shared/styles/variables.css">
@@ -93,12 +200,47 @@ A single-page user manual with sidebar navigation, built from chapter files.
   <link rel="stylesheet" href="/shared/components/header.css">
   <link rel="stylesheet" href="/shared/components/footer.css">
   <link rel="stylesheet" href="/{app-slug}/styles/docs.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X5B0LXFJ37');
+  </script>
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Forest Valley Apps",
+        "item": "https://apps.fv.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{App Name}",
+        "item": "https://apps.fv.dev/{app-slug}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "User Manual",
+        "item": "https://apps.fv.dev/{app-slug}/docs/"
+      }
+    ]
+  }
+  </script>
 </head>
 ```
 
 **Layout:**
 
-- Shared header (same as landing, but with "Back to {App Name}" link)
+- Shared header (same as landing, but with "Back to {App Name}" link). Logo `<img>` must include explicit dimensions: `width="616" height="341"`.
 - Two-column layout:
   - **Left sidebar** (sticky): Table of contents from `README.md`. Each chapter is a section. Sub-headings (`##`) within chapters become nested nav items. Link to anchors.
   - **Right content area**: All chapter content rendered as HTML. Each chapter is a `<section>` with an `id` matching the sidebar links. Convert markdown content to semantic HTML: headings, paragraphs, lists, code blocks, tables, bold, italics, links.

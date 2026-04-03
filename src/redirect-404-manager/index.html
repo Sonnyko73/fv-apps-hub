@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirect &amp; 404 Manager for Ecwid — Forest Valley Apps</title>
   <meta name="description" content="Custom URL paths and redirect management for embedded Ecwid stores. Fix broken links, detect 404 errors, and auto-redirect deleted products.">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://apps.fv.dev/redirect-404-manager/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Redirect &amp; 404 Manager for Ecwid — Forest Valley Apps">
   <meta property="og:description" content="Custom URL paths and redirect management for embedded Ecwid stores. Fix broken links, detect 404 errors, and auto-redirect deleted products.">
-  <meta property="og:image" content="https://apps.fv.dev/redirect-404-manager/assets/og.png">
   <meta property="og:url" content="https://apps.fv.dev/redirect-404-manager/">
-  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://apps.fv.dev/redirect-404-manager/assets/og.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Redirect &amp; 404 Manager for Ecwid — Forest Valley Apps">
+  <meta name="twitter:description" content="Custom URL paths and redirect management for embedded Ecwid stores. Fix broken links, detect 404 errors, and auto-redirect deleted products.">
+  <meta name="twitter:image" content="https://apps.fv.dev/redirect-404-manager/assets/og.png">
+  <!-- LCP preload -->
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
   <link rel="stylesheet" href="/shared/styles/reset.css">
   <link rel="stylesheet" href="/shared/styles/variables.css">
@@ -24,6 +34,95 @@
     gtag('js', new Date());
     gtag('config', 'G-X5B0LXFJ37');
   </script>
+  <!-- Schema: SoftwareApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Redirect & 404 Manager",
+      "description": "Custom URL paths and redirect management for embedded Ecwid stores. Fix broken links, detect 404 errors, and auto-redirect deleted products.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://apps.fv.dev/redirect-404-manager/",
+      "offers": {
+        "@type": "Offer",
+        "price": "5.99",
+        "priceCurrency": "USD",
+        "description": "14-day free trial — no payment required"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forest Valley",
+        "url": "https://fv.dev"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forest Valley Apps",
+          "item": "https://apps.fv.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Redirect & 404 Manager",
+          "item": "https://apps.fv.dev/redirect-404-manager/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is this different from Ecwid's custom slugs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ecwid's built-in custom slug feature only works on Instant Site — it's not available when your store is embedded on WordPress, Wix, Squarespace, or other platforms. This app lets you create custom URL paths that redirect to any product or category, on any platform. It's functionally the same as having custom slugs, but it works everywhere Ecwid can be embedded."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work with Ecwid Instant Site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This app is designed for embedded Ecwid stores (WordPress, Wix, Squarespace, Joomla, custom sites). On Instant Site, Ecwid controls the server and the app's redirect scripts cannot execute. Instant Site is not supported."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are these real HTTP 301 redirects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The app performs client-side redirects using JavaScript (Ecwid.openPage() or window.location.replace()). These are not true HTTP 301 status codes — the browser loads the page, the script runs, and then navigates to the new URL. Google does follow JavaScript redirects and transfers link equity, though true server-side 301s are considered stronger signals. For most Ecwid merchants on embedded stores, client-side redirects are the only practical option since you typically don't have direct access to your hosting server's redirect configuration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I import redirects from another tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can import redirects via CSV. The format is simple: source URL, destination URL."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Redirect rules are stored in an encrypted database and published to Ecwid Application Storage so the storefront script can read them without an extra network request. Data is never shared with third parties."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
 </head>
 <body>
 
@@ -31,7 +130,7 @@
   <header class="fv-header">
     <div class="fv-container">
       <a href="/" class="fv-header-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo">
+        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341">
         <span class="fv-header-title">Forest Valley Apps</span>
       </a>
       <nav class="fv-header-nav">
@@ -204,7 +303,7 @@
   <footer class="fv-footer">
     <div class="fv-container">
       <div class="fv-footer-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley">
+        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341">
         <span>Forest Valley</span>
       </div>
       <div class="fv-footer-links">
