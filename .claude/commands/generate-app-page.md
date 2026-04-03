@@ -158,7 +158,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 7. **FAQ** — From "FAQ" in `about.md`. Use CSS-only `<details><summary>` accordion. No JavaScript.
 
-8. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: Documentation (`/{app-slug}/docs/`), Support (email from about.md).
+8. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev.
 
 ### 2. Landing page styles: `src/{app-slug}/styles/landing.css`
 
@@ -277,7 +277,7 @@ Read the current `src/index.html`. Look at the `<!-- App Grid -->` section.
 <div class="fv-card app-card">
   <div class="app-card-header">
     <div class="app-card-icon">
-      <!-- SVG icon appropriate for the app -->
+      <img src="/shared/assets/{app-slug}-app-logo.png" alt="{App Name}" width="40" height="40">
     </div>
     <span class="app-card-badge badge-free">{Pricing badge: Free/Freemium/Paid}</span>
   </div>

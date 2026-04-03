@@ -1,0 +1,21 @@
+# Forest Valley Apps — AI Content Index
+
+> Forest Valley Rocky Inc. builds specialized apps for Ecwid merchants.
+> Primary product: Redirect & 404 Manager for embedded Ecwid stores ($5.99/mo).
+> All apps solve specific problems for Ecwid stores embedded on WordPress, Wix, Squarespace, Joomla, and custom sites.
+
+## Product Page
+https://apps.fv.dev/redirect-404-manager/
+Custom URL paths, 404 detection, and automatic redirects for embedded Ecwid stores (WordPress, Wix, Squarespace, Joomla). Fixes broken links when products are deleted, creates SEO-friendly URL paths without server access, and detects 404 errors in real time.
+
+## Documentation
+https://apps.fv.dev/redirect-404-manager/docs/
+Complete user manual: setup, managing redirects, bulk CSV import, wildcard rules, analytics, troubleshooting.
+
+## About
+https://apps.fv.dev/about/
+Developer background, company information, and founding context for Forest Valley Apps.
+
+## Homepage
+https://apps.fv.dev/
+Overview of all Forest Valley apps for Ecwid merchants.

@@ -1,0 +1,144 @@
+/* About page styles */
+
+.about-hero {
+  background: var(--fv-gray-50);
+  padding: var(--fv-space-3xl) 0;
+  border-bottom: 1px solid var(--fv-gray-200);
+}
+
+.about-hero h1 {
+  font-size: var(--fv-fs-3xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-md);
+}
+
+.about-lead {
+  font-size: var(--fv-fs-lg);
+  color: var(--fv-gray-600);
+  max-width: 640px;
+}
+
+/* Developer section */
+.about-developer {
+  padding: var(--fv-space-3xl) 0;
+  border-bottom: 1px solid var(--fv-gray-200);
+}
+
+.about-developer-content h2 {
+  font-size: var(--fv-fs-2xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-lg);
+}
+
+.about-developer-content p {
+  color: var(--fv-gray-700);
+  line-height: 1.7;
+  margin-bottom: var(--fv-space-md);
+  max-width: 720px;
+}
+
+.about-developer-links {
+  display: flex;
+  gap: var(--fv-space-sm);
+  margin-top: var(--fv-space-xl);
+  flex-wrap: wrap;
+}
+
+/* Company section */
+.about-company {
+  padding: var(--fv-space-3xl) 0;
+  background: var(--fv-gray-50);
+  border-bottom: 1px solid var(--fv-gray-200);
+}
+
+.about-company h2 {
+  font-size: var(--fv-fs-2xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-xl);
+}
+
+.about-company-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--fv-space-2xl);
+}
+
+.about-company-grid h3 {
+  font-size: var(--fv-fs-lg);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-md);
+}
+
+.about-company-grid p {
+  color: var(--fv-gray-700);
+  line-height: 1.7;
+  margin-bottom: var(--fv-space-md);
+}
+
+.about-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--fv-space-xs) var(--fv-space-lg);
+  align-items: baseline;
+}
+
+.about-details dt {
+  font-weight: 600;
+  color: var(--fv-navy);
+  white-space: nowrap;
+}
+
+.about-details dd {
+  color: var(--fv-gray-700);
+  line-height: 1.6;
+}
+
+.about-details a {
+  color: var(--fv-green);
+  text-decoration: none;
+}
+
+.about-details a:hover {
+  text-decoration: underline;
+}
+
+/* Focus section */
+.about-focus {
+  padding: var(--fv-space-3xl) 0;
+}
+
+.about-focus h2 {
+  font-size: var(--fv-fs-2xl);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-xl);
+}
+
+.about-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--fv-space-lg);
+}
+
+.about-focus-card {
+  padding: var(--fv-space-xl);
+}
+
+.about-focus-card h3 {
+  font-size: var(--fv-fs-md);
+  color: var(--fv-navy);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.about-focus-card p {
+  color: var(--fv-gray-700);
+  line-height: 1.6;
+  font-size: var(--fv-fs-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-company-grid,
+  .about-focus-grid {
+    grid-template-columns: 1fr;
+  }
+}
