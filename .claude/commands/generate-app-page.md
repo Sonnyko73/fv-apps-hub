@@ -264,7 +264,28 @@ A single-page user manual with sidebar navigation, built from chapter files.
 
 CSS for the manual layout: sidebar, content area, responsive behavior, code block styling, table styling. Use `--fv-*` tokens.
 
-### 5. Sitemap update: `src/sitemap.xml`
+### 5. OG image: `src/{app-slug}/assets/og.png`
+
+The OG image source of truth lives in `Shared-assets/apps-assets/{app-slug}-logo/og.png` (Google Drive, via the `Shared-assets` symlink).
+
+Before generating, check if it exists:
+
+```bash
+ls "Shared-assets/apps-assets/{app-slug}-logo/og.png"
+```
+
+- **If it exists** — copy it to the app's assets folder:
+  ```bash
+  mkdir -p src/{app-slug}/assets/
+  cp "Shared-assets/apps-assets/{app-slug}-logo/og.png" src/{app-slug}/assets/og.png
+  ```
+- **If it does not exist** — warn the user. The `og:image` meta tag in the generated page will return 404 until the image is created. The OG image should be 1200×630px and placed in `Shared-assets/apps-assets/{app-slug}-logo/og.png`.
+
+Also check that the main site OG exists: `Shared-assets-git/assets/og.png`. If missing, run `bash scripts/sync-assets.sh` to sync it from `Shared-assets/assets/og.png`.
+
+---
+
+### 6. Sitemap update: `src/sitemap.xml`
 
 Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`:
 
@@ -350,3 +371,12 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
    - Commit with a message like `feat: add {App Name} app page`
    - Push to `main` — this triggers GitHub Actions → Cloudflare Pages deployment
 4. Report the commit hash and confirm the push succeeded
+5. **Request GSC indexing** for the two new URLs (use Playwright or instruct the user):
+   - GSC → URL Inspection → `https://apps.fv.dev/{app-slug}/` → Request indexing
+   - GSC → URL Inspection → `https://apps.fv.dev/{app-slug}/docs/` → Request indexing
+
+## Infrastructure notes
+
+- **apps.fv.dev hosting:** Cloudflare Pages (project: `fv-apps-hub`, account: `ak@fv.dev`)
+- **Security headers** (HSTS, CSP, X-Frame-Options, etc.) are globally configured in `_headers` — do not add them to individual HTML pages and do not modify `_headers` when generating app pages
+- **fv.dev** is hosted on Tilda, DNS on Porkbun — unrelated to this repo
