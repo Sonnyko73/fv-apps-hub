@@ -38,6 +38,35 @@
   max-width: 760px;
 }
 
+/* Who We Build For */
+.audience {
+  padding: var(--fv-space-2xl) 0;
+  background: var(--fv-gray-50);
+}
+
+.audience h2 {
+  margin-bottom: var(--fv-space-xl);
+  color: var(--fv-navy);
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--fv-space-xl);
+}
+
+.audience-item h3 {
+  color: var(--fv-green);
+  font-size: var(--fv-fs-md);
+  margin-bottom: var(--fv-space-sm);
+}
+
+.audience-item p {
+  color: var(--fv-gray-600);
+  font-size: var(--fv-fs-sm);
+  line-height: 1.7;
+}
+
 /* App Grid */
 .apps {
   padding: var(--fv-space-2xl) 0;
@@ -181,6 +210,10 @@
   }
 
   .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-grid {
     grid-template-columns: 1fr;
   }
 

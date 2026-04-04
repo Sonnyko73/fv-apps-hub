@@ -214,7 +214,7 @@ Must include: developer name, brief bio referencing e-commerce experience, Linke
 
 ---
 
-### 12. Add customer testimonials to product page
+### 12. Add customer testimonials to product page ⏭ N/A — No reviews yet
 **Effort:** 2-4 hours (sourcing + implementation) | **Impact:** High
 
 Source from: Ecwid App Market reviews, support email exchanges (with permission), or direct outreach to trial users. Minimum 2-3 attributed quotes with name, store type, and specific outcome.
@@ -276,7 +276,7 @@ Deploy at `https://apps.fv.dev/llms.txt`. Content provided in FULL-AUDIT-REPORT.
 
 ---
 
-### 19. Add product screenshots to product page
+### 19. Add product screenshots to product page ✅ Done — Apr 4, 2026
 **Effort:** 2 hours | **Impact:** High (Experience E-E-A-T signal)
 
 3-5 screenshots of: dashboard overview, redirect rule editor, 404 detection list. These are required for the Experience dimension of E-E-A-T.
@@ -290,10 +290,10 @@ Add CNAME `www.apps.fv.dev → apps.fv.dev` in DNS, then 301-redirect in Cloudfl
 
 ---
 
-### 21. Expand homepage content to 600+ words
+### 21. Expand homepage content to 600+ words ✅ Done — Apr 4, 2026
 **Effort:** 2-3 hours | **Impact:** High (thin content risk mitigation)
 
-Current ~300 words falls below the 500-word floor. Replace generic copy with Ecwid-specific problem/solution narrative. Include "Ecwid" in the H1 or opening paragraph.
+Expanded What We Do (5 paragraphs), added "Who We Build For" section (4 audience segments: Ecwid merchants, agencies/devs, service businesses, merchants in migration), expanded all 3 Why items. Broad multi-platform framing, not Ecwid-only.
 
 ---
 
