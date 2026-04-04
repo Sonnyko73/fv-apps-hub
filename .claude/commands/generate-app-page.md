@@ -158,7 +158,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 7. **FAQ** — From "FAQ" in `about.md`. Use CSS-only `<details><summary>` accordion. No JavaScript.
 
-8. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev.
+8. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Blog (`/blog/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev.
 
 ### 2. Landing page styles: `src/{app-slug}/styles/landing.css`
 
@@ -264,28 +264,123 @@ A single-page user manual with sidebar navigation, built from chapter files.
 
 CSS for the manual layout: sidebar, content area, responsive behavior, code block styling, table styling. Use `--fv-*` tokens.
 
-### 5. OG image: `src/{app-slug}/assets/og.png`
+### 5. Discover app assets folder in Shared-assets
 
-The OG image source of truth lives in `Shared-assets/apps-assets/{app-slug}-logo/og.png` (Google Drive, via the `Shared-assets` symlink).
-
-Before generating, check if it exists:
+The `Shared-assets/apps-assets/` directory contains one folder per app, but the folder name does not always match the app slug (e.g. `seo-redirect-logo` for `redirect-404-manager`). Discover the correct folder by scanning for a `screenshots.md` file whose first line is `# screenshots: {app-slug}`:
 
 ```bash
-ls "Shared-assets/apps-assets/{app-slug}-logo/og.png"
+grep -rl "# screenshots: {app-slug}" Shared-assets/apps-assets/
 ```
 
-- **If it exists** — copy it to the app's assets folder:
+- **If found** — the folder containing that file is `{assets-folder}` (e.g. `Shared-assets/apps-assets/seo-redirect-logo/`).
+- **If not found** — fall back to `Shared-assets/apps-assets/{app-slug}-logo/`. If that also doesn't exist, warn the user that the Shared-assets folder could not be located.
+
+Store this path as `{assets-folder}` for use in all steps below.
+
+### 6. OG image: `src/{app-slug}/assets/og.png`
+
+The OG image source of truth is `{assets-folder}/og.png`.
+
+Check both existence and freshness:
+
+```bash
+# Check if source exists
+ls "{assets-folder}/og.png"
+
+# Compare modification times (source newer than dest = needs update)
+# Source newer if dest doesn't exist OR source mtime > dest mtime
+```
+
+- **If source exists and is newer than `src/{app-slug}/assets/og.png`** (or dest doesn't exist) — copy it:
   ```bash
   mkdir -p src/{app-slug}/assets/
-  cp "Shared-assets/apps-assets/{app-slug}-logo/og.png" src/{app-slug}/assets/og.png
+  cp "{assets-folder}/og.png" src/{app-slug}/assets/og.png
+  echo "OG image updated from source of truth."
   ```
-- **If it does not exist** — warn the user. The `og:image` meta tag in the generated page will return 404 until the image is created. The OG image should be 1200×630px and placed in `Shared-assets/apps-assets/{app-slug}-logo/og.png`.
+- **If source exists and dest is already up to date** — skip copy, note "OG image is current."
+- **If source does not exist** — warn the user. The `og:image` meta tag will return 404 until the image is created at `{assets-folder}/og.png` (1200×630px).
 
-Also check that the main site OG exists: `Shared-assets-git/assets/og.png`. If missing, run `bash scripts/sync-assets.sh` to sync it from `Shared-assets/assets/og.png`.
+Also check the main site OG freshness:
+
+```bash
+# Source: Shared-assets/assets/og.png → Dest: Shared-assets-git/assets/og.png
+```
+
+If source is newer than dest (or dest missing): run `bash scripts/sync-assets.sh` to sync it. If source is missing, warn the user.
+
+### 7. Screenshots: `src/{app-slug}/assets/screenshot-*.png`
+
+Screenshots source of truth: `{assets-folder}/screenshots.md` + the image files alongside it.
+
+**Parse `screenshots.md`:**
+
+```
+# screenshots: {app-slug}
+
+1. filename.png | Section Title | Caption text
+2. filename.png | Section Title | Caption text
+...
+```
+
+Ignore comment/instruction lines (those that don't start with a digit). Each numbered entry is: `N. filename | Title | Caption`.
+
+**Copy each screenshot** from `{assets-folder}/{filename}` to `src/{app-slug}/assets/{filename}`:
+
+```bash
+mkdir -p src/{app-slug}/assets/
+# For each file listed in screenshots.md:
+cp "{assets-folder}/{filename}" src/{app-slug}/assets/{filename}
+```
+
+Only copy files that are missing or where the source is newer than the dest. Report what was copied vs. skipped.
+
+If `screenshots.md` does not exist in `{assets-folder}`, skip the screenshots section entirely and note "No screenshots.md found — screenshots section omitted."
+
+**Add a Screenshots section to the landing page** — insert it between "How It Works" and "Pricing":
+
+```html
+<!-- Screenshots -->
+<section class="screenshots">
+  <div class="fv-container">
+    <h2>See It in Action</h2>
+    <div class="screenshots-list">
+      <!-- Repeat for each entry in screenshots.md, in order (N = 01, 02, 03...): -->
+      <figure class="screenshot-item">
+        <figcaption>
+          <span class="screenshot-num">0N</span>
+          <div class="screenshot-text">
+            <strong>{Title}</strong>
+            <span>{Caption}</span>
+          </div>
+        </figcaption>
+        <img src="/{app-slug}/assets/{filename}" alt="{Title}" width="1200" height="750" loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+```
+
+Note: figcaption goes **above** the image inside each `<figure>`. The number badge (`screenshot-num`) is zero-padded (01, 02, 03...).
+
+Add corresponding CSS to `src/{app-slug}/styles/landing.css`:
+
+```css
+/* Screenshots */
+.screenshots { padding: var(--fv-space-3xl) 0; background: var(--fv-gray-50); }
+.screenshots h2 { text-align: center; margin-bottom: var(--fv-space-2xl); }
+.screenshots-list { display: flex; flex-direction: column; gap: var(--fv-space-2xl); }
+.screenshot-item { margin: 0; background: var(--fv-white); border-radius: var(--fv-radius-lg); box-shadow: var(--fv-shadow); overflow: hidden; }
+.screenshot-item figcaption { display: flex; align-items: flex-start; gap: var(--fv-space-md); padding: var(--fv-space-md) var(--fv-space-lg); border-bottom: 1px solid var(--fv-gray-50); }
+.screenshot-num { font-size: var(--fv-fs-xs); font-weight: 700; color: var(--fv-green); background: #e8f8ef; border-radius: var(--fv-radius-sm); padding: 2px 8px; letter-spacing: 0.05em; flex-shrink: 0; margin-top: 2px; }
+.screenshot-text { display: flex; flex-direction: column; gap: 2px; }
+.screenshot-text strong { font-size: var(--fv-fs-base); color: var(--fv-navy); }
+.screenshot-text span { font-size: var(--fv-fs-sm); color: var(--fv-gray-800); line-height: 1.5; }
+.screenshot-item img { width: 100%; height: auto; display: block; }
+```
 
 ---
 
-### 6. Sitemap update: `src/sitemap.xml`
+### 8. Sitemap update: `src/sitemap.xml`
 
 Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`:
 
@@ -304,7 +399,7 @@ Add two new `<url>` entries for the app landing page and docs page. Insert befor
 
 If entries for this app already exist, update them (don't duplicate).
 
-### 6. llms.txt update: `src/llms.txt`
+### 9. llms.txt update: `src/llms.txt`
 
 Add a new section for the app. Insert before the `## Homepage` section:
 
@@ -320,7 +415,7 @@ https://apps.fv.dev/{app-slug}/docs/
 
 If entries for this app already exist, update them (don't duplicate).
 
-### 7. Catalog card update: `src/index.html`
+### 10. Catalog card update: `src/index.html`
 
 Read the current `src/index.html`. Look at the `<!-- App Grid -->` section.
 
