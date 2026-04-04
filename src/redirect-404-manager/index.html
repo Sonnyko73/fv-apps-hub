@@ -19,13 +19,9 @@
   <meta name="twitter:description" content="Custom URL paths and redirect management for embedded Ecwid stores. Fix broken links, detect 404 errors, and auto-redirect deleted products.">
   <meta name="twitter:image" content="https://apps.fv.dev/redirect-404-manager/assets/og.png">
   <!-- LCP preload -->
-  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
-  <link rel="stylesheet" href="/shared/styles/reset.css">
-  <link rel="stylesheet" href="/shared/styles/variables.css">
-  <link rel="stylesheet" href="/shared/styles/base.css">
-  <link rel="stylesheet" href="/shared/components/header.css">
-  <link rel="stylesheet" href="/shared/components/footer.css">
+  <link rel="stylesheet" href="/shared/shared.css">
   <link rel="stylesheet" href="/redirect-404-manager/styles/landing.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
   <script>
@@ -130,7 +126,7 @@
   <header class="fv-header">
     <div class="fv-container">
       <a href="/" class="fv-header-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
         <span class="fv-header-title">Forest Valley Apps</span>
       </a>
       <nav class="fv-header-nav">
@@ -342,7 +338,7 @@
   <footer class="fv-footer">
     <div class="fv-container">
       <div class="fv-footer-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>
         <span>Forest Valley</span>
       </div>
       <div class="fv-footer-links">

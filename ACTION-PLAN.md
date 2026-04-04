@@ -299,27 +299,25 @@ Expanded What We Do (5 paragraphs), added "Who We Build For" section (4 audience
 
 ## LOW — Backlog (Address Within 90 Days)
 
-### 22. Publish a targeted blog post / guide
+### 22. Publish a targeted blog post / guide ✅ Done — Apr 4, 2026
 **Best topic:** "How to Migrate Your Ecwid Store Without Losing SEO Rankings"
 **Why:** Directly targets the high-intent problem the product solves; creates first topical authority content; provides internal linking to product page.
 
-### 23. Create a YouTube walkthrough video
+### 23. Create a YouTube walkthrough video ⏭ N/A — No staff available
 **Best topic:** "How to Fix 404 Errors on Your Embedded Ecwid Store (WordPress, Wix, Squarespace)"
 **Why:** Strongest known correlator with AI citation (0.737). Screen recording + voiceover, 3-5 minutes.
 
-### 24. Consolidate CSS files (6 → 1-2)
-Combine the 5 shared CSS files into a single `shared.min.css`. Total uncompressed payload is only ~7KB — no reason to serve 6 separate files.
+### 24. Consolidate CSS files (5 → 1) ✅ Done — Apr 4, 2026
+Combined reset.css, variables.css, base.css, header.css, footer.css into single `shared.css`. All 10 HTML pages updated. 5 HTTP requests → 1.
 
-### 25. Convert fv-logo.png to WebP
-22.6KB PNG → ~10KB WebP. Use `<picture>` element with PNG fallback.
+### 25. Convert fv-logo.png to WebP ✅ Done — Apr 4, 2026
+23KB PNG → 5KB WebP (78% smaller). All pages use `<picture>` element with WebP source and PNG fallback. Preload hints updated to WebP.
 
-### 26. Implement IndexNow
-Generate a UUID key file, deploy at `/{key}.txt`, and POST to IndexNow API on any page publish/update.
+### 26. Implement IndexNow ✅ Done — Apr 4, 2026
+Key: `2d1a1675-0fbb-4a6c-a08d-919a3e8d3fc5`. Deployed at `/2d1a1675-0fbb-4a6c-a08d-919a3e8d3fc5.txt`. POST to IndexNow API on page publish/update still requires manual or scripted step.
 
-### 27. Add Permissions-Policy header
-```
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-```
+### 27. Add Permissions-Policy header ✅ Done — Apr 4, 2026
+Added `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()` to `_headers`.
 
 ### 28. Establish Ecwid community presence
 Answer threads on r/ecwid and the Ecwid Community Forum about 404 errors and redirect management. Genuine, helpful answers that mention the product in context.

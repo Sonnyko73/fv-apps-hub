@@ -4,30 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How to Migrate Your Ecwid Store Without Losing SEO Rankings — Forest Valley Apps</title>
-  <meta name="description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for keeping Google happy through an Ecwid store migration.">
+  <meta name="description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for auditing your URLs, building a redirect map, and keeping Google happy through the transition.">
   <!-- Canonical -->
   <link rel="canonical" href="https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/">
   <!-- Open Graph -->
   <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Forest Valley Apps">
   <meta property="og:title" content="How to Migrate Your Ecwid Store Without Losing SEO Rankings">
-  <meta property="og:description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for keeping Google happy through an Ecwid store migration.">
+  <meta property="og:description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for auditing your URLs, building a redirect map, and keeping Google happy through the transition.">
   <meta property="og:url" content="https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/">
-  <meta property="og:image" content="https://apps.fv.dev/shared/assets/og.png">
+  <meta property="og:image" content="https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/og.png">
   <meta property="article:published_time" content="2026-04-04">
+  <meta property="article:modified_time" content="2026-04-04">
   <meta property="article:author" content="Forest Valley">
+  <meta property="article:section" content="SEO">
+  <meta property="article:tag" content="SEO">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How to Migrate Your Ecwid Store Without Losing SEO Rankings">
-  <meta name="twitter:description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for keeping Google happy through an Ecwid store migration.">
-  <meta name="twitter:image" content="https://apps.fv.dev/shared/assets/og.png">
+  <meta name="twitter:description" content="Changing products, restructuring categories, or moving platforms puts your organic traffic at risk. Here's the exact process for auditing your URLs, building a redirect map, and keeping Google happy through the transition.">
+  <meta name="twitter:image" content="https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/og.png">
   <!-- LCP preload -->
-  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
-  <link rel="stylesheet" href="/shared/styles/reset.css">
-  <link rel="stylesheet" href="/shared/styles/variables.css">
-  <link rel="stylesheet" href="/shared/styles/base.css">
-  <link rel="stylesheet" href="/shared/components/header.css">
-  <link rel="stylesheet" href="/shared/components/footer.css">
+  <link rel="stylesheet" href="/shared/shared.css">
   <link rel="stylesheet" href="/blog/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
   <script>
@@ -47,6 +47,9 @@
       "datePublished": "2026-04-04",
       "dateModified": "2026-04-04",
       "url": "https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/",
+      "wordCount": 1048,
+      "articleSection": "SEO",
+      "image": "https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/og.png",
       "author": {
         "@type": "Organization",
         "name": "Forest Valley",
@@ -55,7 +58,13 @@
       "publisher": {
         "@type": "Organization",
         "name": "Forest Valley Apps",
-        "url": "https://apps.fv.dev/"
+        "url": "https://apps.fv.dev/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://apps.fv.dev/shared/assets/fv-logo.png",
+          "width": 616,
+          "height": 341
+        }
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -66,24 +75,9 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Forest Valley Apps",
-          "item": "https://apps.fv.dev/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Blog",
-          "item": "https://apps.fv.dev/blog/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "How to Migrate Your Ecwid Store Without Losing SEO Rankings",
-          "item": "https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/"
-        }
+        { "@type": "ListItem", "position": 1, "name": "Forest Valley Apps", "item": "https://apps.fv.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://apps.fv.dev/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How to Migrate Your Ecwid Store Without Losing SEO Rankings", "item": "https://apps.fv.dev/blog/how-to-migrate-ecwid-store-seo/" }
       ]
     }
   ]
@@ -95,7 +89,7 @@
   <header class="fv-header">
     <div class="fv-container">
       <a href="/" class="fv-header-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
         <span class="fv-header-title">Forest Valley Apps</span>
       </a>
       <nav class="fv-header-nav">
@@ -122,7 +116,7 @@
   </section>
 
   <!-- Article Body -->
-  <div class="article-body">
+  <article class="article-body">
     <div class="fv-container">
       <div class="article-content">
 
@@ -215,7 +209,7 @@
 
       </div>
     </div>
-  </div>
+  </article>
 
   <!-- CTA -->
   <section class="article-cta">
@@ -235,7 +229,7 @@
   <footer class="fv-footer">
     <div class="fv-container">
       <div class="fv-footer-brand">
-        <img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>
         <span>Forest Valley</span>
       </div>
       <div class="fv-footer-links">
