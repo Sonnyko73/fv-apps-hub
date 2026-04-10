@@ -31,6 +31,23 @@ function minifyCSS(css) {
     .trim();
 }
 
+function inlineStylesheets(html) {
+  return html.replace(/<link\b[^>]*rel="stylesheet"[^>]*>/g, (match) => {
+    const hrefMatch = match.match(/\bhref="([^"]+)"/);
+    if (!hrefMatch) return match;
+    const href = hrefMatch[1];
+    // Skip external URLs
+    if (/^https?:\/\//.test(href)) return match;
+    const cssPath = path.join(DIST, href);
+    if (!fs.existsSync(cssPath)) {
+      console.warn(`  WARN: CSS not found for inlining: ${href}`);
+      return match;
+    }
+    const css = minifyCSS(fs.readFileSync(cssPath, 'utf8'));
+    return `<style>${css}</style>`;
+  });
+}
+
 async function build() {
   // Clean dist
   if (fs.existsSync(DIST)) {
@@ -48,6 +65,17 @@ async function build() {
     const src = path.join(ROOT, file);
     if (fs.existsSync(src)) {
       fs.copyFileSync(src, path.join(DIST, file));
+    }
+  }
+
+  // Inline local stylesheets into HTML (eliminates render-blocking CSS requests)
+  const htmlFilesForInlining = findFiles(DIST, '.html');
+  for (const file of htmlFilesForInlining) {
+    const html = fs.readFileSync(file, 'utf8');
+    const inlined = inlineStylesheets(html);
+    if (inlined !== html) {
+      fs.writeFileSync(file, inlined);
+      console.log(`  CSS inlined: ${path.relative(DIST, file)}`);
     }
   }
 

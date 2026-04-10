@@ -49,13 +49,9 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
   <meta name="twitter:description" content="{Same as description}">
   <meta name="twitter:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
   <!-- LCP preload — must be first link tag -->
-  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
-  <link rel="stylesheet" href="/shared/styles/reset.css">
-  <link rel="stylesheet" href="/shared/styles/variables.css">
-  <link rel="stylesheet" href="/shared/styles/base.css">
-  <link rel="stylesheet" href="/shared/components/header.css">
-  <link rel="stylesheet" href="/shared/components/footer.css">
+  <link rel="stylesheet" href="/shared/shared.css">
   <link rel="stylesheet" href="/{app-slug}/styles/landing.css">
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
@@ -141,9 +137,9 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 **Required sections (in order):**
 
-1. **Header** — Use the shared header markup from `SHARED-STYLES.md`, but customize nav to include: Features (#features), Pricing (#pricing), Docs (link to `/{app-slug}/docs/`), and a CTA button linking to the platform install URL from `about.md`. The logo `<img>` must include explicit dimensions to prevent CLS:
+1. **Header** — Use the shared header markup from `SHARED-STYLES.md`, but customize nav to include: Features (#features), Pricing (#pricing), Docs (link to `/{app-slug}/docs/`), and a CTA button linking to the platform install URL from `about.md`. The logo must use a `<picture>` element with WebP source and PNG fallback, with explicit dimensions to prevent CLS:
    ```html
-   <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341">
+   <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
    ```
 
 2. **Hero** — Headline (what the app does), subheadline (one paragraph expanding on it), primary CTA button ("Install Free on {Platform}" linking to install URL), secondary CTA ("View Documentation" linking to `/{app-slug}/docs/`).
@@ -158,7 +154,15 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 7. **FAQ** — From "FAQ" in `about.md`. Use CSS-only `<details><summary>` accordion. No JavaScript.
 
-8. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Blog (`/blog/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev.
+8. **Last Updated** — A centered line just before the footer showing the generation date:
+   ```html
+   <div class="fv-container last-updated">
+     <p>Last updated: {Month D, YYYY}</p>
+   </div>
+   ```
+   Use today's date at generation time. This signals content freshness to AI engines.
+
+9. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Blog (`/blog/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev. Footer logo must also use `<picture>` with WebP: `<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>`.
 
 ### 2. Landing page styles: `src/{app-slug}/styles/landing.css`
 
@@ -192,13 +196,9 @@ A single-page user manual with sidebar navigation, built from chapter files.
   <meta name="twitter:description" content="User manual for {App Name}. {Short description}.">
   <meta name="twitter:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
   <!-- LCP preload — must be first link tag -->
-  <link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" href="/shared/assets/favicon.ico">
-  <link rel="stylesheet" href="/shared/styles/reset.css">
-  <link rel="stylesheet" href="/shared/styles/variables.css">
-  <link rel="stylesheet" href="/shared/styles/base.css">
-  <link rel="stylesheet" href="/shared/components/header.css">
-  <link rel="stylesheet" href="/shared/components/footer.css">
+  <link rel="stylesheet" href="/shared/shared.css">
   <link rel="stylesheet" href="/{app-slug}/styles/docs.css">
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
@@ -240,10 +240,14 @@ A single-page user manual with sidebar navigation, built from chapter files.
 
 **Layout:**
 
-- Shared header (same as landing, but with "Back to {App Name}" link). Logo `<img>` must include explicit dimensions: `width="616" height="341"`.
+- Shared header (same as landing, but with "Back to {App Name}" link). Logo must use `<picture>` with WebP source and PNG fallback: `<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>`.
 - Two-column layout:
   - **Left sidebar** (sticky): Table of contents from `README.md`. Each chapter is a section. Sub-headings (`##`) within chapters become nested nav items. Link to anchors.
-  - **Right content area**: All chapter content rendered as HTML. Each chapter is a `<section>` with an `id` matching the sidebar links. Convert markdown content to semantic HTML: headings, paragraphs, lists, code blocks, tables, bold, italics, links.
+  - **Right content area**: All chapter content rendered as HTML. Each chapter is a `<section>` with an `id` matching the sidebar links. Convert markdown content to semantic HTML: headings, paragraphs, lists, code blocks, tables, bold, italics, links. Add a "Last updated" line right after the intro paragraph:
+    ```html
+    <p class="last-updated">Last updated: {Month D, YYYY}</p>
+    ```
+    Use today's date at generation time.
 - Shared footer
 - On mobile (below 768px): sidebar collapses above content or becomes a top nav
 
@@ -262,7 +266,11 @@ A single-page user manual with sidebar navigation, built from chapter files.
 
 ### 4. Manual page styles: `src/{app-slug}/styles/docs.css`
 
-CSS for the manual layout: sidebar, content area, responsive behavior, code block styling, table styling. Use `--fv-*` tokens.
+CSS for the manual layout: sidebar, content area, responsive behavior, code block styling, table styling. Use `--fv-*` tokens. Include a `.last-updated` rule:
+
+```css
+.last-updated { color: var(--fv-gray-500); font-size: var(--fv-fs-sm); margin-bottom: var(--fv-space-lg); }
+```
 
 ### 5. Discover app assets folder in Shared-assets
 
@@ -376,24 +384,26 @@ Add corresponding CSS to `src/{app-slug}/styles/landing.css`:
 .screenshot-text strong { font-size: var(--fv-fs-base); color: var(--fv-navy); }
 .screenshot-text span { font-size: var(--fv-fs-sm); color: var(--fv-gray-800); line-height: 1.5; }
 .screenshot-item img { width: 100%; height: auto; display: block; }
+
+/* Last Updated */
+.last-updated { text-align: center; padding: var(--fv-space-lg) 0; }
+.last-updated p { color: var(--fv-gray-500); font-size: var(--fv-fs-sm); margin: 0; }
 ```
 
 ---
 
 ### 8. Sitemap update: `src/sitemap.xml`
 
-Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`:
+Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`. Use today's date as `<lastmod>`. Do not add `<priority>` or `<changefreq>` — Google ignores these tags:
 
 ```xml
   <url>
     <loc>https://apps.fv.dev/{app-slug}/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>{YYYY-MM-DD}</lastmod>
   </url>
   <url>
     <loc>https://apps.fv.dev/{app-slug}/docs/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>{YYYY-MM-DD}</lastmod>
   </url>
 ```
 
@@ -473,5 +483,6 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
 ## Infrastructure notes
 
 - **apps.fv.dev hosting:** Cloudflare Pages (project: `fv-apps-hub`, account: `ak@fv.dev`)
-- **Security headers** (HSTS, CSP, X-Frame-Options, etc.) are globally configured in `_headers` — do not add them to individual HTML pages and do not modify `_headers` when generating app pages
+- **Security headers** are globally configured in `_headers` for `/*` — do not add them to individual HTML pages. Current headers: `Strict-Transport-Security` (preload), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, and a CSP that allows: self, unsafe-inline styles, https images, GTM scripts, Google Analytics connects. If the new app page loads any external resource not covered by this CSP (e.g. a new CDN font, external iframe, third-party script), update `_headers` CSP accordingly — otherwise the resource will be blocked in production.
+- **CSS inlining** is handled automatically by `scripts/build.js` at build time — always use `<link rel="stylesheet">` in source HTML. Never manually inline CSS in source files. The build replaces every local `<link rel="stylesheet">` with a `<style>` block, eliminating render-blocking requests in production.
 - **fv.dev** is hosted on Tilda, DNS on Porkbun — unrelated to this repo

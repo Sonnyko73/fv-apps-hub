@@ -383,3 +383,14 @@
   height: auto;
   display: block;
 }
+
+/* Last Updated */
+.last-updated {
+  text-align: center;
+  padding: var(--fv-space-lg) 0;
+}
+.last-updated p {
+  color: var(--fv-gray-500);
+  font-size: var(--fv-fs-sm);
+  margin: 0;
+}

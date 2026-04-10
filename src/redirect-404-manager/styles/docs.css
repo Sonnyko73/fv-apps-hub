@@ -218,6 +218,13 @@
   color: var(--fv-navy);
 }
 
+/* Last Updated */
+.last-updated {
+  color: var(--fv-gray-500);
+  font-size: var(--fv-fs-sm);
+  margin-bottom: var(--fv-space-lg);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .docs-layout {

@@ -25,6 +25,11 @@ fv-apps-hub/
 │   │   └── index.html       # Terms of Service page
 │   ├── rdpp/
 │   │   └── index.html       # Regional Data Protection Policy page
+│   ├── blog/
+│   │   ├── index.html       # Blog listing page (generated from blog/INDEX.md)
+│   │   ├── styles.css       # Blog styles (shared by listing + articles, manually maintained)
+│   │   └── {slug}/
+│   │       └── index.html   # Article page (generated from blog/YYMMDD-slug.md)
 │   └── {app-slug}/         # App pages (generated from docs/)
 │       ├── index.html       # Landing page
 │       ├── docs/
@@ -32,6 +37,10 @@ fv-apps-hub/
 │       └── styles/
 │           ├── landing.css  # Landing page styles
 │           └── docs.css     # Manual page styles
+├── blog/                    # Blog posts (source of truth)
+│   ├── CLAUDE.md            # Blog format documentation
+│   ├── INDEX.md             # Post registry (date, slug, title, tag, excerpt)
+│   └── YYMMDD-slug.md      # Post source files
 ├── docs/                    # App manuals (source of truth)
 │   └── {app-slug}-app-docs/
 │       ├── about.md         # App info for catalog card + landing page
@@ -43,17 +52,12 @@ fv-apps-hub/
 │   └── FVR RDPP.md                # Source for src/rdpp/index.html
 ├── Shared-assets -> ../Shared-assets  # Symlink to Google Drive source (READ-ONLY, gitignored, local only)
 ├── Shared-assets-git/             # Committed copy of shared design system (synced by sync-assets.sh)
-│   ├── styles/              # Hosted at apps.fv.dev/shared/styles/
-│   │   ├── reset.css        # Minimal CSS reset
-│   │   ├── variables.css    # Brand tokens (design system)
-│   │   └── base.css         # Typography, containers, utilities
+│   ├── shared.css           # Consolidated shared CSS (reset + tokens + base + header + footer)
 │   ├── assets/              # Committed copies of shared assets
-│   │   ├── fv-logo.png         # Primary logo (used in headers/footers)
+│   │   ├── fv-logo.png         # Primary logo PNG (fallback)
+│   │   ├── fv-logo.webp        # Primary logo WebP (preferred, 78% smaller)
 │   │   ├── favicon.ico
 │   │   └── {app-slug}-app-logo.png  # App icons (referenced as /shared/assets/)
-│   └── components/
-│       ├── header.css       # Shared header styles
-│       └── footer.css       # Shared footer styles
 ├── scripts/
 │   ├── build.js
 │   └── sync-assets.sh       # Syncs from Google Drive source → Shared-assets-git/
@@ -71,17 +75,23 @@ fv-apps-hub/
 - `apps.fv.dev/rdpp/` -- Regional Data Protection Policy
 - `apps.fv.dev/shared/styles/` -- Shared CSS (built from `Shared-assets/styles/`)
 - `apps.fv.dev/shared/assets/` -- Shared assets (built from `Shared-assets/assets/`)
+- `apps.fv.dev/blog/` -- Blog listing page
+- `apps.fv.dev/blog/{slug}/` -- Blog article
 - `apps.fv.dev/{app-slug}/` -- App landing page
 - `apps.fv.dev/{app-slug}/docs/` -- App user manual
 
 ## Shared Design System
 
-App pages consume shared styles via `<link>` tags with relative paths:
+App pages consume the consolidated shared stylesheet via a single `<link>` tag:
 
 ```html
-<link rel="stylesheet" href="/shared/styles/reset.css">
-<link rel="stylesheet" href="/shared/styles/variables.css">
-<link rel="stylesheet" href="/shared/styles/base.css">
+<link rel="stylesheet" href="/shared/shared.css">
+```
+
+The logo uses `<picture>` with WebP source and PNG fallback:
+
+```html
+<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
 ```
 
 See `SHARED-STYLES.md` for the full reference (tokens, utility classes, header/footer markup, page template). See `SITE_SPEC.md` for app page structure and generation rules.
@@ -147,6 +157,28 @@ App data is hardcoded in HTML. When adding a new app, manually add a card. App i
 - `npm run build` -- Build to `dist/` (copies src + shared, minifies HTML/CSS)
 - `npm run dev` -- Serve `dist/` locally via `npx serve`
 
+## Google API Credentials (SEO Monitoring)
+
+Credentials are configured at **Tier 2** (API key + service account + GA4) — no setup needed.
+
+| Config | Location |
+|--------|----------|
+| Config file | `~/.config/claude-seo/google-api.json` |
+| Service account | `~/.config/claude-seo/service_account.json` |
+| GSC property | `sc-domain:apps.fv.dev` |
+| GA4 property ID | `properties/531155258` (Data API — for reading analytics) |
+
+**GA4 Measurement ID** (`G-XXXXXXXXXX` for the client-side tracking snippet) is separate — find it in GA4 → Admin → Data streams → apps.fv.dev.
+
+Scripts live at `~/.claude/skills/seo/scripts/` — do not call directly. Use skill commands:
+
+```
+/seo google gsc sc-domain:apps.fv.dev    # GSC search analytics + URL inspection
+/seo google pagespeed https://apps.fv.dev # CrUX + PageSpeed
+/seo google ga4                           # GA4 organic traffic
+python ~/.claude/skills/seo/scripts/google_auth.py --check  # Verify credentials
+```
+
 ## App Docs (`docs/`)
 
 Each app has a manual in `docs/{app-slug}-app-docs/` with:
@@ -156,6 +188,31 @@ Each app has a manual in `docs/{app-slug}-app-docs/` with:
 - **`01-*.md`, `02-*.md`, ...** -- Manual chapters (getting started, features, troubleshooting, etc.).
 
 The docs folder is the **source of truth** for all app content on the site. App pages and catalog cards should be built from these docs.
+
+## Blog (`blog/`)
+
+Blog post source markdown lives in `blog/` at the project root. This is the source of truth for all blog content.
+
+- **Naming:** `YYMMDD-slug.md` (e.g. `260404-how-to-migrate-ecwid-store-seo.md`)
+- **Format:** YAML frontmatter (title, slug, date, tag, read_time, excerpt, optional cta) + markdown body
+- **Index:** `blog/INDEX.md` tracks all published posts with metadata (one line per post, newest first)
+- **Docs:** `blog/CLAUDE.md` has the full format specification
+
+Generated HTML goes to `src/blog/{slug}/index.html`. The listing page at `src/blog/index.html` is rebuilt on each publish. Blog CSS at `src/blog/styles.css` is manually maintained (not generated).
+
+### Blog commands
+
+- `/add-post {path-to-any.md}` -- Ingest any markdown file into `blog/`. Renames to `YYMMDD-slug.md`, adds/completes YAML frontmatter, updates INDEX.md. Does not generate HTML.
+- `/publish-blog` -- Auto-detects new or updated posts (compares blog source mtime vs generated HTML mtime) and generates HTML for them. Updates listing page, sitemap, llms.txt.
+- `/publish-blog {YYMMDD-slug}` -- Publish only a specific post.
+
+### Typical workflow
+
+1. Write or receive a post `.md` file (anywhere on disk)
+2. Run `/add-post /path/to/draft.md` to ingest it into `blog/`
+3. Run `/publish-blog` to generate HTML for all new/updated posts
+4. Run `npm run build` to verify
+5. Push to `main`
 
 ## Legal Pages (`src/privacy/`, `src/terms/`, `src/rdpp/`)
 

@@ -67,14 +67,10 @@ Store the resolved URL as `{og_image_url}` for use in OG and Twitter meta tags b
 <meta name="twitter:description" content="{excerpt}">
 <meta name="twitter:image" content="{og_image_url}">
 <!-- LCP preload -->
-<link rel="preload" as="image" href="/shared/assets/fv-logo.png" fetchpriority="high">
+<link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
 <link rel="icon" href="/shared/assets/favicon.ico">
 <!-- CSS (shared + blog) -->
-<link rel="stylesheet" href="/shared/styles/reset.css">
-<link rel="stylesheet" href="/shared/styles/variables.css">
-<link rel="stylesheet" href="/shared/styles/base.css">
-<link rel="stylesheet" href="/shared/components/header.css">
-<link rel="stylesheet" href="/shared/components/footer.css">
+<link rel="stylesheet" href="/shared/shared.css">
 <link rel="stylesheet" href="/blog/styles.css">
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
@@ -134,7 +130,7 @@ Store the resolved URL as `{og_image_url}` for use in OG and Twitter meta tags b
 
 **Body sections (in order):**
 
-1. **Header** — shared header. Nav links: `Blog` → `/blog/`, `fv.dev` → `https://fv.dev`. Logo `<img>` must include explicit dimensions: `width="616" height="341"`.
+1. **Header** — shared header. Nav links: `Blog` → `/blog/`, `fv.dev` → `https://fv.dev`. Logo must use `<picture>` with WebP source and PNG fallback: `<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>`.
 
 2. **Article hero** — back link, meta (tag + formatted date + read time), h1, intro paragraph.
    ```html
@@ -179,7 +175,7 @@ Store the resolved URL as `{og_image_url}` for use in OG and Twitter meta tags b
    </section>
    ```
 
-5. **Footer** — shared footer. Links: All Apps, Blog, About, Terms of Service, Privacy Policy, Regional Data Protection, info@fv.dev, fv.dev. Logo `<img>` must include `width="616" height="341"`.
+5. **Footer** — shared footer. Links: All Apps, Blog, About, Terms of Service, Privacy Policy, Regional Data Protection, info@fv.dev, fv.dev. Footer logo must use `<picture>` with WebP: `<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>`.
 
 **Content rendering rules (markdown → HTML):**
 

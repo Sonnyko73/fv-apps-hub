@@ -16,6 +16,10 @@ Complete user manual: setup, managing redirects, bulk CSV import, wildcard rules
 https://apps.fv.dev/about/
 Developer background, company information, and founding context for Forest Valley Apps.
 
+## Blog: How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO
+https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/
+Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition.
+
 ## Homepage
 https://apps.fv.dev/
 Overview of all Forest Valley apps for Ecwid merchants.

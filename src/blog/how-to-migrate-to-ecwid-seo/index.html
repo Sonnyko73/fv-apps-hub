@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO — Forest Valley Apps</title>
+  <meta name="description" content="Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition.">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Forest Valley Apps">
+  <meta property="og:title" content="How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO">
+  <meta property="og:description" content="Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition.">
+  <meta property="og:url" content="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/">
+  <meta property="og:image" content="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/og.png">
+  <meta property="article:published_time" content="2026-04-04">
+  <meta property="article:modified_time" content="2026-04-04">
+  <meta property="article:author" content="Forest Valley">
+  <meta property="article:section" content="SEO">
+  <meta property="article:tag" content="SEO">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO">
+  <meta name="twitter:description" content="Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition.">
+  <meta name="twitter:image" content="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/og.png">
+  <!-- LCP preload -->
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
+  <link rel="icon" href="/shared/assets/favicon.ico">
+  <!-- CSS (shared + blog) -->
+  <link rel="stylesheet" href="/shared/shared.css">
+  <link rel="stylesheet" href="/blog/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X5B0LXFJ37');
+  </script>
+  <!-- Schema: BlogPosting + BreadcrumbList -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO",
+      "description": "Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition.",
+      "datePublished": "2026-04-04",
+      "dateModified": "2026-04-04",
+      "url": "https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/",
+      "wordCount": 2564,
+      "articleSection": "SEO",
+      "image": "https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/og.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Forest Valley",
+        "url": "https://fv.dev"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forest Valley Apps",
+        "url": "https://apps.fv.dev/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://apps.fv.dev/shared/assets/fv-logo.png",
+          "width": 616,
+          "height": 341
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Forest Valley Apps", "item": "https://apps.fv.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://apps.fv.dev/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO", "item": "https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo/" }
+      ]
+    }
+  ]
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="fv-header">
+    <div class="fv-container">
+      <a href="/" class="fv-header-brand">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
+        <span class="fv-header-title">Forest Valley Apps</span>
+      </a>
+      <nav class="fv-header-nav">
+        <a href="/blog/">Blog</a>
+        <a href="https://fv.dev">fv.dev</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="fv-container">
+      <div class="article-back">
+        <a href="/blog/">&larr; Back to Blog</a>
+      </div>
+      <div class="article-meta">
+        <span class="blog-tag">SEO</span>
+        <span class="blog-date">April 4, 2026</span>
+        <span class="blog-read-time">12 min read</span>
+      </div>
+      <h1>How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO</h1>
+      <p class="article-intro">When you migrate from Shopify, WooCommerce, BigCommerce, or another e-commerce platform to Ecwid, every product and category URL changes at once. If you had 500 indexed product pages, you now have 500 potential 404 errors on day one. This guide covers the exact process for preserving your organic rankings through the switch.</p>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="fv-container">
+      <div class="article-content">
+
+        <h2>Why platform migrations break your SEO</h2>
+
+        <p>When you switch platforms, every URL changes. Google sees the old URLs returning 404 errors while new URLs appear with no history, no backlinks, and no authority. Rankings you built for the old URLs don't transfer on their own.</p>
+
+        <p>Redirects are how you bridge that gap. Google follows the trail from old URL to new URL and carries the ranking signals over. Whether you keep your rankings or lose them comes down to whether those redirects exist before you flip the switch.</p>
+
+        <h3>The embedded-store problem</h3>
+
+        <p>Most SEO migration guides assume you control your web server. With Ecwid, you usually don't. Ecwid is typically embedded in a third-party website (WordPress, Wix, Squarespace, Joomla), so you can't add a line to <code>.htaccess</code> or configure Nginx rules. The hosting platform controls the server, and Ecwid controls the product URLs.</p>
+
+        <p>Standard migration advice ("set up 301 redirects on your server") doesn't work here. You need an approach built for the embedded store reality. More on your options in Step 4.</p>
+
+        <h2>Step 1: Audit your old platform's URLs</h2>
+
+        <p>The most common migration mistake is switching before documenting what exists. Once you point your domain to the new site, the original URLs are gone. Capture them first.</p>
+
+        <h3>Export from your current platform</h3>
+
+        <ul>
+          <li><strong>Shopify:</strong> Export your product CSV (which includes handles/URLs), and crawl your live site for category and content page URLs.</li>
+          <li><strong>WooCommerce:</strong> Export products via WooCommerce's built-in CSV export, and use a crawler on your WordPress site.</li>
+          <li><strong>BigCommerce:</strong> Export your product catalog, and crawl the live site for all indexed URLs.</li>
+        </ul>
+
+        <h3>Export from Google Search Console</h3>
+
+        <p>Go to <strong>Performance &gt; Pages</strong> and export all URLs with impressions in the last 12 months. Your platform export might miss pages that aren't products (blog posts, custom pages, informational content) that still drive organic traffic. GSC catches everything Google knows about.</p>
+
+        <p>Combine both exports into a single spreadsheet. This becomes your redirect map.</p>
+
+        <h2>Step 2: Understand Ecwid's URL system</h2>
+
+        <p>Before you build your redirect map, you need to know what the new URLs will look like.</p>
+
+        <p>Ecwid generates product and category URLs based on product names and appends product IDs (e.g., <code>/summer-linen-dress-p12345</code>). These will look nothing like your old platform's URLs. Shopify uses <code>/products/summer-linen-dress</code>, WooCommerce uses <code>/product/summer-linen-dress</code>, BigCommerce uses its own structure. Ecwid's format differs from all of them.</p>
+
+        <h3>Check your URL format</h3>
+
+        <p>Ecwid stores use different URL formats depending on your website setup:</p>
+
+        <ul>
+          <li><strong>Default (hashbang) URLs</strong>, e.g., <code>example.com/store/#!/product-name/p/123456</code>. Long and unfriendly for SEO, but resilient because the product ID is in the URL.</li>
+          <li><strong>Clean URLs</strong>, e.g., <code>example.com/store/product-name</code>. Shorter and better for SEO. Requires server rewrite rules on your hosting platform. On Ecwid's Instant Site, Clean URLs are enabled by default.</li>
+          <li><strong>Clean URLs + Custom Slugs</strong>, e.g., <code>example.com/store/best-pizza</code>. Available on Business and Unlimited plans when Clean URLs are enabled. Gives you full control over the URL path.</li>
+        </ul>
+
+        <p>If your new hosting setup supports Clean URLs, configure the server rewrite rules <em>before</em> you start mapping URLs. The format you choose determines what your new URLs will look like, and you need to know that before building the redirect map.</p>
+
+        <h3>When Clean URLs aren't possible</h3>
+
+        <p>On some platforms (Webflow, Sitejet, and certain managed hosting environments), you can't access server configuration files, so server-level rewrite rules aren't an option. Ecwid falls back to query-based clean URLs in those cases (e.g., <code>example.com/store?store-page=Product-p123</code>). These are functional but less effective for SEO than true clean URLs, and Ecwid's own documentation says as much.</p>
+
+        <p>If you're on one of these platforms, your redirect map destinations will use this query-based format. Factor that in before you start building the map, and know that your SEO ceiling is lower from the start compared to a setup with proper clean URLs.</p>
+
+        <h2>Step 3: Build a redirect map</h2>
+
+        <p>A redirect map is a two-column spreadsheet: old URL on the left, new Ecwid URL on the right. Every indexed URL from your old platform needs a row.</p>
+
+        <h3>The URL generation catch</h3>
+
+        <p>Most migration guides skip this friction point: Ecwid auto-generates product URLs when you import your catalog, and you can't pre-define slugs during the import process. You have to import your products first, wait for Ecwid to generate the URLs, then export the catalog again to discover what URLs it created. Only then can you start matching old URLs to new ones.</p>
+
+        <p>On Business and Unlimited plans, you can edit slugs after import using Custom Slugs. But you're still doing it product by product, after the fact. With a large catalog, plan for this step to take longer than you'd expect.</p>
+
+        <p>After importing your product catalog and exporting the new URLs from your Ecwid admin, match each old URL to its Ecwid equivalent:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Old URL (Shopify)</th>
+              <th>New URL (Ecwid)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/products/summer-linen-dress</code></td>
+              <td><code>/store/summer-linen-dress-p12345</code></td>
+            </tr>
+            <tr>
+              <td><code>/collections/womens-clothing</code></td>
+              <td><code>/store/womens-clothing</code></td>
+            </tr>
+            <tr>
+              <td><code>/products/vintage-boots</code></td>
+              <td><em>(discontinued, redirect to)</em> <code>/store/footwear</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Sort by traffic</h3>
+
+        <p>Sort your redirect map by traffic volume (impressions from GSC). Do the high-traffic URLs first. A missed redirect on a page that gets 5,000 impressions a month costs you far more than one on a page that gets 20.</p>
+
+        <h3>Be specific with destinations</h3>
+
+        <p>Redirecting everything to the homepage is better than leaving 404s, but it's a weak signal to Google compared to redirecting to a related page. If you discontinued a winter boots product, redirecting to your footwear category is far stronger than redirecting to <code>/</code>.</p>
+
+        <p>For each old URL, decide:</p>
+
+        <ul>
+          <li><strong>Direct match:</strong> the product exists in Ecwid. Redirect to its new URL.</li>
+          <li><strong>Category fallback:</strong> the product was discontinued but a relevant category exists. Redirect there.</li>
+          <li><strong>Homepage fallback:</strong> no relevant destination exists. Redirect to the homepage rather than leaving a 404.</li>
+        </ul>
+
+        <h2>Step 4: Set up redirects before going live</h2>
+
+        <p>Redirects must be in place <em>before</em> you point your domain to the new Ecwid-embedded site, not after you notice traffic dropped.</p>
+
+        <h3>Know what Ecwid offers natively</h3>
+
+        <p>Ecwid has a built-in 301 redirect manager, but with hard constraints. It requires the Business plan ($29.90/month) or higher, works only on Ecwid Instant Site (New-Gen version), and caps manual creation at 10 redirects before requiring CSV import.</p>
+
+        <p>For Instant Site merchants on the Business plan or above, the native tool covers the basics: pointing old URLs to new ones, redirecting discontinued product pages, and setting up vanity URLs for marketing campaigns. When you change a custom URL slug, Ecwid auto-redirects the old slug to the new one.</p>
+
+        <p>The native tool does not support wildcard or regex redirects (every redirect must be individually specified), 404 monitoring, broken link detection, or redirect chain validation. For Instant Site merchants with straightforward needs, it may be enough. For everyone else, and for any migration involving pattern-based URL changes, you'll need one of the approaches below.</p>
+
+        <h3>Choose your redirect implementation</h3>
+
+        <p>Most embedded Ecwid stores have several options depending on the hosting setup.</p>
+
+        <p><strong>Option A: Server-level redirects (WordPress, self-hosted sites)</strong></p>
+
+        <p>If your store is embedded in WordPress, you can configure redirects via a plugin like Redirection (2M+ active installs), Rank Math's redirect module, or Yoast SEO Premium. If you have direct server access, <code>.htaccess</code> rules or Nginx configuration work too.</p>
+
+        <p>One distinction trips up many merchants here: server-level rules for Ecwid stores must <strong>rewrite</strong>, not <strong>redirect</strong>, the store subpaths. Ecwid's own developer documentation warns: <em>"Do not redirect the 'store/anything/' to '/store'. The rewrite rules should only map one URL to another, without redirection."</em></p>
+
+        <p>Ecwid's storefront is a JavaScript widget that renders within a single host page. When a visitor goes to <code>/store/Blue-Flannel-p69981208</code>, no corresponding file or directory exists on the server. Ecwid's JavaScript intercepts the URL and renders the correct product. If your server 301-redirects all <code>/store/*</code> paths to <code>/store</code> instead of silently serving the store page, Ecwid's JS can't resolve the individual product page. Google won't index your products, and visitors hitting direct product links will see the wrong content.</p>
+
+        <p>The WordPress Ecwid plugin handles this rewriting automatically. But if you're adding redirect rules on top of that for migration purposes, make sure those rules redirect old non-Ecwid paths to the correct new Ecwid URLs. Don't let them interfere with the rewrite rules that make Ecwid's clean URLs work.</p>
+
+        <p>One more limitation: WordPress redirect plugins work at the WordPress routing level. They can redirect an old static URL like <code>/old-product-info</code> to your Ecwid store page at <code>/store</code>. But redirecting between specific Ecwid product URLs within the store is unreliable, because Ecwid products aren't separate WordPress pages. They're JavaScript-rendered views on a single host page, and WordPress has no awareness of them as individual routes.</p>
+
+        <p><strong>Option B: Client-side redirects via a redirect app</strong></p>
+
+        <p>If you don't have server access (common with hosted website builders like Wix or Squarespace), you need a JavaScript-based solution. Redirect &amp; 404 Manager integrates with Ecwid's API, reads your redirect rules, and executes them on page load.</p>
+
+        <p>Wix and Squarespace have their own built-in redirect tools (Wix's URL Redirect Manager; Squarespace's URL Mappings). These work at the page level: they can redirect an old page to the page containing the Ecwid store widget. But like WordPress plugins, they cannot redirect between specific Ecwid product URLs within the embedded store. If your old Shopify URL <code>/products/blue-flannel</code> needs to land on Ecwid's <code>/store/Blue-Flannel-p69981208</code>, the platform's built-in tool can get the visitor to <code>/store</code> but not to the specific product view.</p>
+
+        <p>A storefront-level redirect app fills that gap. It runs inside Ecwid's JavaScript environment and can route visitors to specific products, categories, or pages within the store.</p>
+
+        <p><strong>Option C: DNS-level redirects via Cloudflare</strong></p>
+
+        <p>If your domain runs through Cloudflare, you can use Cloudflare Redirect Rules or Bulk Redirects to handle domain-level and path-based redirects at scale (Cloudflare supports millions of URL rules). This works regardless of your hosting platform and fires before any page content loads.</p>
+
+        <p>Two limitations: Cloudflare cannot redirect hash-based URLs (the fragment after <code>#</code> never reaches the server, so Cloudflare never sees it), and you need to configure Cloudflare rules carefully to avoid conflicting with the rewrite rules that make Ecwid's clean URLs work. Cloudflare handles old non-Ecwid paths well (like your former Shopify <code>/products/*</code> URLs pointing to specific new Ecwid URLs), but it won't help with hash-based Ecwid URLs.</p>
+
+        <h3>How these approaches differ for SEO</h3>
+
+        <p>Server-level redirects respond with an HTTP 301 status code before the page renders. Search engines see the redirect immediately and transfer link equity to the new URL. This is the strongest approach.</p>
+
+        <p>DNS-level redirects (Cloudflare) behave the same way. The redirect fires before the browser receives any page content, and search engines treat them identically to server-level 301s.</p>
+
+        <p>Client-side redirects work differently. The page loads, JavaScript executes, and then the visitor goes to the correct destination. Google can follow JavaScript redirects and has indicated they pass ranking signals, but server-side 301s remain preferred. The app hides the storefront element at load (before the redirect fires) so visitors don't see a flash of wrong content, but crawlers still need to execute JavaScript to discover the redirect.</p>
+
+        <p>Server-side or DNS-level is better when available. But client-side redirects are far better than nothing. A 404 error transfers zero link equity. A JavaScript redirect transfers most of it. For most embedded Ecwid stores where the hosting platform controls the server, client-side redirects through a storefront app are the only option, and they fill a gap that would otherwise leave you with no redirect capability at all.</p>
+
+        <h3>Combining approaches</h3>
+
+        <p>For stores on WordPress or other self-hosted platforms, you can use server-side redirects for your highest-traffic pages and the app for everything else (wildcard patterns, 404 detection, ongoing monitoring). Server-side redirect plugins have no awareness of Ecwid's product catalog, so you create and maintain every redirect by hand. They won't detect when a product URL changes or a product gets deleted.</p>
+
+        <div class="article-callout">
+          <p><strong>Instant Site users:</strong> If your store runs on Ecwid's Instant Site, the app's client-side storefront features do not work. Instant Site's server handles URL routing before the storefront JavaScript loads.</p>
+        </div>
+
+        <h3>Upload via CSV import</h3>
+
+        <p>Upload your redirect map via CSV import. The CSV format is two columns: <code>source_path</code> (old URL path) and <code>destination_path</code> (new Ecwid URL path). The import preview validates each row, checking for duplicate sources, confirming destinations exist in your Ecwid catalog, and flagging potential issues.</p>
+
+        <h3>Use wildcard redirects for patterns</h3>
+
+        <p>When many old URLs follow a predictable pattern, a single wildcard redirect can replace hundreds of individual rules. If all your Shopify product URLs lived under <code>/products/*</code> and your Ecwid store uses <code>/store/*</code>, one wildcard rule handles the entire batch. You'll still need individual rules where the slug changed between old and new.</p>
+
+        <h3>Test before going live</h3>
+
+        <p>The app's redirect testing feature lets you verify that destinations resolve correctly, check for redirect chains (A &gt; B &gt; C), and detect redirect loops before you flip the switch.</p>
+
+        <h2>Step 5: Update internal links</h2>
+
+        <p>Redirects handle external links and bookmarked URLs. But your own internal links need to point directly to the new Ecwid URLs rather than going through a redirect.</p>
+
+        <p>This is a bigger job than it sounds. You need to update every internal link on your website with Ecwid URLs: navigation menus, blog post product links, landing page CTAs, footer links. Anything that pointed to your old platform's URLs needs to change.</p>
+
+        <p>Crawl your own site after launch and look for any internal links that return a redirect response. Update them to point to the final destination. This removes redirect latency and sends cleaner signals to Google.</p>
+
+        <h2>Step 6: Monitor after launch</h2>
+
+        <p>Even a well-executed migration shows some short-term volatility in rankings. Google needs to recrawl and reprocess the URLs. This takes days to weeks depending on your site's crawl budget.</p>
+
+        <h3>Google Search Console</h3>
+
+        <p>Watch two reports after launch:</p>
+
+        <ul>
+          <li><strong>Pages &gt; Not found (404):</strong> Any 404 errors here mean you missed a redirect. Fix them immediately.</li>
+          <li><strong>Pages &gt; Redirect:</strong> Verify these resolve to the correct destinations.</li>
+        </ul>
+
+        <p>A spike in 404 errors in the first few days is normal for pages Google hasn't recrawled yet. 404s that persist beyond two weeks mean something is broken.</p>
+
+        <h3>Real-time 404 detection</h3>
+
+        <p>Google Search Console reports 404s with a delay, often several days after they first occur. During a migration, that delay means broken URLs can sit undetected during the most critical window.</p>
+
+        <p>Redirect &amp; 404 Manager's 404 dashboard catches broken URLs in real time as visitors encounter them on your storefront. You can spot and fix missed redirects within hours of going live, instead of waiting for GSC to flag them days later.</p>
+
+        <p>Use both: the app's dashboard for immediate post-migration triage, and GSC for ongoing monitoring once things stabilize.</p>
+
+        <h2>How long does recovery take?</h2>
+
+        <p>A platform switch will show a temporary dip in rankings even with perfect redirects. Google drops the old URLs from its index and re-evaluates the new ones. For most sites, this resolves within 4 to 8 weeks.</p>
+
+        <p>The difference between a well-executed migration and a damaging one is the shape of the recovery. With proper redirects, rankings return to pre-migration levels within a month or two. Without redirects, you're rebuilding from scratch. For competitive search terms, that rebuild can take 6 to 12 months or more.</p>
+
+        <p>The SEO equity in your existing pages is real and worth protecting. A few hours of migration planning saves months of recovery work.</p>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <section class="article-cta">
+    <div class="fv-container">
+      <div class="article-cta-box">
+        <h2>Managing Redirects on an Embedded Ecwid Store?</h2>
+        <p>Redirect &amp; 404 Manager handles the Ecwid-specific parts automatically — bulk CSV import for planned migrations, wildcard redirects for pattern-based URL changes, redirect chain detection, and a real-time 404 dashboard so nothing slips through.</p>
+        <div class="article-cta-actions">
+          <a href="/redirect-404-manager/" class="fv-btn fv-btn-primary">Learn About the App</a>
+          <a href="https://my.ecwid.com/store/130416012#apps:view=app&name=seo-redirect-manager" class="fv-btn fv-btn-outline">Install Free on Ecwid</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="fv-footer">
+    <div class="fv-container">
+      <div class="fv-footer-brand">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>
+        <span>Forest Valley</span>
+      </div>
+      <div class="fv-footer-links">
+        <a href="/">All Apps</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/rdpp/">Regional Data Protection</a>
+        <a href="mailto:info@fv.dev">info@fv.dev</a>
+        <a href="https://fv.dev">fv.dev</a>
+      </div>
+      <div class="fv-footer-copy">
+        &copy; 2026 Forest Valley Rocky Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
