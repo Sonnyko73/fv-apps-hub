@@ -4,10 +4,20 @@ Generate (or regenerate) the landing page, manual page, and catalog card for an 
 
 ## Input
 
-The app slug is provided as: $ARGUMENTS
+Optional argument: $ARGUMENTS
 
-- If a slug is provided (e.g. `seo-redirect-manager`), generate for that app.
-- If no slug is provided, list all available apps by scanning `docs/*-app-docs/` folders (symlinks, named `{app-slug}-app-docs`) and ask which one to generate.
+- **If a slug is provided** (e.g. `redirect-404-manager`), run the freshness check (below) for that app only.
+- **If no argument is provided**, run the freshness check for every app. Scan all `docs/*-app-docs/` folders.
+
+**Freshness check** — for each `docs/{app-slug}-app-docs/` folder:
+  1. Derive the slug by stripping `-app-docs` from the folder name.
+  2. Find the newest modification time among ALL source files: `docs/{app-slug}-app-docs/about.md`, `docs/{app-slug}-app-docs/README.md`, `docs/{app-slug}-app-docs/*.md` (chapter files). Also check the assets folder (discovered in step 5 below): `{assets-folder}/og.png`, `{assets-folder}/screenshots.md`, and any screenshot image files listed in `screenshots.md`. The newest mtime across all of these is `{source_mtime}`.
+  3. Find the oldest modification time among the two generated HTML files: `src/{app-slug}/index.html` and `src/{app-slug}/docs/index.html`. If either file does not exist, the app is **new**. Otherwise the older of the two is `{dest_mtime}`.
+  4. Classify the app:
+     - **New:** either generated HTML file does not exist.
+     - **Updated:** `{source_mtime}` is newer than `{dest_mtime}`.
+     - **Up to date:** `{dest_mtime}` is newer than or equal to `{source_mtime}`.
+  5. List what was found (new, updated, up to date) and proceed to generate all apps that need it. If everything is up to date, report that and stop.
 
 ## Source files
 
@@ -476,9 +486,10 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
    - Commit with a message like `feat: add {App Name} app page`
    - Push to `main` — this triggers GitHub Actions → Cloudflare Pages deployment
 4. Report the commit hash and confirm the push succeeded
-5. **Request GSC indexing** for the two new URLs (use Playwright or instruct the user):
+5. **Request GSC indexing** for the two URLs:
    - GSC → URL Inspection → `https://apps.fv.dev/{app-slug}/` → Request indexing
    - GSC → URL Inspection → `https://apps.fv.dev/{app-slug}/docs/` → Request indexing
+   - Use Playwright to automate via the GSC web UI
 
 ## Infrastructure notes
 

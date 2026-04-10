@@ -300,10 +300,14 @@ If an entry for this slug already exists, update it.
 1. List all files created or modified
 2. Run `npm --prefix "{project-root}" run build` to verify the build succeeds
 3. Report what was generated and any warnings
-4. Do NOT commit or push — the user will decide when to commit
+4. **Commit and push:**
+   - Stage all generated/modified files with `git add` (article HTML, OG images, blog listing, homepage, sitemap, llms.txt, INDEX.md)
+   - Commit with a descriptive message (e.g. `blog: publish how-to-migrate-to-ecwid-seo`)
+   - Push to `main` — this triggers GitHub Actions → Cloudflare Pages deployment
+   - Report the commit hash and confirm the push succeeded
 5. **Request GSC indexing** for each new article URL:
    - GSC → URL Inspection → `https://apps.fv.dev/blog/{slug}/` → Request indexing
-   - Either use Playwright to automate, or instruct the user to do it manually
+   - Use Playwright to automate via the GSC web UI
 
 ## Infrastructure notes
 
