@@ -16,6 +16,10 @@ Complete user manual: setup, managing redirects, bulk CSV import, wildcard rules
 https://apps.fv.dev/about/
 Developer background, company information, and founding context for Forest Valley Apps.
 
+## Blog: How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO
+https://apps.fv.dev/blog/shopify-to-eseries-migration/
+Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.
+
 ## Blog: How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace
 https://apps.fv.dev/blog/ecwid-store-redirects-wordpress-wix-squarespace/
 The redirect tools built into WordPress, Wix, and Squarespace can't target Ecwid product URLs. This guide covers what works for embedded stores, where platform tools fall short, and how to handle catalog changes without losing rankings.

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO — Forest Valley Apps</title>
+  <meta name="description" content="Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://apps.fv.dev/blog/shopify-to-eseries-migration/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Forest Valley Apps">
+  <meta property="og:title" content="How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO">
+  <meta property="og:description" content="Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.">
+  <meta property="og:url" content="https://apps.fv.dev/blog/shopify-to-eseries-migration/">
+  <meta property="og:image" content="https://apps.fv.dev/blog/shopify-to-eseries-migration/og.png">
+  <meta property="article:published_time" content="2026-04-28">
+  <meta property="article:modified_time" content="2026-04-28">
+  <meta property="article:author" content="Forest Valley">
+  <meta property="article:section" content="SEO">
+  <meta property="article:tag" content="SEO">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO">
+  <meta name="twitter:description" content="Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.">
+  <meta name="twitter:image" content="https://apps.fv.dev/blog/shopify-to-eseries-migration/og.png">
+  <!-- LCP preload -->
+  <link rel="preload" as="image" href="/shared/assets/fv-logo.webp" type="image/webp" fetchpriority="high">
+  <link rel="icon" href="/shared/assets/favicon.ico">
+  <!-- CSS (shared + blog) -->
+  <link rel="stylesheet" href="/shared/shared.css">
+  <link rel="stylesheet" href="/blog/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5B0LXFJ37"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X5B0LXFJ37');
+  </script>
+  <!-- Schema: BlogPosting + BreadcrumbList -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO",
+      "description": "Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.",
+      "datePublished": "2026-04-28",
+      "dateModified": "2026-04-28",
+      "url": "https://apps.fv.dev/blog/shopify-to-eseries-migration/",
+      "wordCount": 1900,
+      "articleSection": "SEO",
+      "image": "https://apps.fv.dev/blog/shopify-to-eseries-migration/og.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Forest Valley",
+        "url": "https://fv.dev"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forest Valley Apps",
+        "url": "https://apps.fv.dev/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://apps.fv.dev/shared/assets/fv-logo.png",
+          "width": 616,
+          "height": 341
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://apps.fv.dev/blog/shopify-to-eseries-migration/"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Forest Valley Apps", "item": "https://apps.fv.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://apps.fv.dev/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO", "item": "https://apps.fv.dev/blog/shopify-to-eseries-migration/" }
+      ]
+    }
+  ]
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="fv-header">
+    <div class="fv-container">
+      <a href="/" class="fv-header-brand">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
+        <span class="fv-header-title">Forest Valley Apps</span>
+      </a>
+      <nav class="fv-header-nav">
+        <a href="/blog/">Blog</a>
+        <a href="https://fv.dev">fv.dev</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="fv-container">
+      <div class="article-back">
+        <a href="/blog/">&larr; Back to Blog</a>
+      </div>
+      <div class="article-meta">
+        <span class="blog-tag">SEO</span>
+        <span class="blog-date">April 28, 2026</span>
+        <span class="blog-read-time">10 min read</span>
+      </div>
+      <h1>How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO</h1>
+      <p class="article-intro">If you run your retail store on Lightspeed Retail (X-Series) and you're also paying Shopify every month for your online store, you're paying twice for something that's supposed to be one business. E-Series is already included in your X-Series subscription. Most X-Series merchants know this and still don't switch, usually because the SEO risk of moving off Shopify sounds like it's not worth the headache.</p>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="fv-container">
+      <div class="article-content">
+
+        <p>It mostly isn't, if you handle the URL redirects properly. This guide walks through the full migration, with most of the space spent on the URL part, because that's where rankings go to die if you're careless.</p>
+
+        <h2>Why migrate from Shopify to E-Series</h2>
+
+        <p>The case for an X-Series merchant is consolidation. E-Series talks directly to your Lightspeed Retail catalog: products, inventory, customers, gift cards all sync between the register and the online store without manual reconciliation. If you're on a Core or Plus plan, E-Series Business comes with it. Cancel Shopify and that bill goes away.</p>
+
+        <p>The real tradeoff is Shopify's app ecosystem, which is bigger. If you've wired up half a dozen Shopify-specific apps into your workflow, list them before you decide. Some have E-Series equivalents, some don't.</p>
+
+        <p>For a brick-and-mortar retailer whose online store supports the physical business rather than being the whole business, consolidating is usually worth it.</p>
+
+        <h2>What changes when you switch platforms</h2>
+
+        <p>Three things need attention: your product catalog, your customer data, and your URLs.</p>
+
+        <h3>Product catalog</h3>
+
+        <p>Shopify and E-Series organize products around the same ideas but use different words for them. Shopify "collections" are "categories" in E-Series. Shopify "options" (Size, Color) are also "options" in E-Series. What Shopify calls a "variant" (a specific Size + Color combo) is called a "combination" or "variation" in E-Series. Same thing, different label.</p>
+
+        <p>Most fields transfer cleanly: name, description, price, images, SKU, weight. The things that don't transfer automatically: metafields, custom attributes, and anything tied to a Shopify-specific app.</p>
+
+        <p>If your X-Series POS catalog is already clean, the easier path is to skip the Shopify-to-E-Series migration and sync directly from POS. That's the right move for merchants whose POS is already the source of truth.</p>
+
+        <h3>Customer data</h3>
+
+        <p>Shopify stores customer email, name, address, and order history. E-Series stores the same fields, except order history, which stays in Shopify. You can export the customer list and import it, but old orders don't come along. Pick a clean break date and archive your Shopify exports before canceling.</p>
+
+        <h3>URLs: where the SEO risk lives</h3>
+
+        <p>This is the part that catches people out. Shopify and E-Series use completely different URL structures, and every URL that changes is a potential SEO problem.</p>
+
+        <p><strong>Shopify URL structure:</strong></p>
+
+<pre><code>yourdomain.com/products/red-canvas-sneakers
+yourdomain.com/collections/footwear
+yourdomain.com/pages/about-us</code></pre>
+
+        <p><strong>E-Series URL structure:</strong></p>
+
+<pre><code>yourdomain.com/store/Red-Canvas-Sneakers-p12345678
+yourdomain.com/store/Footwear-c87654321</code></pre>
+
+        <p>The exact path prefix (<code>/store/</code>, <code>/products/</code>, or the domain root) depends on where the Ecwid widget sits on your site and which URL mode is on. E-Series has a few formats: the legacy hashbang (<code>/#!/product-name/p/123456</code>), Clean Store URLs (no hashbang, no ID), and Clean URLs plus Custom Page Slugs (fully custom slugs). Instant Site stores default to clean URLs without IDs. Whichever one your store ends up on, the pattern is regular enough that a bulk redirect rule can handle it.</p>
+
+        <p>Every product and category URL changes. If Google has your Shopify URLs in its index (and for an established store, it does), those pages are carrying years of rankings, backlinks, and traffic. Without redirects, that equity goes to zero. Google sees the new E-Series URLs as fresh pages with no history, and your old Shopify URLs return 404s.</p>
+
+        <p>Redirects from the old URLs to their new equivalents aren't optional. Skip them and your organic traffic won't recover.</p>
+
+        <h2>Pre-migration checklist</h2>
+
+        <p>Before you touch either platform:</p>
+
+        <p><strong>Catalog audit</strong></p>
+
+        <ul>
+          <li>Export your Shopify product catalog (Products &gt; Export).</li>
+          <li>Flag products that use Shopify-specific metafields or app data you'll need to recreate by hand.</li>
+          <li>Decide: migrate from Shopify, or sync from your X-Series POS?</li>
+        </ul>
+
+        <p><strong>SEO baseline</strong></p>
+
+        <ul>
+          <li>Pull organic traffic by URL from Google Search Console (Performance &gt; Pages).</li>
+          <li>Export the full URL list. These are the pages that need redirects.</li>
+          <li>Mark the pages with significant traffic or backlinks. They're your priority.</li>
+        </ul>
+
+        <p><strong>URL mapping</strong></p>
+
+        <ul>
+          <li>List every Shopify product and category URL with its intended E-Series equivalent.</li>
+          <li>The E-Series product ID (<code>-p12345678</code>) doesn't exist until you create the product in E-Series, so you finish the mapping after catalog migration, before go-live.</li>
+        </ul>
+
+        <p><strong>Timing</strong></p>
+
+        <ul>
+          <li>Schedule go-live for a quiet period. A weekday evening is fine. The week before a seasonal peak is not.</li>
+          <li>Tell your team when the maintenance window is so support is ready for questions.</li>
+        </ul>
+
+        <h2>Step 1: set up your E-Series store</h2>
+
+        <p>Activate E-Series from your Lightspeed Retail dashboard. If you're connecting it to an existing website (WordPress, Squarespace, Wix, or something else), install the E-Series plugin or widget there. If you want to use the Lightspeed-hosted E-Series storefront, point your domain at it.</p>
+
+        <p>Run through the usual setup: store name, currency, tax settings, shipping zones. Connect your X-Series POS catalog if you're syncing from there, or set the catalog up manually if you're migrating from Shopify.</p>
+
+        <p>Keep Shopify live during all of this. Don't cancel it or take it offline until redirects are in place and tested.</p>
+
+        <h2>Step 2: migrate your product catalog</h2>
+
+        <p>Syncing from X-Series POS: turn on catalog sync, let E-Series pull your products in, then review variants, images, and descriptions and fill in whatever didn't come through.</p>
+
+        <p>Migrating from Shopify directly: use a migration tool or import your Shopify CSV export. E-Series accepts CSV for products. Map the Shopify columns to E-Series fields. You'll almost certainly need to clean the CSV by hand for categories, options, and anything that doesn't translate cleanly.</p>
+
+        <p>Once products are created in E-Series, write down the IDs. You need them for the URL mapping. A product URL in E-Series looks like <code>/Red-Canvas-Sneakers-p12345678</code>; the number at the end is the E-Series product ID, and it's visible in the admin URL when you open the product.</p>
+
+        <h2>Step 3: build your redirect map</h2>
+
+        <p>With your Shopify URLs (from the pre-migration export) and your E-Series URLs (from the new catalog), put together a mapping spreadsheet:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Old Shopify URL</th>
+              <th>New E-Series URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/products/red-canvas-sneakers</code></td>
+              <td><code>/store/Red-Canvas-Sneakers-p12345678</code></td>
+            </tr>
+            <tr>
+              <td><code>/products/blue-running-shoes</code></td>
+              <td><code>/store/Blue-Running-Shoes-p87654321</code></td>
+            </tr>
+            <tr>
+              <td><code>/collections/footwear</code></td>
+              <td><code>/store/Footwear-c11223344</code></td>
+            </tr>
+            <tr>
+              <td><code>/collections/new-arrivals</code></td>
+              <td><code>/store/New-Arrivals-c55667788</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Start with your highest-traffic pages from Google Search Console. Then category pages. Then individual products. With a large catalog, look for patterns. If the whole <code>/products/</code> path maps to <code>/store/</code>, one wildcard rule covers the lot instead of hundreds of one-off entries.</p>
+
+        <h2>Step 4: implement redirects</h2>
+
+        <p>How you implement the redirects depends on how the E-Series store is hosted.</p>
+
+        <h3>If you're using the Lightspeed-hosted E-Series storefront</h3>
+
+        <p>Point your domain at E-Series, then set up redirects at the server or CDN layer. The reliable options:</p>
+
+        <ul>
+          <li><strong>Your domain registrar or CDN.</strong> Cloudflare, Fastly, and most others let you define redirect rules in the dashboard without server access. Redirect <code>/products/*</code> to the matching E-Series path.</li>
+          <li><strong><code>.htaccess</code>, if you have server access.</strong> Standard Apache redirect syntax handles bulk redirects fine.</li>
+          <li><strong>Lightspeed's built-in redirect manager (Instant Site only).</strong> If your storefront is an E-Series Instant Site, the admin has a redirect manager for individual URL redirects. It's specific to Instant Site. It doesn't apply to embedded setups on external websites.</li>
+        </ul>
+
+        <p>These are server-side redirects, so they return real HTTP 301s, which is the strongest SEO signal for permanently moved content.</p>
+
+        <h3>If you're embedding E-Series in your existing website (WordPress, Squarespace, Wix, or custom)</h3>
+
+        <p>When E-Series runs as an embedded widget, your host's server handles the outer site but the Ecwid storefront is a single-page application. Redirects for Ecwid store paths have to happen at the storefront level; the server doesn't see individual product URLs the way it sees normal pages.</p>
+
+        <p>For embedded stores, <a href="https://apps.ecwid.com/app/seo-redirect-manager">Redirect &amp; 404 Manager</a> on the Ecwid App Market handles this. It drops a small script into your E-Series storefront that processes redirect rules client-side, supports clean and hash-based URLs, and lets you manage rules from the E-Series admin without touching your site's code.</p>
+
+        <p>Honest caveat: the app uses JavaScript redirects, not server-side 301s. Google does follow JavaScript redirects and does transfer link equity, but a JS redirect isn't the same HTTP status as a 301. For embedded Ecwid stores where you don't control the server at the storefront level, JavaScript redirects are the only practical option, and they work in practice.</p>
+
+        <p>You can import your whole redirect mapping from a CSV, which is what makes a large Shopify catalog tractable. The app also detects 404s passively after go-live, so you can catch anything you missed.</p>
+
+        <h2>Step 5: go live</h2>
+
+        <p>When your catalog is set up and the redirects are tested:</p>
+
+        <ol>
+          <li>Point your domain at the new E-Series storefront. Update DNS if you're switching to the hosted storefront; if you're embedding the widget, make sure it's live on your existing site.</li>
+          <li>Visit a handful of old Shopify URLs and check they forward to the right E-Series pages.</li>
+          <li>Update your XML sitemap with E-Series URLs and submit it to Google Search Console.</li>
+          <li>If your domain changed or the store moved significantly, use Google Search Console's <strong>Change of Address tool</strong> to tell Google about it.</li>
+          <li>Update links on your social profiles, email signatures, and any external listings that still point at old URLs.</li>
+        </ol>
+
+        <h2>Step 6: post-migration monitoring</h2>
+
+        <p>The week after go-live is when problems show up. Watch:</p>
+
+        <p><strong>Google Search Console.</strong> Check Coverage and Performance daily for the first two weeks. 404 errors spiking means the redirect mapping has gaps. Patch them as you find them.</p>
+
+        <p><strong>Your 404 log.</strong> On embedded E-Series setups with Redirect &amp; 404 Manager, the app's 404 log shows broken URLs with hit counts and referrers. Sort by hit count and fix the worst offenders first.</p>
+
+        <p><strong>Organic traffic.</strong> A temporary dip is normal; Google needs time to recrawl and reindex. If traffic hasn't come back inside 4-6 weeks, check Search Console for indexing issues or missing redirects.</p>
+
+        <p><strong>Cancel Shopify.</strong> Only once traffic is stable and the critical redirects are working. Archive your Shopify data rather than deleting it. You'll want access to the historical orders and customer records later.</p>
+
+        <h2>Common mistakes</h2>
+
+        <p><strong>Migrating before redirects are ready.</strong> If you go live without redirects, Google indexes the new URLs while discovering the old ones now 404. The damage is immediate and takes weeks to recover from. Get redirects in place before the domain switch.</p>
+
+        <p><strong>Forgetting category pages.</strong> Most merchants map product pages and forget collection/category URLs. Those often carry a lot of link equity and ranking history.</p>
+
+        <p><strong>Not testing in staging.</strong> Before pointing the live domain, test the E-Series store on a staging URL. Check that the catalog looks right, checkout works, and redirects fire.</p>
+
+        <p><strong>Canceling Shopify too early.</strong> Keep it active for at least 30 days post-migration. Use that time to confirm everything works and that you've pulled any data you still need.</p>
+
+        <h2>The short version</h2>
+
+        <p>For an X-Series merchant on a separate Shopify store, migrating to E-Series is mostly a consolidation exercise. Catalog migration and URL redirects are the two pieces of real work. Redirects are the part merchants underestimate, and the part that decides whether your rankings survive. Build the map before go-live, pick the right implementation for your hosting setup, and watch for gaps afterwards.</p>
+
+        <p>Once you're on E-Series, your online store and X-Series POS share the same catalog, customers, and reporting.</p>
+
+        <p><em>Redirect &amp; 404 Manager is on the <a href="https://apps.ecwid.com/app/seo-redirect-manager">Ecwid App Market</a> for merchants running E-Series as an embedded store on WordPress, Wix, Squarespace, Joomla, or a custom website.</em></p>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <section class="article-cta">
+    <div class="fv-container">
+      <div class="article-cta-box">
+        <h2>Migrating from Shopify to E-Series?</h2>
+        <p>Redirect &amp; 404 Manager handles bulk redirect imports, wildcard rules, and 404 monitoring for embedded E-Series stores on WordPress, Wix, Squarespace, or any custom site. 14-day free trial, then $5.99/month flat.</p>
+        <div class="article-cta-actions">
+          <a href="/redirect-404-manager/" class="fv-btn fv-btn-primary">Learn About the App</a>
+          <a href="https://my.ecwid.com/store/130416012#apps:view=app&name=seo-redirect-manager" class="fv-btn fv-btn-outline">Install Free on Ecwid</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="fv-footer">
+    <div class="fv-container">
+      <div class="fv-footer-brand">
+        <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>
+        <span>Forest Valley</span>
+      </div>
+      <div class="fv-footer-links">
+        <a href="/">All Apps</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/rdpp/">Regional Data Protection</a>
+        <a href="mailto:info@fv.dev">info@fv.dev</a>
+        <a href="https://fv.dev">fv.dev</a>
+      </div>
+      <div class="fv-footer-copy">
+        &copy; 2026 Forest Valley Rocky Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
