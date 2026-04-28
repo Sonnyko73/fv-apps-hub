@@ -138,7 +138,7 @@ Copy this markup into your app pages. The CSS classes are styled by `header.css`
   <div class="fv-container">
     <a href="/" class="fv-header-brand">
       <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo">
-      <span class="fv-header-title">Forest Valley Apps</span>
+      <span class="fv-header-title">FV Apps</span>
     </a>
     <nav class="fv-header-nav">
       <a href="https://fv.dev">fv.dev</a>
@@ -177,7 +177,7 @@ Here's a minimal app page using all shared resources:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your App Name — Forest Valley Apps</title>
+  <title>Your App Name — FV Apps</title>
   <link rel="icon" href="/shared/assets/favicon.ico">
   <link rel="stylesheet" href="/shared/styles/reset.css">
   <link rel="stylesheet" href="/shared/styles/variables.css">
@@ -192,7 +192,7 @@ Here's a minimal app page using all shared resources:
     <div class="fv-container">
       <a href="/" class="fv-header-brand">
         <img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo">
-        <span class="fv-header-title">Forest Valley Apps</span>
+        <span class="fv-header-title">FV Apps</span>
       </a>
       <nav class="fv-header-nav">
         <a href="https://fv.dev">fv.dev</a>

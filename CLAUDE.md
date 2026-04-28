@@ -127,7 +127,7 @@ See `SHARED-STYLES.md` for the full reference (tokens, utility classes, header/f
 ## Catalog Page (`src/index.html`)
 
 Sections:
-1. **Header** -- FV logo, "Forest Valley Apps" title, link to fv.dev
+1. **Header** -- FV logo, "FV Apps" title, link to fv.dev
 2. **Hero** -- Tagline: "Business Apps by Forest Valley", subtitle about integrations and tools
 3. **What We Do** -- Description of the company's approach and focus
 4. **App Grid** -- Card per app with: icon, name, one-line description, platform badges, pricing badge (Free/Freemium/Paid), "View details" link
@@ -202,15 +202,15 @@ Generated HTML goes to `src/blog/{slug}/index.html`. The listing page at `src/bl
 
 ### Blog commands
 
-- `/add-post {path-to-any.md}` -- Ingest any markdown file into `blog/`. Renames to `YYMMDD-slug.md`, adds/completes YAML frontmatter, updates INDEX.md. Does not generate HTML.
-- `/publish-blog` -- Auto-detects new or updated posts (compares blog source mtime vs generated HTML mtime) and generates HTML for them. Updates listing page, sitemap, llms.txt.
-- `/publish-blog {YYMMDD-slug}` -- Publish only a specific post.
+- `/blog-add-post {path-to-any.md}` -- Ingest any markdown file into `blog/`. Renames to `YYMMDD-slug.md`, adds/completes YAML frontmatter, updates INDEX.md. Does not generate HTML.
+- `/blog-publish` -- Auto-detects new or updated posts (compares blog source mtime vs generated HTML mtime) and generates HTML for them. Updates listing page, sitemap, llms.txt.
+- `/blog-publish {YYMMDD-slug}` -- Publish only a specific post.
 
 ### Typical workflow
 
 1. Write or receive a post `.md` file (anywhere on disk)
-2. Run `/add-post /path/to/draft.md` to ingest it into `blog/`
-3. Run `/publish-blog` to generate HTML for all new/updated posts
+2. Run `/blog-add-post /path/to/draft.md` to ingest it into `blog/`
+3. Run `/blog-publish` to generate HTML for all new/updated posts
 4. Run `npm run build` to verify
 5. Push to `main`
 

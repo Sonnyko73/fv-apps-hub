@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace — Forest Valley Apps</title>
+  <title>How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace — FV Apps</title>
   <meta name="description" content="The redirect tools built into WordPress, Wix, and Squarespace can't target Ecwid product URLs. This guide covers what works for embedded stores, where platform tools fall short, and how to handle catalog changes without losing rankings.">
   <!-- Canonical -->
   <link rel="canonical" href="https://apps.fv.dev/blog/ecwid-store-redirects-wordpress-wix-squarespace/">
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Forest Valley Apps">
+  <meta property="og:site_name" content="FV Apps">
   <meta property="og:title" content="How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace">
   <meta property="og:description" content="The redirect tools built into WordPress, Wix, and Squarespace can't target Ecwid product URLs. This guide covers what works for embedded stores, where platform tools fall short, and how to handle catalog changes without losing rankings.">
   <meta property="og:url" content="https://apps.fv.dev/blog/ecwid-store-redirects-wordpress-wix-squarespace/">
@@ -59,7 +59,7 @@
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Forest Valley Apps",
+        "name": "FV Apps",
         "url": "https://apps.fv.dev/",
         "logo": {
           "@type": "ImageObject",
@@ -77,7 +77,7 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Forest Valley Apps", "item": "https://apps.fv.dev/" },
+        { "@type": "ListItem", "position": 1, "name": "FV Apps", "item": "https://apps.fv.dev/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://apps.fv.dev/blog/" },
         { "@type": "ListItem", "position": 3, "name": "How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace", "item": "https://apps.fv.dev/blog/ecwid-store-redirects-wordpress-wix-squarespace/" }
       ]
@@ -92,7 +92,7 @@
     <div class="fv-container">
       <a href="/" class="fv-header-brand">
         <picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" class="fv-header-logo" width="616" height="341"></picture>
-        <span class="fv-header-title">Forest Valley Apps</span>
+        <span class="fv-header-title">FV Apps</span>
       </a>
       <nav class="fv-header-nav">
         <a href="/blog/">Blog</a>
@@ -134,13 +134,13 @@
 
         <h2>How Ecwid URLs work</h2>
 
-        <p>Your URL format determines how vulnerable your store is to catalog changes. Ecwid stores use three formats: hashbang URLs (with product IDs, resilient to renames), clean URLs (shorter, better for SEO, but renaming a product breaks the old link), and custom slugs (full control over the path, but any slug change breaks the old URL). For a full breakdown, see <a href="/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>.</p>
+        <p>Your URL format determines how vulnerable your store is to catalog changes. Ecwid stores use three formats: hashbang URLs (with product IDs, resilient to renames), clean URLs (shorter, better for SEO, but renaming a product breaks the old link), and custom slugs (full control over the path, but any slug change breaks the old URL). For a full breakdown, see <a href="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>.</p>
 
         <p>The cleaner your URLs are for SEO, the more fragile they are when things change. Even hashbang URLs benefit from redirects. Renaming a product won't break the link for visitors, but Google may have both the old and new versions indexed. A redirect keeps search engines pointed at the current URL.</p>
 
         <h2>What your hosting platform can and can't do</h2>
 
-        <p>WordPress plugins, Wix's URL Redirect Manager, Squarespace's URL Mappings, and Cloudflare Redirect Rules all work at the server or DNS level. They can redirect old pages to the page containing your Ecwid store. None of them can redirect between specific Ecwid product or category URLs, because those are JavaScript-rendered views on a single host page, not actual server-side pages. For a platform-by-platform breakdown, see <a href="/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>.</p>
+        <p>WordPress plugins, Wix's URL Redirect Manager, Squarespace's URL Mappings, and Cloudflare Redirect Rules all work at the server or DNS level. They can redirect old pages to the page containing your Ecwid store. None of them can redirect between specific Ecwid product or category URLs, because those are JavaScript-rendered views on a single host page, not actual server-side pages. For a platform-by-platform breakdown, see <a href="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>.</p>
 
         <p>One thing to watch on WordPress: if your setup uses clean URLs for Ecwid, do not redirect <code>/store/*</code> paths. Use rewrites instead. If your server 301-redirects all <code>/store/*</code> to <code>/store</code>, Ecwid's JavaScript can't resolve individual product pages. The WordPress Ecwid plugin handles this rewriting on its own. Make sure any redirect rules you add don't conflict with it.</p>
 
@@ -274,7 +274,7 @@
         <p>Your existing pages built up ranking value over months. A few minutes of redirect planning keeps that intact.</p>
 
         <div class="article-callout">
-          <p><strong>Migrating from another platform?</strong> If you're switching to Ecwid from Shopify, WooCommerce, or BigCommerce, handle the platform migration redirects first. Read <a href="/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>, then come back here for ongoing catalog management.</p>
+          <p><strong>Migrating from another platform?</strong> If you're switching to Ecwid from Shopify, WooCommerce, or BigCommerce, handle the platform migration redirects first. Read <a href="https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo">How to Migrate to Ecwid Without Losing SEO</a>, then come back here for ongoing catalog management.</p>
         </div>
 
       </div>
@@ -288,7 +288,7 @@
         <h2>Need redirects for your embedded Ecwid store?</h2>
         <p>Redirect &amp; 404 Manager handles redirect creation, wildcard patterns, 404 detection, and auto-redirects on product deletion, built for Ecwid embedded stores on WordPress, Wix, Squarespace, and any other site. All features described in this article are included in the 14-day free trial and the paid plan ($5.99/month). No feature-gated tiers. After the trial ends, the app stops processing redirects until you subscribe.</p>
         <div class="article-cta-actions">
-          <a href="/redirect-404-manager/" class="fv-btn fv-btn-primary">Learn About the App</a>
+          <a href="https://apps.fv.dev/redirect-404-manager/" class="fv-btn fv-btn-primary">Learn About the App</a>
           <a href="https://my.ecwid.com/store/130416012#apps:view=app&name=seo-redirect-manager" class="fv-btn fv-btn-outline">Install Free on Ecwid</a>
         </div>
       </div>

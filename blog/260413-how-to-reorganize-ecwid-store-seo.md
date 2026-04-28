@@ -2,6 +2,7 @@
 title: "How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace"
 slug: ecwid-store-redirects-wordpress-wix-squarespace
 date: 2026-04-15
+date_modified: 2026-04-15
 tag: SEO
 read_time: 10 min read
 excerpt: "The redirect tools built into WordPress, Wix, and Squarespace can't target Ecwid product URLs. This guide covers what works for embedded stores, where platform tools fall short, and how to handle catalog changes without losing rankings."
@@ -10,7 +11,7 @@ cta:
   heading: "Need redirects for your embedded Ecwid store?"
   text: "Redirect & 404 Manager handles redirect creation, wildcard patterns, 404 detection, and auto-redirects on product deletion, built for Ecwid embedded stores on WordPress, Wix, Squarespace, and any other site. All features described in this article are included in the 14-day free trial and the paid plan ($5.99/month). No feature-gated tiers. After the trial ends, the app stops processing redirects until you subscribe."
   primary_label: "Learn About the App"
-  primary_url: "/redirect-404-manager/"
+  primary_url: "https://apps.fv.dev/redirect-404-manager/"
   secondary_label: "Install Free on Ecwid"
   secondary_url: "https://my.ecwid.com/store/130416012#apps:view=app&name=seo-redirect-manager"
 related:
@@ -30,13 +31,13 @@ For most redirect needs on an embedded Ecwid store, page-level routing isn't eno
 
 ## How Ecwid URLs work
 
-Your URL format determines how vulnerable your store is to catalog changes. Ecwid stores use three formats: hashbang URLs (with product IDs, resilient to renames), clean URLs (shorter, better for SEO, but renaming a product breaks the old link), and custom slugs (full control over the path, but any slug change breaks the old URL). For a full breakdown, see [How to Migrate to Ecwid Without Losing SEO](/blog/how-to-migrate-to-ecwid-seo).
+Your URL format determines how vulnerable your store is to catalog changes. Ecwid stores use three formats: hashbang URLs (with product IDs, resilient to renames), clean URLs (shorter, better for SEO, but renaming a product breaks the old link), and custom slugs (full control over the path, but any slug change breaks the old URL). For a full breakdown, see [How to Migrate to Ecwid Without Losing SEO](https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo).
 
 The cleaner your URLs are for SEO, the more fragile they are when things change. Even hashbang URLs benefit from redirects. Renaming a product won't break the link for visitors, but Google may have both the old and new versions indexed. A redirect keeps search engines pointed at the current URL.
 
 ## What your hosting platform can and can't do
 
-WordPress plugins, Wix's URL Redirect Manager, Squarespace's URL Mappings, and Cloudflare Redirect Rules all work at the server or DNS level. They can redirect old pages to the page containing your Ecwid store. None of them can redirect between specific Ecwid product or category URLs, because those are JavaScript-rendered views on a single host page, not actual server-side pages. For a platform-by-platform breakdown, see [How to Migrate to Ecwid Without Losing SEO](/blog/how-to-migrate-to-ecwid-seo).
+WordPress plugins, Wix's URL Redirect Manager, Squarespace's URL Mappings, and Cloudflare Redirect Rules all work at the server or DNS level. They can redirect old pages to the page containing your Ecwid store. None of them can redirect between specific Ecwid product or category URLs, because those are JavaScript-rendered views on a single host page, not actual server-side pages. For a platform-by-platform breakdown, see [How to Migrate to Ecwid Without Losing SEO](https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo).
 
 One thing to watch on WordPress: if your setup uses clean URLs for Ecwid, do not redirect `/store/*` paths. Use rewrites instead. If your server 301-redirects all `/store/*` to `/store`, Ecwid's JavaScript can't resolve individual product pages. The WordPress Ecwid plugin handles this rewriting on its own. Make sure any redirect rules you add don't conflict with it.
 
@@ -163,4 +164,4 @@ For larger restructuring projects like merging categories or bulk slug changes, 
 
 Your existing pages built up ranking value over months. A few minutes of redirect planning keeps that intact.
 
-> **Migrating from another platform?** If you're switching to Ecwid from Shopify, WooCommerce, or BigCommerce, handle the platform migration redirects first. Read [How to Migrate to Ecwid Without Losing SEO](/blog/how-to-migrate-to-ecwid-seo), then come back here for ongoing catalog management.
+> **Migrating from another platform?** If you're switching to Ecwid from Shopify, WooCommerce, or BigCommerce, handle the platform migration redirects first. Read [How to Migrate to Ecwid Without Losing SEO](https://apps.fv.dev/blog/how-to-migrate-to-ecwid-seo), then come back here for ongoing catalog management.

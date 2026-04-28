@@ -31,7 +31,7 @@ Each post must have an OG image. The image file lives alongside the post in `blo
 - Post: `blog/YYMMDD-slug.md`
 - OG image: `blog/YYMMDD-slug-og.png`
 
-The `/add-post` command requires an OG image path and copies it with this naming. The `/publish-blog` command copies it to `src/blog/{slug}/og.png` (with freshness checking).
+The `/blog-add-post` command requires an OG image path and copies it with this naming. The `/blog-publish` command copies it to `src/blog/{slug}/og.png` (with freshness checking).
 
 Recommended size: 1200x630px.
 
@@ -45,7 +45,7 @@ Recommended size: 1200x630px.
 
 ## Index
 
-`INDEX.md` tracks all published posts with metadata. Updated by `/publish-blog`.
+`INDEX.md` tracks all published posts with metadata. Updated by `/blog-publish`.
 
 ## Relationship to src/blog/
 
@@ -56,6 +56,6 @@ Recommended size: 1200x630px.
 
 ## Commands
 
-- `/add-post {path-to-any.md}` -- Ingest a markdown file into this folder. Renames to `YYMMDD-slug.md`, adds/completes frontmatter, updates INDEX.md. Does NOT generate HTML.
-- `/publish-blog` -- Generates HTML for new or updated posts. Compares `blog/*.md` against `src/blog/*/index.html` to detect what needs publishing. Also accepts a specific filename to publish one post.
-- `/publish-blog {YYMMDD-slug}` -- Publish only the specified post.
+- `/blog-add-post {path-to-any.md}` -- Ingest a markdown file into this folder. Renames to `YYMMDD-slug.md`, adds/completes frontmatter, updates INDEX.md. Does NOT generate HTML.
+- `/blog-publish` -- Generates HTML for new or updated posts. Compares `blog/*.md` against `src/blog/*/index.html` to detect what needs publishing. Also accepts a specific filename to publish one post.
+- `/blog-publish {YYMMDD-slug}` -- Publish only the specified post.

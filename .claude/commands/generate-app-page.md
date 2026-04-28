@@ -2,6 +2,12 @@
 
 Generate (or regenerate) the landing page, manual page, and catalog card for an app from its docs.
 
+## Standards
+
+App landing pages share most quality signals with blog posts (where they overlap, the rules align with `/blog-publish`). Before generating HTML, every app must pass the **Pre-generation validation** checks below. Failures in the **Required** list block generation; **Warnings** are reported but do not block. Refusing to generate is preferable to emitting a half-broken page.
+
+These rules are tuned for AI citation (ChatGPT, Perplexity, Google AI Overviews) and traditional SERP performance, adapted to the constraints of a landing page rather than long-form prose.
+
 ## Input
 
 Optional argument: $ARGUMENTS
@@ -29,6 +35,52 @@ All content comes from `docs/{app-slug}-app-docs/` (a symlink to the app's manua
 
 Read ALL of these files before generating anything.
 
+## Pre-generation validation
+
+Run these checks against `about.md`, `README.md`, the chapter files, and the asset folder **before** generating any HTML. Required failures block generation for that app and the publisher continues with the next app (do not block the whole batch).
+
+### Required (block generation on failure)
+
+- [ ] **`about.md` exists and parses** — sections found: app name, one-line description, problem statement, features, plans/pricing, FAQ.
+- [ ] **App name and description are present** — non-empty.
+- [ ] **At least 7 distinct H2/H3 headings** would render in the landing page (Hero, Problem, Features, How It Works, Pricing, FAQ, plus per-feature/per-FAQ H3s). Counting H2+H3 from the planned output should give ≥ 7.
+- [ ] **Exactly one H1 in the rendered landing page** — the Hero headline. No other element (including section headings) renders as `<h1>`.
+- [ ] **OG image is 1200×630.** Inspect `{assets-folder}/og.png`. If wrong dimensions, fail with the actual dimensions reported.
+- [ ] **All inline images and screenshots have non-empty, descriptive alt text.** Empty or placeholder alts ("screenshot 1", "image1", "icon") fail.
+- [ ] **Slug is lowercase, hyphenated, no trailing punctuation, ≤60 chars.** Slugs are derived from the `docs/{app-slug}-app-docs/` folder name and are permanent — never change a slug once an app is published; if the app's positioning shifts, create a new app folder and 301 the old slug.
+- [ ] **JSON-LD blocks (planned output) are valid JSON** and contain the required `SoftwareApplication`, `BreadcrumbList`, and (if FAQ exists) `FAQPage` types with all required fields populated.
+
+### Warnings (report but do not block)
+
+- **Total visible body copy < 500 words** across the landing page — reads as thin to AI engines.
+- **Hero subheadline doesn't answer the headline in 2–4 sentences** — visitors and AI crawlers should know what the app does within the first paragraph.
+- **`<title>` length outside 50–60 chars** after the `— FV Apps` suffix.
+- **`<meta description>` (one-line description from about.md) outside 140–160 chars.**
+- **Internal links in body copy < 2** — features/FAQ/manual sections should link to related blog posts, docs, or other site pages. Nav, footer, and primary CTA links don't count.
+- **Missing list or missing table** — landing pages should have **both**. Pricing already renders as a table; features should be a list. Both present yields a measurable AI-citation lift for product pages.
+- **Flesch-Kincaid grade outside 14–18** (only if `textstat` is installed; skip the warning entirely if not). Landing-page copy may legitimately run lower than blog prose. **Never auto-rewrite** — flag for the editor.
+- **No screenshots** when `screenshots.md` is missing — landing pages with screenshots perform better.
+
+### Validation report
+
+Print a per-app compact report before generating:
+
+```
+[redirect-404-manager] PASS
+  about.md sections: app name, description, problem, features, pricing, FAQ ✓
+  planned h1: 1, h2+h3: 18
+  og image: 1200×630 ✓
+  images with alt: 12/12
+  warnings: title 71 chars (>60); body copy 432 words (<500)
+
+[some-app] FAIL — refusing to generate
+  ✗ og image: 1080×1080 (expected 1200×630)
+  ✗ images with alt: 8/12 (4 empty)
+  ✓ everything else
+```
+
+Only proceed to "What to generate" for apps in PASS state.
+
 ## What to generate
 
 ### 1. Landing page: `src/{app-slug}/index.html`
@@ -43,7 +95,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{App Name} for {Platform} — Forest Valley Apps</title>
+  <title>{App Name} for {Platform} — FV Apps</title>
   <meta name="description" content="{One-line description from about.md}">
   <!-- Canonical -->
   <link rel="canonical" href="https://apps.fv.dev/{app-slug}/">
@@ -71,7 +123,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
     gtag('js', new Date());
     gtag('config', 'G-X5B0LXFJ37');
   </script>
-  <!-- Schema: SoftwareApplication + BreadcrumbList + FAQPage -->
+  <!-- Schema: SoftwareApplication + BreadcrumbList + FAQPage (+ HowTo when applicable) -->
   <script type="application/ld+json">
   [
     {
@@ -82,6 +134,9 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "url": "https://apps.fv.dev/{app-slug}/",
+      "image": "https://apps.fv.dev/{app-slug}/assets/og.png",
+      "datePublished": "{YYYY-MM-DD of original publish; preserve from prior generation if present, otherwise today}",
+      "dateModified": "{YYYY-MM-DD; today only if the source files actually changed since last generation}",
       "offers": [
         {
           "@type": "Offer",
@@ -109,7 +164,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Forest Valley Apps",
+          "name": "FV Apps",
           "item": "https://apps.fv.dev/"
         },
         {
@@ -135,6 +190,7 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
         // ... one entry per FAQ item in about.md
       ]
     }
+    // + HowTo block (see below) IF the "How It Works" section has 3+ ordered steps
   ]
   </script>
 </head>
@@ -142,8 +198,33 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 **Notes on schema values:**
 - Fill `SoftwareApplication.offers` from "Plans & Pricing" in `about.md`. If free-only, use a single Offer with price "0". If freemium, include both Free and Pro offers with accurate prices.
-- Fill `FAQPage.mainEntity` with every Q&A from the "FAQ" section of `about.md`.
+- Fill `FAQPage.mainEntity` with every Q&A from the "FAQ" section of `about.md`. Skip the `FAQPage` block entirely if fewer than 3 Q&A pairs are present (Google penalizes thin FAQ schema). **Never invent Q&A entries that aren't already in `about.md`.**
 - If the app is paid-only (no free tier), remove the Free plan Offer entry.
+- **`datePublished`** is set on first generation and preserved across regenerations. To find a prior value, parse the existing `src/{app-slug}/index.html` JSON-LD for the `datePublished` field. If not present (truly new app), use today's date.
+- **`dateModified`** is set to today **only** when the source files (`about.md`, `README.md`, chapter files, screenshots, OG image) have actually changed since the last generation. On a no-op regeneration, preserve the prior `dateModified` value. **Never bump `dateModified` to manufacture freshness** — that's flagged as a dark pattern by ranking systems.
+
+**Conditional schema: `HowTo`**
+
+If the "How It Works" section in `about.md` has 3+ ordered steps and reads as a procedural walkthrough (not just feature highlights), append this block to the JSON-LD array:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to use {App Name}",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "{Step heading}",
+      "text": "{Step body, plain-text, HTML stripped}",
+      "url": "https://apps.fv.dev/{app-slug}/#how-it-works"
+    }
+    // … one entry per step
+  ]
+}
+```
+
+If "How It Works" describes feature benefits rather than walking through real steps, do **not** emit `HowTo`. Use `HowTo` only when the section is genuinely procedural.
 
 **Required sections (in order):**
 
@@ -164,13 +245,13 @@ A single-page site built from `about.md`. Follow the structure in `SITE_SPEC.md`
 
 7. **FAQ** — From "FAQ" in `about.md`. Use CSS-only `<details><summary>` accordion. No JavaScript.
 
-8. **Last Updated** — A centered line just before the footer showing the generation date:
+8. **Last Updated** — A centered line just before the footer showing the page's `dateModified` (the same value used in the SoftwareApplication JSON-LD and the sitemap `<lastmod>`):
    ```html
    <div class="fv-container last-updated">
      <p>Last updated: {Month D, YYYY}</p>
    </div>
    ```
-   Use today's date at generation time. This signals content freshness to AI engines.
+   Render the date as `Month D, YYYY` (e.g. `April 28, 2026`) for human readers. This must match the JSON-LD `dateModified` and the sitemap `<lastmod>` byte-for-byte (after format conversion). On a no-op regeneration, preserve the prior date instead of bumping to today.
 
 9. **Footer** — Use the shared footer markup from `SHARED-STYLES.md`, but add links to: All Apps (`/`), Blog (`/blog/`), Documentation (`/{app-slug}/docs/`), About (`/about/`), Terms of Service, Privacy Policy, Regional Data Protection, Support email (from about.md), fv.dev. Footer logo must also use `<picture>` with WebP: `<picture><source srcset="/shared/assets/fv-logo.webp" type="image/webp"><img src="/shared/assets/fv-logo.png" alt="Forest Valley" width="616" height="341"></picture>`.
 
@@ -190,19 +271,19 @@ A single-page user manual with sidebar navigation, built from chapter files.
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{App Name} — User Manual — Forest Valley Apps</title>
+  <title>{App Name} — User Manual — FV Apps</title>
   <meta name="description" content="User manual for {App Name}. {Short description}.">
   <!-- Canonical -->
   <link rel="canonical" href="https://apps.fv.dev/{app-slug}/docs/">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{App Name} — User Manual — Forest Valley Apps">
+  <meta property="og:title" content="{App Name} — User Manual — FV Apps">
   <meta property="og:description" content="User manual for {App Name}. {Short description}.">
   <meta property="og:url" content="https://apps.fv.dev/{app-slug}/docs/">
   <meta property="og:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{App Name} — User Manual — Forest Valley Apps">
+  <meta name="twitter:title" content="{App Name} — User Manual — FV Apps">
   <meta name="twitter:description" content="User manual for {App Name}. {Short description}.">
   <meta name="twitter:image" content="https://apps.fv.dev/{app-slug}/assets/og.png">
   <!-- LCP preload — must be first link tag -->
@@ -227,7 +308,7 @@ A single-page user manual with sidebar navigation, built from chapter files.
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Forest Valley Apps",
+        "name": "FV Apps",
         "item": "https://apps.fv.dev/"
       },
       {
@@ -257,7 +338,7 @@ A single-page user manual with sidebar navigation, built from chapter files.
     ```html
     <p class="last-updated">Last updated: {Month D, YYYY}</p>
     ```
-    Use today's date at generation time.
+    Use the docs page's own `dateModified` (matching its sitemap `<lastmod>`). Today only when the manual sources actually changed since last generation; otherwise preserve the prior date.
 - Shared footer
 - On mobile (below 768px): sidebar collapses above content or becomes a top nav
 
@@ -404,18 +485,20 @@ Add corresponding CSS to `src/{app-slug}/styles/landing.css`:
 
 ### 8. Sitemap update: `src/sitemap.xml`
 
-Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`. Use today's date as `<lastmod>`. Do not add `<priority>` or `<changefreq>` — Google ignores these tags:
+Add two new `<url>` entries for the app landing page and docs page. Insert before `</urlset>`. Do not add `<priority>` or `<changefreq>` — Google ignores these tags:
 
 ```xml
   <url>
     <loc>https://apps.fv.dev/{app-slug}/</loc>
-    <lastmod>{YYYY-MM-DD}</lastmod>
+    <lastmod>{landing-page dateModified}</lastmod>
   </url>
   <url>
     <loc>https://apps.fv.dev/{app-slug}/docs/</loc>
-    <lastmod>{YYYY-MM-DD}</lastmod>
+    <lastmod>{docs-page dateModified}</lastmod>
   </url>
 ```
+
+The `<lastmod>` for each URL must match the `dateModified` in the corresponding page's JSON-LD schema (and the visible "Last Updated" line). On a no-op regeneration, preserve the prior `<lastmod>` rather than bumping to today.
 
 If entries for this app already exist, update them (don't duplicate).
 
@@ -468,11 +551,19 @@ Pricing badge: Use "Free" if the app has a free tier, "Freemium" if it has both 
 
 ## Important rules
 
-- **No JavaScript.** Pure HTML + CSS only. Use `<details><summary>` for accordions, CSS `:target` or sticky positioning for navigation.
+- **No JavaScript.** Pure HTML + CSS only. Use `<details><summary>` for accordions, CSS `:target` or sticky positioning for navigation. (The GA4 snippet in `<head>` is the single allowed exception.)
 - **Use shared styles.** Load the shared CSS in the correct order. Use `--fv-*` tokens and utility classes (`.fv-container`, `.fv-btn`, `.fv-card`, etc.). Only write app-specific CSS for things the shared system doesn't cover.
 - **Semantic HTML.** Use proper heading hierarchy, `<section>`, `<nav>`, `<main>`, `<article>` where appropriate.
-- **Accessible.** All images need `alt` text. All interactive elements need focus styles. Use sufficient color contrast.
+- **Accessible.** All images need `alt` text. All interactive elements need focus styles. Use sufficient color contrast. Inline images below the fold get `loading="lazy"`.
 - **Clean formatting.** Well-indented HTML. CSS organized by section.
+- **Refuse to generate** on any required validation failure. Report exactly what failed; skip that app and continue with others. Never silently emit a half-broken page.
+- **Do not bump `dateModified`** when the source files haven't changed. Manufacturing freshness is treated as a dark pattern by ranking systems. Preserve `datePublished` from the prior generation.
+- **`dateModified` consistency:** the value in the JSON-LD `SoftwareApplication`, the visible "Last Updated" line on the page, and the sitemap `<lastmod>` must all match.
+- **Do not auto-rewrite copy** for FK readability — flag it for the editor.
+- **Do not pad word count** with filler to clear the 500-word threshold.
+- **Do not generate FAQ entries that aren't already in `about.md`** — including emitting `FAQPage` schema for absent Q&A. Same rule for `HowTo`: don't emit if the section isn't genuinely procedural.
+- **Do not change a published slug.** If the app's positioning shifts after publish, that's a new app folder + a 301 from the old slug — not an in-place edit.
+- **Do not emit JSON-LD for content that isn't on the page** (offers without prices, FAQ without Q&A, HowTo without steps, screenshots in schema that don't render). Google penalizes mismatched structured data.
 
 ## After generating
 

@@ -2,6 +2,7 @@
 title: "How to Migrate to Ecwid from Shopify, WooCommerce, or BigCommerce Without Losing SEO"
 slug: how-to-migrate-to-ecwid-seo
 date: 2026-04-04
+date_modified: 2026-04-04
 tag: SEO
 read_time: 12 min read
 excerpt: "Switching to Ecwid from another e-commerce platform? Every URL changes at once. Here's the exact process for auditing your old URLs, building a redirect map, and keeping Google happy through the transition."
@@ -10,7 +11,7 @@ cta:
   heading: "Managing Redirects on an Embedded Ecwid Store?"
   text: "Redirect & 404 Manager handles the Ecwid-specific parts automatically — bulk CSV import for planned migrations, wildcard redirects for pattern-based URL changes, redirect chain detection, and a real-time 404 dashboard so nothing slips through."
   primary_label: "Learn About the App"
-  primary_url: "/redirect-404-manager/"
+  primary_url: "https://apps.fv.dev/redirect-404-manager/"
   secondary_label: "Install Free on Ecwid"
   secondary_url: "https://my.ecwid.com/store/130416012#apps:view=app&name=seo-redirect-manager"
 ---

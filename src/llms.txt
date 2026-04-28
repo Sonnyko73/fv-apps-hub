@@ -1,4 +1,4 @@
-# Forest Valley Apps — AI Content Index
+# FV Apps — AI Content Index
 
 > Forest Valley Rocky Inc. builds specialized apps for Ecwid merchants.
 > Primary product: Redirect & 404 Manager for embedded Ecwid stores ($5.99/mo).
@@ -14,11 +14,11 @@ Complete user manual: setup, managing redirects, bulk CSV import, wildcard rules
 
 ## About
 https://apps.fv.dev/about/
-Developer background, company information, and founding context for Forest Valley Apps.
+Developer background, company information, and founding context for FV Apps.
 
-## Blog: How to migrate from Shopify to Lightspeed eCom (E-Series) without losing your SEO
+## Blog: Migrate Shopify to Lightspeed E-Series Without Losing SEO
 https://apps.fv.dev/blog/shopify-to-eseries-migration/
-Lightspeed Retail (X-Series) merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to handle the redirects so your rankings survive the move.
+X-Series merchants paying for a separate Shopify store can consolidate to E-Series — but every URL changes. Here's how to keep your rankings.
 
 ## Blog: How to Set Up and Manage Redirects for Your Ecwid Store on WordPress, Wix, or Squarespace
 https://apps.fv.dev/blog/ecwid-store-redirects-wordpress-wix-squarespace/
